@@ -21,10 +21,10 @@
     lxc = {
       enable = true;
       defaultConfig = ''
-        lxc.aa_profile = unconfined
-        lxc.network.type = veth
-        lxc.network.link = lxcbr0
-        lxc.network.flags = up
+        lxc.apparmor.profile = unconfined
+        lxc.net.0.type = veth
+        lxc.net.0.link = lxcbr0
+        lxc.net.0.flags = up
       '';
     };
   };
