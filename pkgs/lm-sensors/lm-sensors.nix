@@ -5,8 +5,8 @@
       src = fetchFromGitHub {
         owner = "groeck";
         repo = "lm-sensors";
-        rev = "6d970e5eb196061605c138c9dcbc833b052c4f3a";
-        sha256 = "10rfrcr47a1j1dp55wbifygrnzp71xpig75qa5qam8mcrmfsp347";
+        rev = "70f7e0848410b9ca4dde7abff669bbbecbf137e0";
+        sha256 = "18896dqjym1jb5vvrdhg2hxbd2q0pnwrxh4jczcax3s0b589z1kj";
       };
       patches = [];
     });
