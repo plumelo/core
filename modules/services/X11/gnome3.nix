@@ -2,6 +2,12 @@
 {
 
   environment.systemPackages = with pkgs; [
+    (buildEnv {
+      name="glib-bin";
+      paths = [glib];
+      pathsToLink = "/bin";
+      extraOutputsToInstall = ["dev"];
+    })
     arc-theme
     arc-icon-theme
 
