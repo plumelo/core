@@ -3,21 +3,7 @@ let
   kernelConfig = import ./config.nix;
 in {
   nixpkgs.overlays = [( self: super: {
-    linux_testing_plumelo = super.callPackage <nixos/pkgs/os-specific/linux/kernel/linux-testing.nix> {
-      kernelPatches = with super; [ 
-        kernelPatches.bridge_stp_helper 
-        kernelPatches.modinst_arg_list_too_long 
-      ];
-      argsOverride = with super; rec {
-        version = "4.17";
-        modDirVersion = "4.17.0";
-        src = fetchurl {
-          url = "https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-${version}.tar.xz";
-          sha256 = "04yd7hnsdyaq4xmrgg7509qjf09k1dy6k1p8qqfrdspajvc1valz";
-        };
-      };
-    };
-
+    linux_testing_plumelo = super.linux_4_17;
     linux_testing_slim = with kernelConfig; self.linux_testing_plumelo.override({
       ignoreConfigErrors= true;
       extraConfig =''
