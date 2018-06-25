@@ -77,9 +77,9 @@ in {
       '';
     });
 
-    linux_4_17           = self.linuxPackages_testing; 
-    linux_4_17_slim      = super.linuxPackagesFor self.linux_testing_slim;
-    linux_4_17_gag3wifi  = super.linuxPackagesFor self.linux_testing_gag3wifi;
-    linux_4_17_yoga2pro  = super.linuxPackagesFor self.linux_testing_yoga2pro;
+    linuxPackages_plumelo   = super.linuxPackagesFor self.linux_testing_plumelo; 
+    linuxPackages_slim      = super.linuxPackagesFor self.linux_testing_slim;
+    linuxPackages_gag3w     = super.linuxPackagesFor self.linux_testing_gag3wifi;
+    linuxPackages_yoga2pro  = super.linuxPackagesFor self.linux_testing_yoga2pro;
   })];
 }
