@@ -1,0 +1,15 @@
+diff --git a/lib/init.c b/lib/init.c
+index 33bee0f2..a2fbd666 100644
+--- a/lib/init.c
++++ b/lib/init.c
+@@ -42,8 +42,9 @@
+ 
+ #define DEFAULT_CONFIG_FILE	ETCDIR "/sensors3.conf"
+ #define ALT_CONFIG_FILE		ETCDIR "/sensors.conf"
++#ifndef DEFAULT_CONFIG_DIR
+ #define DEFAULT_CONFIG_DIR	ETCDIR "/sensors.d"
+-
++#endif
+ /* Wrapper around sensors_yyparse(), which clears the locale so that
+    the decimal numbers are always parsed properly. */
+ static int sensors_parse(void)
