@@ -3,7 +3,20 @@ let
   kernelConfig = import ./config.nix;
 in {
   nixpkgs.overlays = [( self: super: {
-    linux_testing_plumelo = super.linux_4_17;
+    linux_testing_plumelo = super.callPackage <nixos/pkgs/os-specific/linux/kernel/linux-testing.nix> { 
+      kernelPatches = with super; [  
+        kernelPatches.bridge_stp_helper  
+        kernelPatches.modinst_arg_list_too_long  
+      ]; 
+      argsOverride = with super; rec { 
+        version = "4.18-rc2"; 
+        modDirVersion = "4.18.0-rc2"; 
+        src = fetchurl { 
+          url = "https://git.kernel.org/torvalds/t/linux-${version}.tar.gz"; 
+          sha256 = "04vflzj14wvvkj3lsbabsw0239y58cdd8g5kciqz1ydhdlgifpza"; 
+        }; 
+      }; 
+    }; 
     linux_testing_slim = with kernelConfig; self.linux_testing_plumelo.override({
       ignoreConfigErrors= true;
       extraConfig =''
