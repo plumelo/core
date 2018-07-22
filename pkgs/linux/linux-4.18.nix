@@ -9,11 +9,11 @@ in {
         kernelPatches.modinst_arg_list_too_long  
       ]; 
       argsOverride = with super; rec { 
-        version = "4.18-rc2"; 
-        modDirVersion = "4.18.0-rc2"; 
+        version = "4.18-rc5"; 
+        modDirVersion = "4.18.0-rc5"; 
         src = fetchurl { 
           url = "https://git.kernel.org/torvalds/t/linux-${version}.tar.gz"; 
-          sha256 = "04vflzj14wvvkj3lsbabsw0239y58cdd8g5kciqz1ydhdlgifpza"; 
+          sha256 = "1r7ia0dc4p8xvyrl5kx9v7ii1m25ly0hg6xyz3zwhaailg1y4jzk"; 
         }; 
       }; 
     }; 
