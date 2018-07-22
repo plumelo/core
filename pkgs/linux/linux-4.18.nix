@@ -17,6 +17,27 @@ in {
         }; 
       }; 
     }; 
+
+    linux_testing_raven = with kernelConfig; self.linux_testing_plumelo.override({
+      ignoreConfigErrors = true;
+      extraConfig = ''
+        KALLSYMS_ALL y
+        CPU_SUP_CENTAUR n
+        MK8 n
+        MPSC n
+        MATOM n
+        CC_OPTIMIZE_FOR_PERFORMANCE y
+        DRM_NOUVEAU n
+        DRM_I915 n
+        DRM_RADEON n
+        DRM_AMD_DC y
+        DRM_AMD_DC_DCN1_0 y
+        NR_CPUS 8
+        ${exclude.uncommon}
+        ${exclude.fs}
+      '';
+    });
+
     linux_testing_slim = with kernelConfig; self.linux_testing_plumelo.override({
       ignoreConfigErrors= true;
       extraConfig =''
@@ -77,7 +98,8 @@ in {
       '';
     });
 
-    linuxPackages_plumelo   = super.linuxPackagesFor self.linux_testing_plumelo; 
+    linuxPackages_plumelo   = super.linuxPackagesFor self.linux_testing_plumelo;
+    linuxPackages_raven     = super.linuxPackagesFor self.linux_testing_raven;
     linuxPackages_slim      = super.linuxPackagesFor self.linux_testing_slim;
     linuxPackages_gag3w     = super.linuxPackagesFor self.linux_testing_gag3wifi;
     linuxPackages_yoga2pro  = super.linuxPackagesFor self.linux_testing_yoga2pro;
