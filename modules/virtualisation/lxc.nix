@@ -68,6 +68,7 @@
         lxc.net.0.link = lxcbr0
         lxc.net.0.flags = up
       '';
+      lxcfs.enable = true;
     };
   };
   environment.etc."default/lxc".text = ''

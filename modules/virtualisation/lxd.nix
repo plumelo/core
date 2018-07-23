@@ -4,7 +4,7 @@
   security.apparmor = {
     enable = true;
     profiles = [
-      "${pkgs.lxc}/etc/apparmor.d/usr.bin.lxc-star"
+      "${pkgs.lxc}/etc/apparmor.d/usr.bin.lxc-start"
       "${pkgs.lxc}/etc/apparmor.d/lxc-containers"
     ];
     packages = [ pkgs.lxc ];
