@@ -106,6 +106,7 @@
       paper-icon-theme
       brightnessctl
       mako
+      android-udev-rules
     ];
 
     extraSessionCommands = ''
@@ -130,6 +131,9 @@
     opengl.enable = true;
   };
 
-  services.udev.packages = with pkgs; [ brightnessctl ];
+  services.udev.packages = with pkgs; [
+    brightnessctl
+    android-udev-rules
+  ];
   programs.ssh.startAgent = true;
 }

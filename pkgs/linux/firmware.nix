@@ -7,8 +7,8 @@
 
       src = fetchgit {
         url = "https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git";
-        rev = "d1147327232ec4616a66ab898df84f9700c816c1";
-        sha256 = "0xhbalf15isv7f0d5gfjaylillhkm7npr795riq65pz2aw66ralf";
+        rev = "8d69bab7a3da1913113ea98cefb73d5fa6988286";
+        sha256 = "1ganxgkdxl10v0ihsp9qsaj4px8yf8kihz4gbmqyld28rqnc47zl";
       };
     }); 
   })];
