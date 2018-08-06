@@ -107,6 +107,7 @@
       brightnessctl
       mako
       android-udev-rules
+      jmtpfs
     ];
 
     extraSessionCommands = ''
