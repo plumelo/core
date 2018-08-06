@@ -4,16 +4,16 @@ let
 in {
   nixpkgs.overlays = [( self: super: {
     linux_testing_plumelo = super.callPackage <nixos/pkgs/os-specific/linux/kernel/linux-testing.nix> { 
-      kernelPatches = with super; [  
-        kernelPatches.bridge_stp_helper  
-        kernelPatches.modinst_arg_list_too_long  
+      kernelPatches = with super; [
+        kernelPatches.bridge_stp_helper
+        kernelPatches.modinst_arg_list_too_long
       ]; 
-      argsOverride = with super; rec { 
-        version = "4.18-rc6"; 
-        modDirVersion = "4.18.0-rc6"; 
-        src = fetchurl { 
-          url = "https://git.kernel.org/torvalds/t/linux-${version}.tar.gz"; 
-          sha256 = "18xz3pk8z87lk85s6q69ia1n4z03hif7yscnl6j8z85fjycwvf6b"; 
+      argsOverride = with super; rec {
+        version = "4.18-rc8";
+        modDirVersion = "4.18.0-rc8";
+        src = fetchurl {
+          url = "https://git.kernel.org/torvalds/t/linux-${version}.tar.gz";
+          sha256 = "0rqyqms63c15iwcwy40yqd9fvlvh3ah09gddv0wf45z9dqp7id1m";
         }; 
       }; 
     }; 
@@ -56,6 +56,7 @@ in {
     linux_testing_gag3wifi = with kernelConfig; self.linux_testing_plumelo.override({
       ignoreConfigErrors= true;
       extraConfig =''
+        KALLSYMS_ALL y
         CPU_SUP_CENTAUR n
         MK8 n
         MPSC n
