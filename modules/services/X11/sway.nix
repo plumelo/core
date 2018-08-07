@@ -16,20 +16,13 @@
       buildInputs = [
         wayland
         wayland-protocols
-        # libGL
-        #libdrm
         mesa_noglu
         libinput
         libxkbcommon
-        # pixman
-        # libcap
-        # udev
         pango
         cairo
       ] ++ (with xorg; [
-        # xcbutilwm
         xcbutilimage
-        # libX11
       ]);
     };
 
@@ -49,7 +42,6 @@
         wayland
         wayland-protocols
         libGL
-        #libdrm
         mesa_noglu
         libinput
         libxkbcommon
@@ -147,6 +139,7 @@
       mako
       grim
       slurp
+      imagemagick
       android-udev-rules
       jmtpfs
     ];
