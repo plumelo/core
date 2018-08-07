@@ -3,12 +3,12 @@
   nixpkgs.overlays = [( self: super: {
     mako = with super; stdenv.mkDerivation rec {
       name = "mako-${version}";
-      version = "1.0-unstable";
+      version = "1.1";
       src = fetchFromGitHub {
         owner = "emersion";
         repo = "mako";
-        rev = "f496e7c1bd679ab972eebcb6a2fa02ab0a5e01ce";
-        sha256 = "1yfm3bnq1wvi8gr1ayj4pdqh7h303npb43ix70dayb9k7ka764py";
+        rev = "v${version}";
+        sha256 = "18krsyp9g6f689024dn1mq8dyj4yg8c3kcy5s88q1gm8py6c4493";
       };
 
       nativeBuildInputs = [ meson ninja pkgconfig ];
@@ -32,8 +32,8 @@
       src = fetchFromGitHub {
         owner = "swaywm";
         repo = "wlroots";
-        rev = "2a58d44";
-        sha256 = "16h59jglnn1y4h0q71200i429pl1qv3b93ygr7zkvzpsgnm9vci0";
+        rev = "28b0a40";
+        sha256 = "07y7y11jaxaf55gdigz7r41868vgz3fdfrlngr4w29942lnbfl0v";
       };
 
       nativeBuildInputs = [ meson ninja pkgconfig ];
@@ -89,20 +89,19 @@
         wayland
         wayland-protocols
         cairo
-        # libjpeg
       ];
     };
 
 
     sway = with super; stdenv.mkDerivation rec {
       name = "sway-${version}";
-      version = "1.0-alpha.3";
+      version = "1.0-alpha.5";
 
       src = fetchFromGitHub {
         owner = "swaywm";
         repo = "sway";
-        rev = "bec982bba62db39f734d21ffbd2a3c8cefb3f6bd";
-        sha256 = "0ki6f2b2z4fi8jibdaggjfzs4xaw3zllvc4k4la4rj55kbq7m64c";
+        rev = "${version}";
+        sha256 = "0v2fnvx9z1727cva46j4zrlph8wwvkgb1gqgy9hzizbwixf387sl";
       };
       nativeBuildInputs = [ meson ninja pkgconfig ];
       buildInputs = [
