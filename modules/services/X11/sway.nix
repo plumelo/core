@@ -62,6 +62,45 @@
         libX11
       ]);
     };
+    
+    grim = with super; stdenv.mkDerivation rec {
+      name = "grim-${version}";
+      version = "1.0";
+
+      src = fetchFromGitHub {
+        owner = "emersion";
+        repo = "grim";
+        rev = "1d6c877d7854916953b8b76ba3b79522b893d85b";
+        sha256 = "0rrynfsp80f6l1b6lyx9gi40yh5m4pd7ygx97dgsbqwdwhqrn9yr";
+      };
+      nativeBuildInputs = [ meson ninja pkgconfig ];
+      buildInputs = [
+        wayland
+        wayland-protocols
+        cairo
+        libjpeg
+      ];
+    };
+    
+    slurp = with super; stdenv.mkDerivation rec {
+      name = "slurp-${version}";
+      version = "1.0";
+
+      src = fetchFromGitHub {
+        owner = "emersion";
+        repo = "slurp";
+        rev = "a94273e02a5b70ca92dc67a08486198552583818";
+        sha256 = "0gj0y721a5mxir3lz5fpgpf5awqq49si23p4hiys7bpfp6yhqy6y";
+      };
+      nativeBuildInputs = [ meson ninja pkgconfig ];
+      buildInputs = [
+        wayland
+        wayland-protocols
+        cairo
+        # libjpeg
+      ];
+    };
+
 
     sway = with super; stdenv.mkDerivation rec {
       name = "sway-${version}";
@@ -106,6 +145,8 @@
       paper-icon-theme
       brightnessctl
       mako
+      grim
+      slurp
       android-udev-rules
       jmtpfs
     ];
