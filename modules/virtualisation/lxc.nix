@@ -8,8 +8,8 @@
       src = fetchFromGitHub {
         owner = "lxc";
         repo = "lxc-templates";
-        rev = "07632524aec75e27d245555f5ddcfc40a0aebca5";
-       sha256 = "0cb92wdjzzdm73zdlx0h9z8kj3w0kwsrmbg40c002rqibw03afja";
+        rev = "8b5308b5d857c0dc1729a97778a0afe1a0cecd5e";
+        sha256 = "17bbhx4ffbrych6x0ywl9xw9iac4w2qiwimyxnwq1df0nqk8w38v";
       };
       preConfigure = ''
         for file in $(find ./config -type f -name  "*.conf.in"); do
@@ -78,6 +78,8 @@
     LXC_DOMAIN="local"
     LXC_ADDR="10.0.3.1"
   '';
+
+  environment.pathsToLink = ["/share/lxc"];
 
   systemd.services.lxc-net = {
     after     = [ "network.target" "systemd-resolved.service" ];
