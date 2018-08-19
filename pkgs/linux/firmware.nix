@@ -7,10 +7,10 @@
 
       src = fetchgit {
         url = "https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git";
-        rev = "7b5835fd37630d18ac0c755329172f6a17c1af29";
-        sha256 = "111pk6867an94gqshbyrbghsn9pbzjhgswdcjwd4z7cl7ikh6q0p";
+        rev = "f1b95fe5a51830bb8c1712082de4279a042376b6";
+        sha256 = "1qxilfc79xpmmrcdx4j1fs75kiyplr8b5a1mv35cdk9cv24i15ji";
       };
-      outputHash = "04j8zisycm92jm0w86j8lnx5n7s1z11r1f9kq3p6x7hxikpwfqxx";
+      outputHash = "0i03zqi6rqxscj3sbxxifsb1vbgriw5f87c8xxipc8lp3lprllxs";
     });
 
     mesa_drivers = (with super; mesa_drivers.overrideAttrs (attrs: rec {
