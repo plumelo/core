@@ -7,8 +7,8 @@
       src = fetchFromGitHub {
         owner = "emersion";
         repo = "mako";
-        rev = "v${version}";
-        sha256 = "18krsyp9g6f689024dn1mq8dyj4yg8c3kcy5s88q1gm8py6c4493";
+        rev = "3337d92894327325b40cf16b39e00b51e1c0b498";
+        sha256 = "1xgc59xays6fp1b6hf3kq4hc9ypv0xyw0z1hbq6rgr5bvr31f5vg";
       };
 
       nativeBuildInputs = [ meson ninja pkgconfig ];
@@ -26,13 +26,50 @@
       ]);
     };
 
+    grim = with super; stdenv.mkDerivation rec {
+      name = "grim-${version}";
+      version = "1.0";
+
+      src = fetchFromGitHub {
+        owner = "emersion";
+        repo = "grim";
+        rev = "f9d796bbc5e0afba83ee7c675a2c82949cbbc2d9";
+        sha256 = "0rrynfsp80f6l1b6lyx9gi40yh5m4pd7ygx97dgsbqwdwhqrn9yr";
+      };
+      nativeBuildInputs = [ meson ninja pkgconfig ];
+      buildInputs = [
+        wayland
+        wayland-protocols
+        cairo
+        libjpeg
+      ];
+    };
+
+    slurp = with super; stdenv.mkDerivation rec {
+      name = "slurp-${version}";
+      version = "1.0";
+
+      src = fetchFromGitHub {
+        owner = "emersion";
+        repo = "slurp";
+        rev = "1fb12765544d8e8b7f431d91be0d911a6766b40a";
+        sha256 = "12lhmvbdzvmdivaxvd56xcknfb1czgawa40pr8mdj3nmfwvyjl20";
+      };
+      nativeBuildInputs = [ meson ninja pkgconfig ];
+      buildInputs = [
+        wayland
+        wayland-protocols
+        cairo
+      ];
+    };
+
     wlroots_unstable = with super; stdenv.mkDerivation rec {
       name = "wlroots";
       version = "unstable";
       src = fetchFromGitHub {
         owner = "swaywm";
         repo = "wlroots";
-        rev = "28b0a40";
+        rev = "24212df830e2848582121746fd0284bd2d7da67a";
         sha256 = "07y7y11jaxaf55gdigz7r41868vgz3fdfrlngr4w29942lnbfl0v";
       };
 
@@ -54,44 +91,6 @@
         libX11
       ]);
     };
-    
-    grim = with super; stdenv.mkDerivation rec {
-      name = "grim-${version}";
-      version = "1.0";
-
-      src = fetchFromGitHub {
-        owner = "emersion";
-        repo = "grim";
-        rev = "1d6c877d7854916953b8b76ba3b79522b893d85b";
-        sha256 = "0rrynfsp80f6l1b6lyx9gi40yh5m4pd7ygx97dgsbqwdwhqrn9yr";
-      };
-      nativeBuildInputs = [ meson ninja pkgconfig ];
-      buildInputs = [
-        wayland
-        wayland-protocols
-        cairo
-        libjpeg
-      ];
-    };
-    
-    slurp = with super; stdenv.mkDerivation rec {
-      name = "slurp-${version}";
-      version = "1.0";
-
-      src = fetchFromGitHub {
-        owner = "emersion";
-        repo = "slurp";
-        rev = "a94273e02a5b70ca92dc67a08486198552583818";
-        sha256 = "0gj0y721a5mxir3lz5fpgpf5awqq49si23p4hiys7bpfp6yhqy6y";
-      };
-      nativeBuildInputs = [ meson ninja pkgconfig ];
-      buildInputs = [
-        wayland
-        wayland-protocols
-        cairo
-      ];
-    };
-
 
     sway = with super; stdenv.mkDerivation rec {
       name = "sway-${version}";
@@ -100,8 +99,8 @@
       src = fetchFromGitHub {
         owner = "swaywm";
         repo = "sway";
-        rev = "${version}";
-        sha256 = "0v2fnvx9z1727cva46j4zrlph8wwvkgb1gqgy9hzizbwixf387sl";
+        rev = "2c91afbb34f649fcd4de690be5bedba4d989a7f0";
+        sha256 = "096cww48cdwcpw6w2vkxbgakxqcwlmlkcn77aqrl8k9028prd5zd";
       };
       nativeBuildInputs = [ meson ninja pkgconfig ];
       buildInputs = [
