@@ -3,21 +3,20 @@ let
   kernelConfig = import ./config.nix;
 in {
   nixpkgs.overlays = [( self: super: {
-    linux_testing_plumelo = super.linux_latest; 
-    # super.callPackage <nixos/pkgs/os-specific/linux/kernel/linux-testing.nix> { 
-    #   kernelPatches = with super; [
-    #     kernelPatches.bridge_stp_helper
-    #     kernelPatches.modinst_arg_list_too_long
-    #   ]; 
-    #   argsOverride = with super; rec {
-    #     version = "4.18-rc8";
-    #     modDirVersion = "4.18.0-rc8";
-    #     src = fetchurl {
-    #       url = "https://git.kernel.org/torvalds/t/linux-${version}.tar.gz";
-    #       sha256 = "0rqyqms63c15iwcwy40yqd9fvlvh3ah09gddv0wf45z9dqp7id1m";
-    #     }; 
-    #   }; 
-    # }; 
+    linux_testing_plumelo = super.callPackage <nixos/pkgs/os-specific/linux/kernel/linux-testing.nix> { 
+      kernelPatches = with super; [
+        kernelPatches.bridge_stp_helper
+        kernelPatches.modinst_arg_list_too_long
+      ]; 
+      argsOverride = with super; rec {
+        version = "4.19-rc1";
+        modDirVersion = "4.19.0-rc1";
+        src = fetchurl {
+          url = "https://git.kernel.org/torvalds/t/linux-${version}.tar.gz";
+          sha256 = "14c9xg9sv0jrdri36das97vdbybi7vmcy59mj9wmgaz81cdk3wg5";
+        }; 
+      }; 
+    }; 
 
     linux_testing_raven = with kernelConfig; self.linux_testing_plumelo.override({
       ignoreConfigErrors = true;

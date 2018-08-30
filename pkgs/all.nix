@@ -2,7 +2,7 @@
 {
   imports = [
     ./linux/firmware.nix
-    ./linux/linux-4.18.nix
+    ./linux/kernel.nix
     ./brightnessctl/default.nix
     ./lm-sensors/lm-sensors.nix
   ];
