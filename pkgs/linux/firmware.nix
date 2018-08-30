@@ -3,14 +3,14 @@
   nixpkgs.overlays = [( self: super: { 
     firmwareLinuxNonfree = with super; firmwareLinuxNonfree.overrideAttrs(old: rec {
       name = "firmware-linux-nonfree-${version}";
-      version = "2018-07-30";
+      version = "2018-08-27";
 
       src = fetchgit {
         url = "https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git";
-        rev = "f1b95fe5a51830bb8c1712082de4279a042376b6";
-        sha256 = "1qxilfc79xpmmrcdx4j1fs75kiyplr8b5a1mv35cdk9cv24i15ji";
+        rev = "fea76a04f25fd0a217c0d566ff5ff8f23ad3e648";
+        sha256 = "1xy1s9vd7jny4hf4f1hzhlbnm0l4pnw7xycky0v6kfwlg5nnjii5";
       };
-      outputHash = "0i03zqi6rqxscj3sbxxifsb1vbgriw5f87c8xxipc8lp3lprllxs";
+      outputHash = "1p1dkzclj718w7di81s6486dn5zw77c4i2qn63bvp9q4vid452hn";
     });
 
     mesa_drivers = (with super; mesa_drivers.overrideAttrs (attrs: rec {
@@ -33,5 +33,12 @@
         };
       });
     };
+    libdrm = with super; libdrm.overrideAttrs (old: rec {
+      name = "libdrm-2.4.94";
+      src = fetchurl {
+        url = "https://dri.freedesktop.org/libdrm/${name}.tar.bz2";
+        sha256 = "1ghn3l1dv1rsp9z6jpmy4ryna1s8rm4xx0ds532041bnlfq5jg5p";
+      };
+    });
   })];
 }
