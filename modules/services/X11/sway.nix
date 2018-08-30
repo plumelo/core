@@ -34,7 +34,7 @@
         owner = "emersion";
         repo = "grim";
         rev = "f9d796bbc5e0afba83ee7c675a2c82949cbbc2d9";
-        sha256 = "0rrynfsp80f6l1b6lyx9gi40yh5m4pd7ygx97dgsbqwdwhqrn9yr";
+        sha256 = "1cj3rjk965dwfa1ylkh663g9ywbrxgsljy8fs0hrlqybyr4qp1j7";
       };
       nativeBuildInputs = [ meson ninja pkgconfig ];
       buildInputs = [
@@ -70,7 +70,7 @@
         owner = "swaywm";
         repo = "wlroots";
         rev = "24212df830e2848582121746fd0284bd2d7da67a";
-        sha256 = "07y7y11jaxaf55gdigz7r41868vgz3fdfrlngr4w29942lnbfl0v";
+        sha256 = "11xlqww5iqa5am2yf4j6pf9l3dpli3p29ci7ayak8agqy228s630";
       };
 
       nativeBuildInputs = [ meson ninja pkgconfig ];
