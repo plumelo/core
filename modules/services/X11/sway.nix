@@ -63,17 +63,39 @@
       ];
     };
 
+    meson_4_7 = with super; meson.overridePythonAttrs(old: rec{
+      src = python3Packages.fetchPypi {
+        version = "0.47.2";
+        pname = "meson"; 
+        sha256 = "06v795yhpdkhq61ag4h5ygwsgxar8iyhia0cj09y1dwyj5l5rpy4";
+      };
+    postFixup = ''
+      ${old.postFixup}
+
+      # Do not propagate Python
+      rm $out/nix-support/propagated-build-inputs
+    '';
+    });
+
     wlroots_unstable = with super; stdenv.mkDerivation rec {
       name = "wlroots";
       version = "unstable";
       src = fetchFromGitHub {
         owner = "swaywm";
         repo = "wlroots";
-        rev = "24212df830e2848582121746fd0284bd2d7da67a";
-        sha256 = "11xlqww5iqa5am2yf4j6pf9l3dpli3p29ci7ayak8agqy228s630";
+        rev = "0086dbed0983949af97d52feb67d417415a57aea";
+        sha256 = "1c5rz1xdaghvqrg565xn11kjm9h8pmwpxgfsanv6gfvbr4qzl0wh";
       };
 
-      nativeBuildInputs = [ meson ninja pkgconfig ];
+      nativeBuildInputs = [ self.meson_4_7 ninja pkgconfig ];
+
+      mesonFlags = [
+        "-Dauto_features=enabled"
+        # "-Dxwayland=enabled"
+        # "-Dxcb-errors=enabled"
+        # "-Dxcb-icccm=enabled"
+        # "-Dlibcap=enabled"
+      ];
 
       buildInputs = [
         wayland
@@ -85,9 +107,14 @@
         pixman
         libcap
         udev
+        xwayland
+        ffmpeg-full
+        git
+        ctags
       ] ++ (with xorg; [
         xcbutilwm
         xcbutilimage
+        xcbutilerrors
         libX11
       ]);
     };
@@ -99,8 +126,8 @@
       src = fetchFromGitHub {
         owner = "swaywm";
         repo = "sway";
-        rev = "2c91afbb34f649fcd4de690be5bedba4d989a7f0";
-        sha256 = "096cww48cdwcpw6w2vkxbgakxqcwlmlkcn77aqrl8k9028prd5zd";
+        rev = "f7568e26e96abb55b5aaaad76133057f0d14b478";
+        sha256 = "1r1hnnx26n5y1bhk8qm5f2xrljb0f5rb3bqkz81qha19clqwq65n";
       };
       nativeBuildInputs = [ meson ninja pkgconfig ];
       buildInputs = [
