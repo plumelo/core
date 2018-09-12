@@ -182,6 +182,7 @@
       enable = true;
     };
     desktopManager.xterm.enable = false;
+    displayManager.slim.enable=true;
   };
 
   networking = {
