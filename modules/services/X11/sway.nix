@@ -63,18 +63,22 @@
       ];
     };
 
-    meson_4_7 = with super; meson.overridePythonAttrs(old: rec{
+    meson_4_8 = with super; meson.overridePythonAttrs(old: rec{
       src = python3Packages.fetchPypi {
-        version = "0.47.2";
+        version = "0.48.0";
         pname = "meson"; 
-        sha256 = "06v795yhpdkhq61ag4h5ygwsgxar8iyhia0cj09y1dwyj5l5rpy4";
+        sha256 = "0qawsm6px1vca3babnqwn0hmkzsxy4w0gi345apd2qk3v0cv7ipc";
       };
-    postFixup = ''
-      ${old.postFixup}
+      patches =[
+        (builtins.head old.patches)
+        (builtins.elemAt old.patches 2)
+      ];
+      postFixup = ''
+        ${old.postFixup}
 
-      # Do not propagate Python
-      rm $out/nix-support/propagated-build-inputs
-    '';
+        # Do not propagate Python
+        rm $out/nix-support/propagated-build-inputs
+      '';
     });
 
     wlroots_unstable = with super; stdenv.mkDerivation rec {
@@ -83,18 +87,14 @@
       src = fetchFromGitHub {
         owner = "swaywm";
         repo = "wlroots";
-        rev = "0086dbed0983949af97d52feb67d417415a57aea";
-        sha256 = "1c5rz1xdaghvqrg565xn11kjm9h8pmwpxgfsanv6gfvbr4qzl0wh";
+        rev = "890bbd7b5c58235053fd81c4cdad8b861e2471c1";
+        sha256 = "0fkb18apv4skhcpasa9a7pn1yjbrqs5nflz1ngg428syigzvqw8j";
       };
 
-      nativeBuildInputs = [ self.meson_4_7 ninja pkgconfig ];
+      nativeBuildInputs = [ self.meson_4_8 ninja pkgconfig ];
 
       mesonFlags = [
         "-Dauto_features=enabled"
-        # "-Dxwayland=enabled"
-        # "-Dxcb-errors=enabled"
-        # "-Dxcb-icccm=enabled"
-        # "-Dlibcap=enabled"
       ];
 
       buildInputs = [
@@ -121,15 +121,15 @@
 
     sway = with super; stdenv.mkDerivation rec {
       name = "sway-${version}";
-      version = "1.0-alpha.5";
+      version = "1.0-alpha.6";
 
       src = fetchFromGitHub {
         owner = "swaywm";
         repo = "sway";
-        rev = "f7568e26e96abb55b5aaaad76133057f0d14b478";
-        sha256 = "1r1hnnx26n5y1bhk8qm5f2xrljb0f5rb3bqkz81qha19clqwq65n";
+        rev = "42f1fdf0153e38cfec44d816afe8b598199d1320";
+        sha256 = "0iq1zrd1my1sdpjpdca2a9d0j8dp06crygr0p93ccg8l29m6dw1a";
       };
-      nativeBuildInputs = [ meson ninja pkgconfig ];
+      nativeBuildInputs = [ self.meson_4_8 ninja pkgconfig ];
       buildInputs = [
         pcre
         json_c
