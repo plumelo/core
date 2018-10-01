@@ -6,8 +6,8 @@
       version = "2018-09-04";
       src = fetchgit {
         url = "https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git";
-        rev = "85c5d90fc155d78531efa5d2b02e92aaef7e4b88";
-        sha256 = "1yjn0s5vkpbvx8wy07wiszg59jp15szz0s69jw3irgbnbk8jgpyv";
+        rev = "44d4fca9922a252a0bd81f6307bcc072a78da54a";
+        sha256 = "0fkb18apv4skhcpasa9a7pn1yjbrqs5nflz1ngg428syigzvqw8j";
       };
       outputHash = "076960qhiz2gdzlnw29fmx3jk71ks4dgf2mfymdaj7d9frnns8mv";
     });
@@ -25,10 +25,10 @@
 
     xorg = with super; xorg // {
       xf86videoamdgpu = xorg.xf86videoamdgpu.overrideAttrs (attrs: rec {
-        name = "xf86-video-amdgpu-18.0.1";
+        name = "xf86-video-amdgpu-18.1.0";
         src = fetchurl {
-          url = mirror://xorg/individual/driver/xf86-video-amdgpu-18.0.1.tar.bz2;
-          sha256 = "06v9a8dxbhzzkad2qawy8sixz37hf82rh73dwalkqfs0rcn6i13l";
+          url = mirror://xorg/individual/driver/xf86-video-amdgpu-18.1.0.tar.bz2;
+          sha256 = "0wlnb929l3yqj4hdkzyxyhbaph13ac4villajgmbh66pa6xja7z1";
         };
       });
     };
