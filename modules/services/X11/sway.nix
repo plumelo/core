@@ -183,6 +183,10 @@
     };
     desktopManager.xterm.enable = false;
     displayManager.slim.enable=true;
+    extraDisplaySettings = ''
+      Option "TearFree" "true"
+      Option "DRI" "3"
+    '';
   };
 
   networking = {
