@@ -63,4 +63,6 @@
     p7zip
     lm_sensors
   ];
+  
+  services.ntp.enable = true;
 }
