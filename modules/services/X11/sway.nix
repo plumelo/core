@@ -7,8 +7,8 @@
       src = fetchFromGitHub {
         owner = "emersion";
         repo = "mako";
-        rev = "3337d92894327325b40cf16b39e00b51e1c0b498";
-        sha256 = "1xgc59xays6fp1b6hf3kq4hc9ypv0xyw0z1hbq6rgr5bvr31f5vg";
+        rev = "bb1f3b2378d99fcf649cfaa2b8f5a7badc5f87d5";
+        sha256 = "06nd5nhb2czj19l2hfpzys8l4m3r1jqb1v4b6xhjb7pski5zqm8g";
       };
 
       nativeBuildInputs = [ meson ninja pkgconfig ];
@@ -33,8 +33,8 @@
       src = fetchFromGitHub {
         owner = "emersion";
         repo = "grim";
-        rev = "f9d796bbc5e0afba83ee7c675a2c82949cbbc2d9";
-        sha256 = "1cj3rjk965dwfa1ylkh663g9ywbrxgsljy8fs0hrlqybyr4qp1j7";
+        rev = "97202f22003200edcc3fb5966ddc9b19cfe1c6f9";
+        sha256 = "1cq8v4wiqjzg0p84f7l04ydbpirbplfm8zwmg2j2f28qcl5igylp";
       };
       nativeBuildInputs = [ meson ninja pkgconfig ];
       buildInputs = [
@@ -52,8 +52,8 @@
       src = fetchFromGitHub {
         owner = "emersion";
         repo = "slurp";
-        rev = "1fb12765544d8e8b7f431d91be0d911a6766b40a";
-        sha256 = "12lhmvbdzvmdivaxvd56xcknfb1czgawa40pr8mdj3nmfwvyjl20";
+        rev = "d907d308eb1eebf9b1be4a047edbc8f163bdd4b7";
+        sha256 = "07aa3pwqm2a1cf60sipnzrdk1d7m0193jz22s15wqzxh93v3013l";
       };
       nativeBuildInputs = [ meson ninja pkgconfig ];
       buildInputs = [
@@ -87,8 +87,8 @@
       src = fetchFromGitHub {
         owner = "swaywm";
         repo = "wlroots";
-        rev = "890bbd7b5c58235053fd81c4cdad8b861e2471c1";
-        sha256 = "0fkb18apv4skhcpasa9a7pn1yjbrqs5nflz1ngg428syigzvqw8j";
+        rev = "8beeb88309d87474e1b4e8eadcf245a24f04b2d0";
+        sha256 = "0nnimd04mlqi44qcdn6fg2dhfsps5kzkdk5g1m5gzi05ciln6nd6";
       };
 
       nativeBuildInputs = [ self.meson_4_8 ninja pkgconfig ];
@@ -126,8 +126,8 @@
       src = fetchFromGitHub {
         owner = "swaywm";
         repo = "sway";
-        rev = "42f1fdf0153e38cfec44d816afe8b598199d1320";
-        sha256 = "0iq1zrd1my1sdpjpdca2a9d0j8dp06crygr0p93ccg8l29m6dw1a";
+        rev = "cd02d60a992ee38689a0d17fc69c4e2b1956f266";
+        sha256 = "0fxbqg9b7k428krbhsvnbq8kmaxg4c07yin6n2r6aacx2v5wpa2k";
       };
       nativeBuildInputs = [ self.meson_4_8 ninja pkgconfig ];
       buildInputs = [
