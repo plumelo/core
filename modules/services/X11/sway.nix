@@ -156,7 +156,6 @@
       i3status
       xwayland
       dmenu
-      termite
       arc-theme
       arc-icon-theme
       paper-icon-theme
@@ -174,28 +173,11 @@
     '';
   };
 
-  services.xserver = {
-    enable = true;
-    layout = "us";
-    xkbOptions = "eurosign:e";
-    libinput = {
-      enable = true;
-    };
-    desktopManager.xterm.enable = false;
-    displayManager.slim.enable=true;
-    extraDisplaySettings = ''
-      Option "TearFree" "true"
-      Option "DRI" "3"
-    '';
-  };
+  boot.kernel.sysctl."fs.inotify.max_user_watches" = lib.mkDefault 524288;
 
-  networking = {
-    networkmanager.enable = true;
-  };
-  hardware = {
-    opengl.enable = true;
-  };
-
+  networking.networkmanager.enable = true;
+  hardware.opengl.enable = true;
+  services.upower.enable = true;
   services.udev.packages = with pkgs; [
     brightnessctl
     android-udev-rules
