@@ -104,6 +104,7 @@ in {
 
     include ${sway}/etc/sway/config.d/*
 
+    exec ${tmux}/bin/tmux start-server \; run-shell ${tmuxPlugins.resurrect}/share/tmux-plugins/resurrect/scripts/restore.sh
   '';
 
 }
