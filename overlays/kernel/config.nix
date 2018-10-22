@@ -1,4 +1,12 @@
 {
+  ryzen = ''
+    CPU_SUP_CENTAUR n
+    CPU_SUP_INTEL n
+    MK8 n
+    MPSC n
+    MATOM n
+    CC_OPTIMIZE_FOR_PERFORMANCE y 
+  '';
   exclude = {
     uncommon = ''
       MACINTOSH_DRIVERS n
