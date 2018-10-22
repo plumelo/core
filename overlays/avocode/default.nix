@@ -8,7 +8,7 @@ self: super:
       url = "https://media.avocode.com/download/avocode-app/${version}/avocode-${version}-linux.zip";
       sha256 = "1zklpzwi1zl2cbrah90phzghrfaf6rwslrbivhvz2rhywyxdyfnr";
     };
-    libPath = stdenv.lib.makeLibraryPath (with xorg; with gnome2; [
+    libPath = stdenv.lib.makeLibraryPath (with xorg; with gnome3; [
       stdenv.cc.cc.lib
       gdk_pixbuf
       glib
@@ -26,7 +26,6 @@ self: super:
       cups
       expat
       udev
-      GConf
       libX11
       libxcb
       libXi
