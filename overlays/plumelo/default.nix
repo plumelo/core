@@ -13,7 +13,6 @@ self: super:
       ctags
       unrar
       fzf
-      fzf.out
       xclip
       gnumake
       ntfs3g
