@@ -93,7 +93,7 @@ in {
     set $mogrify ${imagemagick}/bin/mogrify
     set $slurp ${slurp}/bin/slurp
     set $xclip ${xclip}/bin/xclip
-    set $mako ${mako}
+    set $mako ${mako}/bin/mako
     set $i3blocks ${i3blocks}/bin/i3blocks
     set $i3blocksconf ${i3blocksconf} 
 
