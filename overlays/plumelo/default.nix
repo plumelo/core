@@ -21,7 +21,6 @@ self: super:
       neomutt
 
       # monitoring
-      python27Packages.glances
       htop
 
       # audio
@@ -58,7 +57,6 @@ self: super:
       ledger
 
       # editors
-      atom
       editorconfig-core-c
       vim
       vim-vint
@@ -71,10 +69,8 @@ self: super:
 
       # misc
       keepassxc
-      taskwarrior
       transmission_gtk
       stress
-      glmark2
       
       # git
       gitAndTools.tig
@@ -93,10 +89,8 @@ self: super:
       #files
       filezilla
       ranger
-      vifm
 
       # sway
-      i3blocks
       pavucontrol
       imv
       mpg123
