@@ -11,7 +11,7 @@ in {
     postBuild = ''
       wrapProgram $out/bin/alacritty \
         --add-flags "--config-file ${./config}" \
-        --set-default "LD_LIBRARY_PATH" "/run/opengl-driver/lib:/run/opengl-driver-32/lib alacritty"
+        --set-default "LD_LIBRARY_PATH" "/run/opengl-driver/lib:/run/opengl-driver-32/lib"
     '';
 
     passthru.terminfo = alacritty.terminfo;
