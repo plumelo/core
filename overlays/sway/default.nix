@@ -22,12 +22,12 @@ let
   });
   wlroots =  mkDerivation rec {
     name = "wlroots";
-    version = "unstable";
+    version = "0.1";
     src = fetchFromGitHub {
       owner = "swaywm";
       repo = "wlroots";
-      rev = "8beeb88309d87474e1b4e8eadcf245a24f04b2d0";
-      sha256 = "0nnimd04mlqi44qcdn6fg2dhfsps5kzkdk5g1m5gzi05ciln6nd6";
+      rev = version;
+      sha256 = "0xfipgg2qh2xcf3a1pzx8pyh1aqpb9rijdyi0as4s6fhgy4w269c";
     };
 
     nativeBuildInputs = [ meson_4_8 ninja pkgconfig ];
@@ -123,13 +123,13 @@ in
 
   sway = mkDerivation rec {
     name = "sway-${version}";
-    version = "1.0-alpha.6";
+    version = "1.0-beta.1";
 
     src = fetchFromGitHub {
       owner = "swaywm";
       repo = "sway";
-      rev = "cd02d60a992ee38689a0d17fc69c4e2b1956f266";
-      sha256 = "0fxbqg9b7k428krbhsvnbq8kmaxg4c07yin6n2r6aacx2v5wpa2k";
+      rev = version;
+      sha256 = "0h9kgrg9mh2acks63z72bw3lwff32pf2nb4i7i5xhd9i6l4gfnqa";
     };
     nativeBuildInputs = [ meson_4_8 ninja pkgconfig ];
     buildInputs = [
@@ -148,6 +148,7 @@ in
       git
       scdoc
       xwayland
+      git
     ];
   };
 }
