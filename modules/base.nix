@@ -45,7 +45,6 @@ in
     kernelPackages = pkgs.linuxPackages_latest;
   };
 
-  users.defaultUserShell = "/run/current-system/sw/bin/fish"; 
   services.ntp.enable = true;
 }
 
