@@ -4,11 +4,11 @@
     enable = true;
     autosuggestions = {
       enable = true;
-      highlightStyle = "fg=9";
+      highlightStyle = "fg=241";
     };
     syntaxHighlighting.enable = true;
   };
-  
+
   programs.zsh.promptInit = ''
     source ${pkgs.zshPlugins.nix-shell}/nix-shell.plugin.zsh
     autoload -U promptinit && promptinit && prompt spaceship
@@ -41,8 +41,8 @@
     bindkey '^w' backward-kill-word
 
     export KEYTIMEOUT=1
-
     export EDITOR=nvim
+    alias dotfiles="git -c core.excludesFile=~/.dotignore --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
   '';
   environment.systemPackages = with pkgs; [zshThemes.spaceship];
   users.defaultUserShell = pkgs.zsh; 

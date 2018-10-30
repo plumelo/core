@@ -94,6 +94,8 @@ self: super:
       pavucontrol
       imv
       mpg123
+      termite
+      alacritty
     ];
   };
 }

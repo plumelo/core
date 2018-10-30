@@ -173,3 +173,8 @@ exec --no-startup-id $mako --default-timeout 10000
 for_window [title="^fzf-menu$"] floating enable
 for_window [title="^fzf-menu$"] resize set 99999 200
 for_window [title="^fzf-menu$"] move position 0 0
+
+for_window [title="^ranger-menu$"] floating enable
+for_window [title="^ranger-menu$"] resize set 99999 400
+for_window [title="^ranger-menu$"] move position 0 0
+
