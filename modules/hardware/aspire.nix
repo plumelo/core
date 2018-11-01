@@ -5,6 +5,8 @@
     kernelParams = [
       "acpi_backlight=vendor"
       "i8042.nopnp"
+      "ivrs_ioapic[4]=00:14.0"
+      "ivrs_ioapic[5]=00:00.2"
     ];
     blacklistedKernelModules = [
       "dell-laptop"
