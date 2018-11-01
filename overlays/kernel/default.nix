@@ -2,12 +2,12 @@ self: super:
 let
   config = import ./config.nix;
   buildLinux = (cfg: super.buildLinux rec {
-    version = "4.19-rc8";
-    modDirVersion = "4.19.0-rc8";
+    version = "4.19";
+    modDirVersion = "4.19.0";
     extraMeta.branch = "4.19";
     src = super.fetchurl {
-      url = "https://git.kernel.org/torvalds/t/linux-${version}.tar.gz";
-      sha256 = "1xw8grzn4i4b2vprfwi4p4003n7rr9725dbiqyrl8w1pm11jwpin";
+      url = "mirror://kernel/linux/kernel/v4.x/linux-${version}.tar.xz";
+      sha256 = "18a92z17alh5kkvjv7l9z8wk5jgdb6raawdfkpwx9bi8amjzas0c";
     };
     ignoreConfigErrors = true;
     extraConfig = cfg;
@@ -18,14 +18,12 @@ let
   });
 
   raven = buildLinux (with config; ''
-    KALLSYMS_ALL y
     ${ryzen}
     DRM_NOUVEAU n
     DRM_I915 n
     DRM_RADEON n
     DRM_AMD_DC y
     DRM_AMD_DC_DCN1_0 y
-    DEBUG_KERNEL_DC y
     NR_CPUS 8
     ${exclude.uncommon}
     ${exclude.fs}
