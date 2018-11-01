@@ -7,10 +7,11 @@ with super;
   src = fetchFromGitHub {
     owner = "neovim";
     repo = "neovim";
-    rev = "nightly";
-    sha256 = "0z4hpgkmr7yvx8zc0mqqj1gqhwkqqgm5gwr7cp7yfjqb5l9h8h98";
+    rev = "b24209dcf5d9d4c14522a7da1a571a9e9520260f";
+    sha256 = "1xrn3aqmfpgspbk22pxk28c2pnq0s0j35nv990gii5jkjhr539b9";
   };
   });
+
   neovim = neovim.override {
     configure = {
       customRC = ''
