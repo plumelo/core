@@ -45,8 +45,8 @@ with super;
         \  })
         endfunction
 
-        nnoremap <silent> - :call Externalize('termite -t "ranger-menu" -e "ranger --choosefiles=%s '.getcwd().'"',':silent ::e! ')<CR>
-        nnoremap <silent> =- :call Externalize('termite -t "ranger-menu" -e "ranger --choosefiles=%s '.expand("%:p:h").'"',':silent ::e! ')<CR>
+        nnoremap <silent> - :call Externalize('${self.alacritty}/bin/alacritty -t "ranger-menu" -e sh -c "ranger --choosefiles=%s '.getcwd().'"; sleep 0.01',':silent ::e! ')<CR>
+        nnoremap <silent> =- :call Externalize('${self.alacritty}/bin/alacritty -t "ranger-menu" -e sh -c "ranger --choosefiles=%s '.expand("%:p:h").'"; sleep 0.01',':silent ::e! ')<CR>
 
       '';
     };

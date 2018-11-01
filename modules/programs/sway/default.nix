@@ -85,7 +85,7 @@ in {
     android-udev-rules
   ];
 
-  environment.etc."sway/config".text = with pkgs;''
+  environment.etc."sway/config".text = with pkgs; ''
     set $term ${alacritty}/bin/alacritty
     set $fzf ${fzf}/bin/fzf
     set $brightness ${brightnessctl}/bin/brightnessctl
