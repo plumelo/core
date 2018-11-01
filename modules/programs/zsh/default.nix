@@ -11,7 +11,8 @@
 
   programs.zsh.promptInit = ''
     source ${pkgs.zshPlugins.nix-shell}/nix-shell.plugin.zsh
-    autoload -U promptinit && promptinit && prompt spaceship
+    source ${pkgs.zsh-history-substring-search}/share/zsh-history-substring-search/zsh-history-substring-search.zsh
+    autoload -U promptinit select-word-style && promptinit && prompt spaceship
     export SPACESHIP_PROMPT_ORDER=(
       user          # Username section
       dir           # Current directory section
@@ -26,26 +27,32 @@
       char          # Prompt character
     )
 
-    export SPACESHIP_RPROMPT_ORDER=(
-      vi_mode       # Vi-mode indicator
-    )
-
-    spaceship_vi_mode_enable
+    bindkey -e
     bindkey '^P' up-history
     bindkey '^N' down-history
+    zmodload zsh/terminfo
+    bindkey "$terminfo[kcuu1]" history-substring-search-up
+    bindkey "$terminfo[kcud1]" history-substring-search-down
+    bindkey '\e[3~' delete-char
+    bindkey '^H' vi-backward-kill-word
+    bindkey '^w' vi-backward-kill-word
+    bindkey '^R' history-incremental-pattern-search-backward
+    bindkey '\e[1;5C' vi-forward-word            # C-Right
+    bindkey '\e[1;5D' vi-backward-word           # C-Left
+    bindkey '\e[5~'   history-search-backward # PgUp
+    bindkey '\e[6~'   history-search-forward  # PgDn
 
-    bindkey '^?' backward-delete-char
-    bindkey '^h' backward-delete-char
+    select-word-style bash
 
-    # ctrl-w removed word backwards
-    bindkey '^w' backward-kill-word
-
-    export KEYTIMEOUT=1
     export EDITOR=nvim
+
+    HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='bg=black,fg=yellow,bold'
+
+    alias ..="cd ../"
     alias dotfiles="git -c core.excludesFile=~/.dotignore --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
   '';
   environment.systemPackages = with pkgs; [zshThemes.spaceship];
-  users.defaultUserShell = pkgs.zsh; 
+  users.defaultUserShell = pkgs.zsh;
 
 }
 
