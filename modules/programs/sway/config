@@ -178,3 +178,4 @@ for_window [title="^ranger-menu$"] floating enable
 for_window [title="^ranger-menu$"] resize set 99999 400
 for_window [title="^ranger-menu$"] move position 0 0
 
+no_focus [title="^mpv-preview$"]

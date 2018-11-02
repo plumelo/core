@@ -1,0 +1,99 @@
+diff --git a/ranger/core/fm.py b/ranger/core/fm.py
+index 61b3cb11..ce93ca9c 100644
+--- a/ranger/core/fm.py
++++ b/ranger/core/fm.py
+@@ -26,7 +26,9 @@ from ranger.ext.img_display import (W3MImageDisplayer, ITerm2ImageDisplayer,
+                                     TerminologyImageDisplayer,
+                                     URXVTImageDisplayer, URXVTImageFSDisplayer,
+                                     KittyImageDisplayer,
+-                                    ImageDisplayer)
++                                    ImageDisplayer,
++                                    MPVImageDisplayer
++                                    )
+ from ranger.core.metadata import MetadataManager
+ from ranger.ext.rifle import Rifle
+ from ranger.container.directory import Directory
+@@ -238,6 +240,8 @@ class FM(Actions,  # pylint: disable=too-many-instance-attributes
+             return URXVTImageFSDisplayer()
+         elif self.settings.preview_images_method == "kitty":
+             return KittyImageDisplayer()
++        elif self.settings.preview_images_method == "mpv":
++            return MPVImageDisplayer()
+         return ImageDisplayer()
+ 
+     def _get_thisfile(self):
+diff --git a/ranger/ext/img_display.py b/ranger/ext/img_display.py
+index 3f5b5471..0176d965 100644
+--- a/ranger/ext/img_display.py
++++ b/ranger/ext/img_display.py
+@@ -667,3 +667,70 @@ class KittyImageDisplayer(ImageDisplayer):
+         #         os.remove(self.temp_paths[k])
+         #     except (OSError, IOError):
+         #         continue
++
++import subprocess
++import json
++import atexit
++import socket
++from pathlib import Path
++
++import logging
++from logging import info
++import traceback
++
++class MPVImageDisplayer(ImageDisplayer):
++    """Implementation of ImageDisplayer using mpv, a general media viewer.
++    Opens media in a separate X window.
++
++    mpv 0.25+ needs to be installed for this to work.
++    """
++
++    def _send_command(self, path, sock):
++        message = '{"command": ["raw","loadfile",%s]}\n' % json.dumps(path)
++        s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
++        s.connect(str(sock))
++        info('-> ' + message)
++        s.send(message.encode())
++        message = s.recv(1024).decode()
++        info('<- ' + message)
++
++    def _launch_mpv(self, path, sock):
++
++        proc = Popen([
++            * os.environ.get("MPV", "mpv").split(),
++            "--no-terminal",
++            "--title=mpv-preview",
++            "--force-window",
++            "--input-ipc-server=" + str(sock),
++            "--image-display-duration=inf",
++            "--loop-file=inf",
++            "--no-osc",
++            "--no-input-default-bindings",
++            "--keep-open",
++            "--idle",
++            "--",
++            path,
++        ])
++
++        @atexit.register
++        def cleanup():
++            proc.terminate()
++            sock.unlink()
++
++    def draw(self, path, start_x, start_y, width, height):
++
++        path = os.path.abspath(path)
++        cache = Path(os.environ.get("XDG_CACHE_HOME", "~/.cache")).expanduser()
++        cache = cache / "ranger"
++        cache.mkdir(exist_ok=True)
++        sock = cache / "image-slave.sock"
++
++        try:
++            self._send_command(path, sock)
++        except (ConnectionRefusedError, FileNotFoundError):
++            info('LAUNCHING ' + path)
++            self._launch_mpv(path, sock)
++        except Exception as e:
++            logging.exception(traceback.format_exc())
++            sys.exit(1)
++        info('SUCCESS')
