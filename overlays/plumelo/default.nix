@@ -37,9 +37,6 @@ self: super:
       # browsers
       firefox
       chromium
-      google-chrome
-      chromedriver
-      epiphany
 
       # communication
       slack
