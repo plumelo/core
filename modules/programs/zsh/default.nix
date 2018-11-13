@@ -13,6 +13,12 @@
     source ${pkgs.zshPlugins.nix-shell}/nix-shell.plugin.zsh
     source ${pkgs.zsh-history-substring-search}/share/zsh-history-substring-search/zsh-history-substring-search.zsh
     autoload -U promptinit select-word-style && promptinit && prompt spaceship
+    function spaceship_nix_shell(){
+      if [[ -n "$IN_NIX_SHELL" ]]; then
+        spaceship::section "cyan" " nix"
+      fi
+    }
+
     export SPACESHIP_PROMPT_ORDER=(
       user          # Username section
       dir           # Current directory section
@@ -25,6 +31,9 @@
       jobs          # Background jobs indicator
       exit_code     # Exit code section
       char          # Prompt character
+    )
+    export SPACESHIP_RPROMPT_ORDER=(
+      nix_shell
     )
 
     bindkey -e
