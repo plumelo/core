@@ -22,11 +22,11 @@ in buildRustPackage rec {
   src = fetchFromGitHub {
     owner = "jwilm";
     repo = "alacritty";
-    rev = "2ede659134936fe294f454a6b2247e1918af6f51";
-    sha256 = "1b72vikxaj5ah0bsndykz997g5rr063icp301vwqk6gbrhchyldb";
+    rev = "742a6b48a196cabf65354862548c07d057a28d55";
+    sha256 = "0dl3h828jc2asjs02cn9gy57anrg5f10qgg3829c4jajspgmr79f";
   };
 
-  cargoSha256 = "1qrzdgr4laix151w2i9gb75h9zk6ypx6n78qkqh0pbc8s4wjmqf9";
+  cargoSha256 = "1wfhy612cg7b7n41k344k674zxj9ms2dajmxblhp9bn43mhm6lfz";
 
   nativeBuildInputs = [
     cmake
