@@ -3,23 +3,6 @@ with super;
 
 let
   mkDerivation = stdenv.mkDerivation;
-  meson_4_8 =  meson.overridePythonAttrs(old: rec{
-    src = python3Packages.fetchPypi {
-      version = "0.48.0";
-      pname = "meson"; 
-      sha256 = "0qawsm6px1vca3babnqwn0hmkzsxy4w0gi345apd2qk3v0cv7ipc";
-    };
-    patches = with builtins; [
-      (head old.patches)
-      (elemAt old.patches 2)
-    ];
-    postFixup = ''
-      ${old.postFixup}
-
-      # Do not propagate Python
-      rm $out/nix-support/propagated-build-inputs
-    '';
-  });
   wlroots =  mkDerivation rec {
     name = "wlroots";
     version = "0.2";
@@ -30,7 +13,7 @@ let
       sha256 = "0gfxawjlb736xl90zfv3n6zzf5n1cacgzflqi1zq1wn7wd3j6ppv";
     };
 
-    nativeBuildInputs = [ meson_4_8 ninja pkgconfig ];
+    nativeBuildInputs = [ meson ninja pkgconfig ];
 
     mesonFlags = [
       "-Dauto_features=enabled"
@@ -131,7 +114,7 @@ in
       rev = version;
       sha256 = "0f9rniwizbc3vzxdy6rc47749p6gczfbgfdy4r458134rbl551hw";
     };
-    nativeBuildInputs = [ meson_4_8 ninja pkgconfig ];
+    nativeBuildInputs = [ meson ninja pkgconfig ];
     buildInputs = [
       pcre
       json_c
