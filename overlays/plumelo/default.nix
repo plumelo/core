@@ -31,8 +31,8 @@ self: super:
       cava
 
       # office
-      libreoffice-fresh
-      unoconv
+      #libreoffice-fresh
+      #unoconv
 
       # browsers
       firefox
