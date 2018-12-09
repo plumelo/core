@@ -33,6 +33,7 @@ in {
           "systemd-journal"
           "lxd"
           "docker"
+          "vboxusers"
           "sway"
         ];
         initialPassword = "${cfg.name}";
