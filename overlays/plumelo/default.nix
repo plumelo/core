@@ -61,7 +61,7 @@ self: super:
       python27Packages.yamllint
 
       # langs
-      nodejs-8_x
+      nodejs-10_x
       ruby
 
       # misc
