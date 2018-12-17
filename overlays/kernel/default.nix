@@ -2,12 +2,12 @@ self: super:
 let
   config = import ./config.nix;
   buildLinux = (cfg: super.buildLinux rec {
-    version = "4.19.6";
-    modDirVersion = "4.19.6";
+    version = "4.19.9";
+    modDirVersion = "4.19.9";
     extraMeta.branch = "4.19";
     src = super.fetchurl {
       url = "mirror://kernel/linux/kernel/v4.x/linux-${version}.tar.xz";
-      sha256 = "1hq9iyx2k6ff6yxsgkd4xvk5al3jw5nxk49zq72w04b2nsz62kk4";
+      sha256 = "1wnvd4901ppzmx26fiav4glfkpb8qc7srcyk2m198wwwhb36q4gw";
     };
     ignoreConfigErrors = true;
     extraConfig = cfg;
@@ -47,7 +47,7 @@ let
     DRM_AMDGPU_CIK y
     DRM_AMD_DC_PRE_VEGA y
     NR_CPUS 16 
-    BT n  
+    BT n
     ${exclude.uncommon}
     ${exclude.fs}
     ${exclude.net}
