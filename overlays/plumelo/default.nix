@@ -79,7 +79,7 @@ self: super:
       vagrant
       redir
       bridge-utils
-      ansible_2_6
+      ansible_2_7
       avocode
       distrobuilder
 
