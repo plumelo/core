@@ -5,16 +5,16 @@ with super;
     prefix-highlight =  prefix-highlight.overrideAttrs (old: rec {
       src = fetchgit {
         url = "https://github.com/tmux-plugins/tmux-prefix-highlight";
-        rev = "61e8293452083f41b1cf633be503e8abf0c494ba";
-        sha256 = "11fwwhghhw05v8n2npq5mjnly3r193jrcp7ivyx9h73zyh6l41l7";
+        rev = "8880f9c9c43cd57443e0272334d17fda9991f369";
+        sha256 = "1y23qc9r6v184vs4hvqg788zv097nnlg3rr4lwwz7hdg5glfdgaj";
       };
     });
 
     resurrect = resurrect.overrideAttrs (old : rec {
       src = fetchgit {
         url = "https://github.com/tmux-plugins/tmux-resurrect";
-        rev = "e5cbe54c7526e8b00cec4652f760d4b8cdb8fece";
-        sha256 = "0q7yxqniqal15q64nzks2wsigpgp2lwg44z2n89cqg8gr3yknvc2";
+        rev = "b020b2481e9365d5ac09f22033f2bb01a86c0f2e";
+        sha256 = "0vzb8zd7k48sy34ynb3mzrwb9qnsvqs2cdmg9916nid7a27av017";
       };
     });
 
