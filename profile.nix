@@ -1,5 +1,5 @@
 { config, lib, pkgs, ... }:
-let local = ./locals.nix;
+let local = ./local.nix;
 in
 {
   imports = (if builtins.pathExists local then [local] else []) ++
