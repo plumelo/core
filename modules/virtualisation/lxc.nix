@@ -4,12 +4,12 @@
   nixpkgs.overlays = [( self: super: { 
     lxc-templates = with super; stdenv.mkDerivation rec {
       name = "lxc-templates-${version}";
-      version = "3.0.2";
+      version = "3.0.3";
       src = fetchFromGitHub {
         owner = "lxc";
         repo = "lxc-templates";
         rev = "lxc-templates-${version}";
-        sha256 = "1q64dbnm5bq2rixzfaraa6miwy3l7mg90k02g41743yl45bsbymj";
+        sha256 = "15ywjgaimvxwc7xk5f4s1k7d384vfs12bc1jywhxahgirjjqgw2l";
       };
       preConfigure = ''
         for file in $(find ./config -type f -name  "*.conf.in"); do
