@@ -2,13 +2,13 @@ self: super:
 {
     firmwareLinuxNonfree = with super; firmwareLinuxNonfree.overrideAttrs(old: rec {
       name = "firmware-linux-nonfree-${version}";
-      version = "2018-10-26";
+      version = "2018-12-18";
       src = fetchgit {
         url = "https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git";
-        rev = "1baa34868b2c0a004dc595b20678145e3fff83e7";
-        sha256 = "0x1dixh2065rrvxx1rb9yrnqq210ngf9rf8jmq5ladyji7q25r2g";
+        rev = "0f22c8527439eaaf5c3fcf87b31c89445b6fa84d";
+        sha256 = "1ja7b5bsv5w0arycxx9rb3fph16xllpnvzbflzq7cziw9aqdcp7i";
       };
-      outputHash = "0smf15n6ijzazd5m6jdngdfq3q7540nysi5dd7fr7qxs4x5mr9jn";
+      outputHash = "0fv0lj52rwcmngavw95n3nmlpc2wmnm769vgzg4f42j4dh206c94";
     });
 
     xorg = with super; xorg // {
