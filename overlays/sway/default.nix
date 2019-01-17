@@ -9,8 +9,8 @@ let
     src = fetchFromGitHub {
       owner = "swaywm";
       repo = "wlroots";
-      rev = version;
-      sha256 = "0gfxawjlb736xl90zfv3n6zzf5n1cacgzflqi1zq1wn7wd3j6ppv";
+      rev = "10b1de6e718f1765f81131447d4b6b86bc78a6f4";
+      sha256 = "19dly2qmaxsdmbqzhxxnpw9pimhrabw79jh534z0xys161b6rqsb";
     };
 
     nativeBuildInputs = [ meson ninja pkgconfig ];
@@ -111,10 +111,15 @@ in
     src = fetchFromGitHub {
       owner = "swaywm";
       repo = "sway";
-      rev = version;
-      sha256 = "0f9rniwizbc3vzxdy6rc47749p6gczfbgfdy4r458134rbl551hw";
+      rev = "70637b40fe98bda420e279e2e059fc93a9f538d6";
+      sha256 = "0mlkx3w72xhlh0df569rwbjv56h3yhykibbxcrh5my13chx9lrvg";
     };
-    nativeBuildInputs = [ meson ninja pkgconfig ];
+    nativeBuildInputs = [ meson ninja pkgconfig cmake ];
+
+    mesonFlags = [
+      "-Denable-tray=true"
+    ];
+
     buildInputs = [
       pcre
       json_c
@@ -122,6 +127,7 @@ in
       wayland
       wayland-protocols
       libxkbcommon
+      libevdev
       cairo
       pango
       libcap
