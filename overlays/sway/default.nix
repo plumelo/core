@@ -103,7 +103,30 @@ in
       cairo
     ];
   };
+  swaylock = mkDerivation rec {
+    name = "swaylock-${version}";
+    version = "1.3";
 
+    src = fetchFromGitHub {
+      owner = "swaywm";
+      repo = "swaylock";
+      rev = "79dd99cb3c8c8de81c822be04442aeff597aea70";
+      sha256 = "0yahv48mz4945zsqazhq5hnm5n57j4x8zj9zv2bxsash881md8wk";
+    };
+    nativeBuildInputs = [ meson ninja pkgconfig cmake ];
+
+    buildInputs = [
+      wayland
+      wayland-protocols
+      libxkbcommon
+      cairo
+      pango
+      gdk_pixbuf
+      pam
+      git
+      scdoc
+    ];
+  };
   sway = mkDerivation rec {
     name = "sway-${version}";
     version = "1.0-beta.2";
@@ -137,7 +160,6 @@ in
       git
       scdoc
       xwayland
-      git
     ];
   };
 }
