@@ -49,11 +49,11 @@ let
 in
 {
   skypeforlinux = with super; skypeforlinux.overrideAttrs (old: rec { 
-    version = "8.36.76.38";
+    version = "8.37.76.92";
     name = "skypeforlinux-${version}";
     src = fetchurl {
       url = "https://repo.skype.com/deb/pool/main/s/skypeforlinux/skypeforlinux_${version}_amd64.deb";
-      sha256 = "15yyw9a2kdiq3zqwpggkrshysl54n3v4c7vbkfpdgh8c2s3xalav";
+      sha256 = "1fqpl0zf73l23dl9almwzhfi56597kdr93914bdi6jhnqj21j479";
     };
 
 
