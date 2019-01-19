@@ -26,14 +26,14 @@ with super;
     };
     spaceship = stdenv.mkDerivation rec {
         pname = "spaceship-prompt";
-        version = "3.9.0";
+        version = "3.10.0";
         name = "zsh-${pname}-${version}";
 
         src = fetchFromGitHub {
           owner = "denysdovhan";
           repo = pname;
-          rev= "6e42f9d78a9fef0d3822d4e6b90d254ca05f1120";
-          sha256 = "07zwkbw1k503mqxz3x8xb843m6qcwqcsfdm0fpvhwmlkk1dxns99";
+          rev= "0e84e3816311f33d16fb617de0fe8d2653b10441";
+          sha256 = "03rjc3y24sz97x1fi6g66ky0pgw2q6z5r33vaprvnd2axay8pbdz";
         };
 
         buildInputs = [ zsh ];
