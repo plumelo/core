@@ -35,6 +35,7 @@ in {
           "docker"
           "vboxusers"
           "sway"
+          "syncthing"
         ];
         initialPassword = "${cfg.name}";
         packages = mkDefault cfg.packages;
