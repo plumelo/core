@@ -60,6 +60,7 @@
 
     alias ..="cd ../"
     alias dotfiles="git -c core.excludesFile=~/.dotignore --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
+    stty -ixon
   '';
   environment.systemPackages = with pkgs; [zshThemes.spaceship];
   users.defaultUserShell = pkgs.zsh;
