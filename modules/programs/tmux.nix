@@ -12,6 +12,7 @@ with pkgs.tmuxPlugins;
       # Automatically set window title
       set-window-option -g automatic-rename on
       set-option -g set-titles on
+      set-option -g renumber-windows on
 
       set-window-option -g xterm-keys on
       set -ga terminal-overrides ",xterm-256color:Tc"
@@ -24,7 +25,7 @@ with pkgs.tmuxPlugins;
       unbind C-b
       set -g prefix C-Space
       bind C-Space send-prefix
-      
+
       set -g @theme "one"
       set -g @theme-background "dark"
 
