@@ -86,6 +86,7 @@ in {
   ];
 
   environment.etc."sway/config".text = with pkgs; ''
+    set $shell ${pkgs.zsh}/bin/zsh
     set $swaylock ${swaylock}/bin/swaylock
     set $term ${alacritty}/bin/alacritty
     set $fzf ${fzf}/bin/fzf

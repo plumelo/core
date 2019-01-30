@@ -4,7 +4,7 @@ set $left h
 set $down j
 set $up k
 set $right l
-set $menu $term -t "fzf-menu" -e bash -c 'compgen -c | sort -u | $fzf | xargs -I ? -r swaymsg exec "fish -c ?"'
+set $menu $term -t "fzf-menu" -e bash -c 'compgen -c | sort -u | $fzf | xargs -I ? -r swaymsg exec "$shell -c ?"'
 
 # input
 input "2:14:ETPS/2_Elantech_Touchpad" {
