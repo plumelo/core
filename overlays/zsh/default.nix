@@ -2,28 +2,6 @@ self: super:
 with super;
 {
   zshThemes = {
-    pure = stdenv.mkDerivation rec {
-        pname = "pure";
-        version = "1.8.0";
-        name = "zsh-pure-${version}";
-
-        src = fetchFromGitHub {
-          owner = "sindresorhus";
-          repo = pname;
-          rev= "a643cc38013b73aade05dcab16fa3ce744d10115";
-          sha256 = "0yq469616g184frvq4flahxxmwky05w2akrcd813ikn0r3gyzla9";
-        };
-
-        buildInputs = [ zsh ];
-
-        installPhase = ''
-          chmod +x pure.zsh async.zsh
-          patchShebangs .
-          
-          install -Dm0644 pure.zsh $out/share/zsh/site-functions/prompt_pure_setup
-          install -Dm0644 async.zsh $out/share/zsh/site-functions/async
-        '';
-    };
     spaceship = stdenv.mkDerivation rec {
         pname = "spaceship-prompt";
         version = "3.10.0";

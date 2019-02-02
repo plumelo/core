@@ -1,7 +1,7 @@
 self: super:
-let 
-  alacritty = import ./unwrapped.nix self super;
-in { 
+let
+  alacritty = super.alacritty;
+in {
   alacritty = super.symlinkJoin {
     name = "alacritty-with-config-${alacritty.version}";
 
