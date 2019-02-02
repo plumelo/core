@@ -3,12 +3,12 @@ with super;
 {
   neovim-unwrapped = neovim-unwrapped.overrideAttrs(old: rec {
   name = "neovim-unwrapped-${version}";
-  version = "0.3.2-dev";
+  version = "0.4.0-dev";
   src = fetchFromGitHub {
     owner = "neovim";
     repo = "neovim";
-    rev = "95fa71c6d2b4a2d86bc1e4a984efbd188fab1382";
-    sha256 = "0j81shywafvzfar0p2x2r77sc4dx6k4prlfp38ish8vxig94r1k0";
+    rev = "f89d0d8230f34dca49eddbea179d274955b572b9";
+    sha256 = "0kb4szx0djj5hnky3grj1mw5sflzdkljh2w1hb5jr7asr71j5c5k";
   };
   });
 
