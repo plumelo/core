@@ -1,5 +1,6 @@
 { config, lib, pkgs, ... }:
-let i3blocksconf = with pkgs; writeText "i3blocksconf" ''
+let 
+  i3blocksconf = with pkgs; writeText "i3blocksconf" ''
   command=${i3blocks}/libexec/i3blocks/$BLOCK_NAME
   separator_block_width=15
   markup=none
@@ -28,9 +29,9 @@ let i3blocksconf = with pkgs; writeText "i3blocksconf" ''
   interval=60
   label=
 '';
-  swayPackage = pkgs.sway;
-
-  swayWrapped = pkgs.writeShellScriptBin "sway" ''
+ldLibraryPath =config.environment.sessionVariables.LD_LIBRARY_PATH;
+swayPackage = pkgs.sway;
+swayWrapped = pkgs.writeShellScriptBin "sway" ''
     export XKB_DEFAULT_LAYOUT=us
     if [[ "$#" -ge 1 ]]; then
       exec sway-setcap "$@" -c /etc/sway/config
@@ -86,9 +87,9 @@ in {
   ];
 
   environment.etc."sway/config".text = with pkgs; ''
-    set $shell ${pkgs.zsh}/bin/zsh
+    set $shell LD_LIBRARY_PATH=${ldLibraryPath} ${pkgs.zsh}/bin/zsh
     set $swaylock ${swaylock}/bin/swaylock
-    set $term ${alacritty}/bin/alacritty
+    set $term LD_LIBRARY_PATH=${ldLibraryPath} ${alacritty}/bin/alacritty
     set $fzf ${fzf}/bin/fzf
     set $brightness ${brightnessctl}/bin/brightnessctl
     set $grim ${grim}/bin/grim
