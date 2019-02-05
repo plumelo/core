@@ -43,15 +43,5 @@ self: super:
       url = "https://github.com/lxc/lxd/releases/download/lxd-${version}/lxd-${version}.tar.gz";
       sha256 = "0zv0bzpb44md5d8y3i2i6srmcdzbzk87mw5byvzmd2s9931g4ip4";
     };
-
-    postInstall = with super; ''
-      rm $bin/bin/{deps,macaroon-identity}
-      wrapProgram $bin/bin/lxd --prefix PATH : ${stdenv.lib.makeBinPath [
-        acl rsync gnutar xz btrfs-progs gzip dnsmasq squashfsTools iproute iptables ebtables bash
-        (writeShellScriptBin "apparmor_parser" ''
-          exec '${apparmor-parser}/bin/apparmor_parser' -I '${apparmor-profiles}/etc/apparmor.d' "$@"
-        '')
-      ]}
-    '';
   });
 }
