@@ -46,7 +46,7 @@ with super;
         endfunction
 
         nnoremap <silent> - :call Externalize('${self.alacritty}/bin/alacritty -t "ranger-menu" -e sh -c "ranger --choosefiles=%s '.getcwd().' && clear"; sleep 0.01',':silent ::e! ')<CR>
-        nnoremap <silent> =- :call Externalize('${self.alacritty}/bin/alacritty -t "ranger-menu" -e sh -c "ranger --choosefiles=%s '.expand("%:p:h").' && clear"; sleep 0.01',':silent ::e! ')<CR>
+        nnoremap <silent> =- :call Externalize('${self.alacritty}/bin/alacritty -t "ranger-menu" -e sh -c "ranger --choosefiles=%s --selectfile='.expand("%:p").' '.expand("%:p:h").' && clear"; sleep 0.01',':silent ::e! ')<CR>
 
       '';
     };
