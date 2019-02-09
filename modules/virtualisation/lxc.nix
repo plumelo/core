@@ -1,7 +1,8 @@
 { config, options, lib, pkgs, ... }:
 with lib;
 let cfg = config.virtualisation.lxc;
-in {
+in
+{
   options = {
     virtualisation.lxc.net = {
       enable = mkOption {
@@ -17,7 +18,6 @@ in {
       address = mkOption {
         type = types.str;
         default = "10.0.3.1";
-
       };
 
     };
@@ -25,19 +25,6 @@ in {
 
   config = mkIf cfg.enable (mkMerge [
     {
-      environment.systemPackages = with pkgs; [ lxc-templates ];
-      environment.pathsToLink = [ "/share/lxc" ];
-
-      system.activationScripts = {
-        lxc = {
-          text = ''
-            mkdir -p /usr/share
-            ln -sfn /run/current-system/sw/share/lxc /usr/share/lxc
-          '';
-          deps = [ ];
-        };
-      };
-
       virtualisation.lxc = {
         defaultConfig = ''
           lxc.apparmor.profile = unconfined

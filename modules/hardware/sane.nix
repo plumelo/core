@@ -9,12 +9,6 @@ in
       drivers = with pkgs; [ gutenprint ];
     };
 
-    environment.systemPackages = with pkgs; [
-      gnome3.simple-scan
-    ];
-    users.defaultUser.extraGroups = [
-      "scanner"
-      "lp"
-    ];
+    environment.systemPackages = with pkgs; [ gnome3.simple-scan ];
   };
 }
