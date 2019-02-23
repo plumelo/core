@@ -27,6 +27,8 @@ let
     NR_CPUS 8
     ${exclude.uncommon}
     ${exclude.fs}
+    ${exclude.net}
+    ${exclude.wlan}
   '');
 
   slim = buildLinux (with config; ''
