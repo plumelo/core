@@ -9,8 +9,8 @@ let
     src = fetchFromGitHub {
       owner = "swaywm";
       repo = "wlroots";
-      rev = "721a810f72aed867176f3721a4462fc24c790954";
-      sha256 = "01jya7f28iq8aivhgmmlkcl9jvwpaj1jih7ii50f83mk4v7wvh7x";
+      rev = "4f66565606c8958684c00f28d0b4996904c041bc";
+      sha256 = "1vs43h3br5mw24flvsrfm7calyisxrj4iyawll8a9k69rh51k4nw";
     };
 
     nativeBuildInputs = [ meson ninja pkgconfig ];
@@ -48,8 +48,8 @@ in
     src = fetchFromGitHub {
       owner = "emersion";
       repo = "mako";
-      rev = "b30c786bdf8b90807e45ec0f52b292ee147ae1ff";
-      sha256 = "1dw75cdvn34kmwdgzm228zvm0apd10rw1hx1k9xbmhihzf7jg76y";
+      rev = "e3a69aa4017d6cb64a270fcc2e708c98cd9d2b39";
+      sha256 = "1cd1jbpipcr4x2m5ci5q45w3c6gxxgwwv6zih3wjxw0j36ff1mz6";
     };
 
     nativeBuildInputs = [ meson ninja pkgconfig ];
@@ -74,8 +74,8 @@ in
     src = fetchFromGitHub {
       owner = "emersion";
       repo = "grim";
-      rev = "1e8dde32b6e5fd6b03230aea290840f64be515db";
-      sha256 = "1bcvkggqszcwy6hg8g4mch3yr25ic0baafbd90af5s5mrhrjxxxz";
+      rev = "6994df611f55a4089209fdd5ad8d9301e4fb0167";
+      sha256 = "1r7ryrv9w3g26p0zik7xg5db0bs6ibx12mjg1xs03wjld3cfcyal";
     };
     nativeBuildInputs = [ meson ninja pkgconfig ];
     buildInputs = [
@@ -93,8 +93,8 @@ in
     src = fetchFromGitHub {
       owner = "emersion";
       repo = "slurp";
-      rev = "d9f3d741dc3de8c24198f41befc297e43054a523";
-      sha256 = "05ivdf37f8cd02yh94f0kz3lpfn0w9qfn095isd941gwmq2v6r50";
+      rev = "a780cfa3cfc9616a258e9592b4111cf83dddeb93";
+      sha256 = "1jrdbwalixiyqpg3zq0fqja77pqhx741f989d2dd2c5sdx6kfa4r";
     };
     nativeBuildInputs = [ meson ninja pkgconfig ];
     buildInputs = [
@@ -110,8 +110,8 @@ in
     src = fetchFromGitHub {
       owner = "swaywm";
       repo = "swaylock";
-      rev = "effdea523158c8e30f7654a87402df155a2229ad";
-      sha256 = "093nv1y9wyg48rfxhd36qdljjry57v1vkzrlc38mkf6zvsq8j7wb";
+      rev = "6b3be42264b9eaa8524ea4f0d93fbd1d82495d90";
+      sha256 = "0al63s2690y2k9ymd7l13p2r28wpy6svziwcgjpasmyga9vckgxv";
     };
 
     mesonFlags = [
@@ -134,13 +134,13 @@ in
   };
   sway = mkDerivation rec {
     name = "sway-${version}";
-    version = "1.0-rc1";
+    version = "1.0-rc3";
 
     src = fetchFromGitHub {
       owner = "swaywm";
       repo = "sway";
-      rev = "a1a99421a1150609bc8a54a2dd51dc9ec780d326";
-      sha256 = "1xg2q3k1flgqpr2cy8xxm2x1jk7ykdlq0fx01jkw4am0kxaj8ivy";
+      rev = "9350a52c0e8b502f9dc7f876da0527607a44bfec";
+      sha256 = "0zczbiq7mprwsa6axaah1qas5jv5jvy054629vbsh49h4m12v04w";
     };
     nativeBuildInputs = [ meson ninja pkgconfig cmake ];
 
