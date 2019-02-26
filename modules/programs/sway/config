@@ -4,7 +4,7 @@ set $left h
 set $down j
 set $up k
 set $right l
-set $menu $term -t "fzf-menu" -e bash -c 'compgen -c | sort -u | $fzf | xargs -I ? -r swaymsg exec "$shell -c ?"'
+set $menu $term --class "fzf-menu" -e bash -c 'compgen -c | sort -u | $fzf | xargs -I ? -r swaymsg exec "$shell -c ?"'
 
 # input
 input "2:14:ETPS/2_Elantech_Touchpad" {
@@ -170,12 +170,12 @@ client.urgent           $base08 $base08 $base00 $base08 $base08
 exec --no-startup-id $mako --default-timeout 10000
 
 #Window clases
-for_window [title="^fzf-menu$"] floating enable
-for_window [title="^fzf-menu$"] resize set 99999 200
-for_window [title="^fzf-menu$"] move position 0 0
+for_window [app_id="fzf-menu"] floating enable
+for_window [app_id="fzf-menu"] resize set 99999 200
+for_window [app_id="fzf-menu"] move position 0 0
 
-for_window [title="^ranger-menu$"] floating enable
-for_window [title="^ranger-menu$"] resize set 99999 400
-for_window [title="^ranger-menu$"] move position 0 0
+for_window [app_id="ranger-menu"] floating enable
+for_window [app_id="ranger-menu"] resize set 99999 400
+for_window [app_id="ranger-menu"] move position 0 0
 
 no_focus [title="^mpv-preview$"]

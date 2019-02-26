@@ -9,8 +9,8 @@ let
     src = fetchFromGitHub {
       owner = "swaywm";
       repo = "wlroots";
-      rev = "4f66565606c8958684c00f28d0b4996904c041bc";
-      sha256 = "1vs43h3br5mw24flvsrfm7calyisxrj4iyawll8a9k69rh51k4nw";
+      rev = "421283935b42ed889043cd06e590a61d8317e88c";
+      sha256 = "05sp5l5xs4nk6b7vig7d1fhv1697as6wkj067qpsvsqx49vd38lx";
     };
 
     nativeBuildInputs = [ meson ninja pkgconfig ];
@@ -139,8 +139,8 @@ in
     src = fetchFromGitHub {
       owner = "swaywm";
       repo = "sway";
-      rev = "9350a52c0e8b502f9dc7f876da0527607a44bfec";
-      sha256 = "0zczbiq7mprwsa6axaah1qas5jv5jvy054629vbsh49h4m12v04w";
+      rev = "2f7247e08a16610228067c9ec34d2b6d897e15fa";
+      sha256 = "169id1gxrk89c2lqf0ljq1mw6f75iam9wmskncfkrk5jp4cj0jq0";
     };
     nativeBuildInputs = [ meson ninja pkgconfig cmake ];
 
