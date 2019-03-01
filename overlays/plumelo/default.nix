@@ -84,7 +84,6 @@ self: super:
       distrobuilder
 
       #files
-      filezilla
       ranger
 
       # sway
