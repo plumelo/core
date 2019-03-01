@@ -28,7 +28,6 @@ in
   };
 
   programs = {
-    fish.enable = true;
     java.enable = true;
   };
 
