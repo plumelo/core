@@ -51,4 +51,8 @@ with super;
       '';
     };
   };
+
+  vim-vint=  vim-vint.overridePythonAttrs(old: {
+    checkPhase = false;
+  });
 }

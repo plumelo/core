@@ -34,10 +34,10 @@ in
   hardware = {
     pulseaudio.enable = true;
     cpu.amd.updateMicrocode = true;
-    opengl.extraPackages = with pkgs; [ 
-      vaapiIntel 
-      libvdpau-va-gl 
-      vaapiVdpau 
+    opengl.extraPackages = with pkgs; [
+      vaapiIntel
+      libvdpau-va-gl
+      vaapiVdpau
     ];
   };
 
