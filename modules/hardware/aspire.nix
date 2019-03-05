@@ -1,5 +1,8 @@
 { config, lib, pkgs, ... }:
 {
+  imports = [
+    ./bluetooth.nix
+  ];
   boot = {
     kernelPackages = lib.mkForce pkgs.linuxPackages_raven;
     kernelParams = [
