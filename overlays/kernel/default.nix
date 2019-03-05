@@ -2,12 +2,12 @@ self: super:
 let
   config = import ./config.nix;
   buildLinux = (cfg: super.buildLinux rec {
-    version = "4.19.16";
-    modDirVersion = "4.19.16";
-    extraMeta.branch = "4.19";
+    version = "5.0";
+    modDirVersion = "5.0.0";
+    extraMeta.branch = "5.0";
     src = super.fetchurl {
-      url = "mirror://kernel/linux/kernel/v4.x/linux-${version}.tar.xz";
-      sha256 = "1pqvn6dsh0xhdpawz4ag27vkw1abvb6sn3869i4fbrz33ww8i86q";
+      url = "mirror://kernel/linux/kernel/v5.x/linux-${version}.tar.xz";
+      sha256 = "0hrf3b1mk1sf8vbl9knccblghmg05d5ypmc2f9d9y5crchd18ys3";
     };
     ignoreConfigErrors = true;
     extraConfig = cfg;
