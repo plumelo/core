@@ -5,12 +5,12 @@ let
   mkDerivation = stdenv.mkDerivation;
   wlroots =  mkDerivation rec {
     name = "wlroots";
-    version = "0.3";
+    version = "0.4.1";
     src = fetchFromGitHub {
       owner = "swaywm";
       repo = "wlroots";
-      rev = "6a60dafe596e3eed680f6176466d7855222d1395";
-      sha256 = "0yk2623ad0gq93130dh13zv4my7ra1j0dfwvgkaa6zjy96fnnksv";
+      rev = version;
+      sha256 = "1624gasx8k0yy649d65ih4hs290szyxzd3bl0kg1l6njnhlxnr6b";
     };
 
     nativeBuildInputs = [ meson ninja pkgconfig ];
@@ -134,13 +134,13 @@ in
   };
   sway = mkDerivation rec {
     name = "sway-${version}";
-    version = "1.0-rc4";
+    version = "1.0-rc5";
 
     src = fetchFromGitHub {
       owner = "swaywm";
       repo = "sway";
-      rev = "c129767bc05ad5c98c1fa73f261cf30ff59346dd";
-      sha256 = "1f0mvf48dvsivdd850r1gd2h90cbn62qflwiff6x2addn868bvxa";
+      rev = version;
+      sha256 = "1jkacibmxy9rpq5mxnq7bkwcy0c592zk4vf20j5qbbljp9h7c87i";
     };
     nativeBuildInputs = [ meson ninja pkgconfig cmake ];
 
