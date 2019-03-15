@@ -13,6 +13,12 @@ in {
       type = types.listOf types.package;
       default = [];
     };
+
+    extraGroups = mkOption {
+      type = types.listOf types.str;
+      default = [];
+      description = "The user's auxiliary groups.";
+    };
   };
 
   config = mkIf (cfg.name != null) {
@@ -24,9 +30,9 @@ in {
         isNormalUser = true;
         uid = 1000;
         extraGroups = [
-          "${cfg.name}" 
-          "wheel" 
-          "disk" 
+          "${cfg.name}"
+          "wheel"
+          "disk"
           "audio"
           "video"
           "networkmanager"
@@ -35,7 +41,7 @@ in {
           "docker"
           "vboxusers"
           "sway"
-        ];
+        ] ++ cfg.extraGroups;
         initialPassword = "${cfg.name}";
         packages = mkDefault cfg.packages;
       };
