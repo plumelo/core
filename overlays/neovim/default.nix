@@ -7,8 +7,8 @@ with super;
   src = fetchFromGitHub {
     owner = "neovim";
     repo = "neovim";
-    rev = "f89d0d8230f34dca49eddbea179d274955b572b9";
-    sha256 = "0kb4szx0djj5hnky3grj1mw5sflzdkljh2w1hb5jr7asr71j5c5k";
+    rev = "5c836d2ef8b6b2a8ad1ea7e4d7e1bf8dd9b1b93d";
+    sha256 = "031lpp0vrqwijlnmqlmlc7cvvslj7h3n87l5phw7nb326q2b610k";
   };
   });
 
