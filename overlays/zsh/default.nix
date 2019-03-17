@@ -4,14 +4,14 @@ with super;
   zshThemes = {
     spaceship = stdenv.mkDerivation rec {
         pname = "spaceship-prompt";
-        version = "3.10.0";
+        version = "3.11.0";
         name = "zsh-${pname}-${version}";
 
         src = fetchFromGitHub {
           owner = "denysdovhan";
           repo = pname;
-          rev= "0e84e3816311f33d16fb617de0fe8d2653b10441";
-          sha256 = "03rjc3y24sz97x1fi6g66ky0pgw2q6z5r33vaprvnd2axay8pbdz";
+          rev= "d9f25e14e7bec4bef223fd8a9151d40b8aa868fa";
+          sha256 = "0vl5dymd07mi42wgkh0c3q8vf76hls1759dirlh3ryrq6w9nrdbf";
         };
 
         buildInputs = [ zsh ];
@@ -35,8 +35,8 @@ with super;
         src = fetchFromGitHub {
           owner = "chisui";
           repo = pname;
-          rev= "dceed031a54e4420e33f22a6b8e642f45cc829e2";
-          sha256 = "10g8m632s4ibbgs8ify8n4h9r4x48l95gvb57lhw4khxs6m8j30q";
+          rev= "3f4dd5eebd7bc4f49768b63dd90ad874fb04dd16";
+          sha256 = "03z89h8rrj8ynxnai77kmb5cx77gmgsfn6rhw77gaix2j3scr2kk";
         };
 
         buildInputs = [ zsh ];
