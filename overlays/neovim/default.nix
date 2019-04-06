@@ -37,14 +37,14 @@ let
 
 in {
   neovim-unwrapped = neovim-unwrapped.overrideAttrs(old: rec {
-  name = "neovim-unwrapped-${version}";
-  version = "0.4.0-dev";
-  src = fetchFromGitHub {
-    owner = "neovim";
-    repo = "neovim";
-    rev = "5c836d2ef8b6b2a8ad1ea7e4d7e1bf8dd9b1b93d";
-    sha256 = "031lpp0vrqwijlnmqlmlc7cvvslj7h3n87l5phw7nb326q2b610k";
-  };
+    name = "neovim-unwrapped-${version}";
+    version = "0.4.0-dev";
+    src = fetchFromGitHub {
+      owner = "neovim";
+      repo = "neovim";
+      rev = "052ced4954075eca360ff7689afea82252f1c599";
+      sha256 = "1vzifx60yi3p37fy8fkc6icmzgf9abl3jbn65s1iizv2q5zdd7gf";
+    };
   });
 
   neovim = neovim.override {
