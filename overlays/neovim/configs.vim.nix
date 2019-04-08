@@ -92,10 +92,64 @@ function! InNetrw()
   nmap <buffer> <left> -
   nmap <buffer> <tab> G<cr>
   nmap <buffer> l qf
-  nmap <silent> <buffer> <Esc> :bd<CR>
+  nmap <silent> <buffer> <Esc> :Rexplore<CR>
 endfunction
 autocmd MyAutoCmd FileType netrw call InNetrw()
-nnoremap - :Explore<CR>
-nnoremap <Leader>f :Explore .<CR>
+
+function MyExplore()
+  if !exists('w:my_netrw_entered')
+    Explore
+    let w:my_netrw_entered = 1
+  else
+    Rexplore
+  endif
+endfunction
+
+nnoremap - :call MyExplore()<cr>
+nnoremap <leader><leader> :Vexplore!<cr>
+
+"fzf plugin
+set runtimepath+=${fzf.out}/share/vim-plugins/fzf*/
+let $FZF_DEFAULT_OPTS='--ansi --layout reverse'
+let g:fzf_layout = { 'down': '15' }
+let g:_fzf_command = '${fd}/bin/fd --type file --follow --hidden --exclude .git'
+
+function! FZFD()
+  let $FZF_DEFAULT_COMMAND = g:_fzf_command
+  FZF
+endfunction
+
+function! s:buflist()
+  redir => ls
+  silent ls
+  redir END
+  return split(ls, '\n')
+endfunction
+
+let g:buffer_action = {
+  \ 'ctrl-x': 'sb',
+  \ 'ctrl-v': 'vsp|b',
+  \ 'ctrl-w': 'bdelete'
+  \}
+
+function! BufferSink(lines)
+  if len(a:lines)<2
+    return
+  endif
+  let key = remove(a:lines, 0)
+  let Cmd = get(g:buffer_action, key,'buffer')
+  for line in a:lines
+    let bid = matchstr(line, '^[ 0-9]*')
+    execute Cmd bid
+  endfor
+endfunction
+
+nnoremap <silent> <C-p> :call FZFD()<CR>
+noremap <Bs> :call fzf#run(fzf#wrap({
+  \ 'source':  reverse(<sid>buflist()),
+  \ 'sink*':  function('BufferSink'),
+  \ 'options': '-m --expect='.join(keys(buffer_action), ',')
+  \ }))<CR>
+
 ''
 
