@@ -1,3 +1,7 @@
+pkgs:
+# vim: set syntax=vim:
+''
+set encoding=utf-8
 scriptencoding utf-8
 
 set number
@@ -34,3 +38,9 @@ set inccommand=nosplit
 set updatetime=750
 set list listchars=tab:▷\ ,space:·,extends:»,precedes:«,nbsp:⦸
 set statusline=2
+set shell=/usr/bin/env\ bash
+
+if has('termguicolors')
+  set termguicolors
+endif
+''

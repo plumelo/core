@@ -1,3 +1,6 @@
+pkgs:
+# vim: set syntax=vim:
+''
 nnoremap <Space>n :nohlsearch<CR>
 nnoremap j gj
 nnoremap k gk
@@ -27,3 +30,4 @@ vnoremap <Space>p "+p
 vnoremap <Space>P "+P
 nnoremap n nzzzv
 nnoremap N Nzzzv
+''
