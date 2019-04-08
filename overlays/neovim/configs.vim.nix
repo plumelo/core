@@ -1,4 +1,4 @@
-{ag}:
+{ag, fzf, fd}:
 # vim: set syntax=vim:
 ''
 " ack
@@ -12,7 +12,7 @@ nnoremap <leader>g :<C-u>Ack!<Space>
 let g:lightline = {
   \ 'colorscheme': 'one',
   \ 'active': {
-  \   'left':[ 
+  \   'left':[
   \     [ 'mode', 'paste' ],
   \     [ 'gitbranch', 'readonly', 'filename', 'modified' ]
   \   ]

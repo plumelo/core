@@ -22,7 +22,6 @@ in {
         ${ callPackage ./autocmds.vim.nix {}}
         ${ callPackage ./configs.vim.nix {}}
         ${ callPackage ./mappings.vim.nix {}}
-        ${ callPackage ./fzf.vim.nix {}}
         syntax enable
         set background=dark
         colorscheme onehalfdark
