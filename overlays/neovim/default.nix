@@ -38,6 +38,7 @@ in {
           lightline-vim
           polyglot
           fugitive
+          vim-dirvish
         ];
         opt = [
           ale
@@ -48,6 +49,7 @@ in {
           vim-highlightedyank
           vim-signify
           editorconfig-vim
+          vim-eunuch
         ]++ (with plugins; [
           starsearch
           onehalfdark

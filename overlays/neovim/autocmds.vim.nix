@@ -30,7 +30,7 @@ function g:LazyPlugins(...)
 
   packadd vim-signify
   packadd editorconfig-vim
-  packadd fugitive
+  packadd vim-eunuch
 endfunction
 
 " autocmds

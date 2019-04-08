@@ -79,34 +79,21 @@ if executable(s:local_prettier_eslint)
     \ }
 endif
 
-" netrw
-let g:netrw_localrmdir='rm -r'
-let g:netrw_bufsettings = 'noma nomod nu nowrap ro nobl'
-let g:netrw_sort_dotfiles_first = 1
-let g:netrw_altfile = 1
-let g:netrw_banner = 0
+" dirvish
+let g:loaded_netrw       = 1
+let g:loaded_netrwPlugin = 1
+let g:dirvish_mode = ':sort ,^.*[\/],'
 
-let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+,\(^\|\s\s\)ntuser\.\S\+'
-function! InNetrw()
+function! SetupDirvish()
   nmap <buffer> <right> <cr>
   nmap <buffer> <left> -
-  nmap <buffer> <tab> G<cr>
-  nmap <buffer> l qf
-  nmap <silent> <buffer> <Esc> :Rexplore<CR>
 endfunction
-autocmd MyAutoCmd FileType netrw call InNetrw()
-
-function MyExplore()
-  if !exists('w:my_netrw_entered')
-    Explore
-    let w:my_netrw_entered = 1
-  else
-    Rexplore
-  endif
-endfunction
-
-nnoremap - :call MyExplore()<cr>
-nnoremap <leader><leader> :Vexplore!<cr>
+augroup dirvish
+  autocmd!
+  autocmd FileType dirvish call SetupDirvish()
+  autocmd FileType dirvish nnoremap <silent><buffer>
+    \ gh :silent keeppatterns g@\v/\.[^\/]+/?$@d _<cr>:setl cole=3<cr>
+augroup END
 
 "fzf plugin
 set runtimepath+=${fzf.out}/share/vim-plugins/fzf*/
