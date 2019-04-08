@@ -16,12 +16,13 @@ in {
   });
 
   neovim = neovim.override {
+    withNodeJs = true;
     configure = {
       customRC = ''
-        ${ callPackage ./options.vim.nix {}}
         ${ callPackage ./autocmds.vim.nix {}}
-        ${ callPackage ./configs.vim.nix {}}
+        ${ callPackage ./options.vim.nix {}}
         ${ callPackage ./mappings.vim.nix {}}
+        ${ callPackage ./configs.vim.nix {}}
         syntax enable
         set background=dark
         colorscheme onehalfdark
@@ -31,6 +32,7 @@ in {
         start = [
           lightline-vim
           polyglot
+          fugitive
         ];
         opt = [
           ale
@@ -38,11 +40,9 @@ in {
           commentary
           surround
           repeat
-          neoformat
           vim-highlightedyank
           vim-signify
           editorconfig-vim
-          fugitive
         ]++ (with plugins; [
           starsearch
           onehalfdark
