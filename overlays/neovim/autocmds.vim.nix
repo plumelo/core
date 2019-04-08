@@ -25,8 +25,6 @@ function g:LazyPlugins(...)
   packadd vim-visualstar
   packadd quickfix-vim
   packadd largefile-vim
-  packadd fzf
-  packadd neoformat
   packadd ale
   packadd starsearch-vim
 
