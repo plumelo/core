@@ -4,7 +4,11 @@ with super;
 let
   plugins = callPackage ./plugins/default.nix {};
 in {
-  neovim-unwrapped = neovim-unwrapped.overrideAttrs(old: rec {
+  neovim-unwrapped = (neovim-unwrapped
+  .override {
+    stdenv= gcc8Stdenv;
+  })
+  .overrideAttrs(old: rec {
     name = "neovim-unwrapped-${version}";
     version = "0.4.0-dev";
     src = fetchFromGitHub {
@@ -13,6 +17,7 @@ in {
       rev = "052ced4954075eca360ff7689afea82252f1c599";
       sha256 = "1vzifx60yi3p37fy8fkc6icmzgf9abl3jbn65s1iizv2q5zdd7gf";
     };
+    NIX_CFLAGS_COMPILE = "-O3 -march=native";
   });
 
   neovim = neovim.override {
