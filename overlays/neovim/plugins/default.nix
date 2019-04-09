@@ -1,7 +1,7 @@
-{vimUtils, fetchFromGitHub}:
+{ vimUtils, fetchFromGitHub, makeWrapper, callPackage }:
 with vimUtils;
-
 {
+  nvim-typescript= callPackage ./nvim-typescript/default.nix {};
   largefile = buildVimPlugin {
     pname= "largefile-vim";
     version = "5";

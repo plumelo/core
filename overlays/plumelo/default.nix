@@ -61,14 +61,13 @@ self: super:
       python27Packages.yamllint
 
       # langs
-      nodejs-10_x
       ruby
 
       # misc
       keepassxc
       transmission_gtk
       stress
-      
+
       # git
       gitAndTools.tig
       git-lfs

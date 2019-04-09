@@ -69,15 +69,6 @@ let g:EditorConfig_max_line_indicator = 'none'
 " highlight and yank plugin
 let g:highlightedyank_highlight_duration = 300
 
-" neoformat plugin
-let s:local_prettier_eslint = findfile('node_modules/.bin/prettier-eslint', '.;')
-if executable(s:local_prettier_eslint)
-  let g:neoformat_javascript_prettiereslint = {
-    \ 'exe': './node_modules/.bin/prettier-eslint',
-    \ 'args': ['--stdin', '--stdin-filepath', '%:p'],
-    \ 'stdin': 1,
-    \ }
-endif
 
 " dirvish
 let g:loaded_netrw       = 1

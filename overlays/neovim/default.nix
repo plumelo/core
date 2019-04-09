@@ -39,6 +39,7 @@ in {
           polyglot
           fugitive
           vim-dirvish
+          plugins.nvim-typescript
         ];
         opt = [
           ale
