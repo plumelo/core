@@ -1,5 +1,6 @@
 { config, lib, pkgs, ... }:
 let
+  ldLibraryPath = config.environment.sessionVariables.LD_LIBRARY_PATH;
   i3blocksexec="${pkgs.i3blocks}/libexec/i3blocks";
   i3blocksconf = pkgs.writeText "i3blocksconf" ''
   command=${i3blocksexec}/$BLOCK_NAME
@@ -87,7 +88,7 @@ in {
   ];
 
   environment.etc."sway/config".text = with pkgs; ''
-    set $shell ${pkgs.zsh}/bin/zsh
+    set $shell LD_LIBRARY_PATH=${ldLibraryPath} ${pkgs.zsh}/bin/zsh
     set $swaylock ${swaylock}/bin/swaylock
     set $term ${alacritty}/bin/alacritty
     set $fzf ${fzf}/bin/fzf

@@ -1,7 +1,4 @@
 { config, options, lib, pkgs, ... }:
-let 
-  ldLibraryPath = config.environment.sessionVariables.LD_LIBRARY_PATH;
-in
 {
   programs.zsh = {
     enable = true;
@@ -64,7 +61,6 @@ in
     alias ..="cd ../"
     alias dotfiles="git -c core.excludesFile=~/.dotignore --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
     stty -ixon
-    export LD_LIBRARY_PATH="''${LD_LIBRARY_PATH:=${ldLibraryPath}}"
   '';
   environment.systemPackages = with pkgs; [zshThemes.spaceship];
   users.defaultUserShell = pkgs.zsh;
