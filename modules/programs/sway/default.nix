@@ -1,7 +1,8 @@
 { config, lib, pkgs, ... }:
-let 
-  i3blocksconf = with pkgs; writeText "i3blocksconf" ''
-  command=${i3blocks}/libexec/i3blocks/$BLOCK_NAME
+let
+  i3blocksexec="${pkgs.i3blocks}/libexec/i3blocks";
+  i3blocksconf = pkgs.writeText "i3blocksconf" ''
+  command=${i3blocksexec}/$BLOCK_NAME
   separator_block_width=15
   markup=none
   color=#E0E0E0
@@ -12,7 +13,7 @@ let
   interval=5
 
   [temperature]
-  command=${i3blocks}/libexec/i3blocks/temperature -w 80 -c 90
+  command=${i3blocksexec}/temperature -w 70 -c 90
   label=
   interval=1
 
@@ -29,7 +30,6 @@ let
   interval=60
   label=
 '';
-ldLibraryPath =config.environment.sessionVariables.LD_LIBRARY_PATH;
 swayPackage = pkgs.sway;
 swayWrapped = pkgs.writeShellScriptBin "sway" ''
     export XKB_DEFAULT_LAYOUT=us
@@ -46,7 +46,7 @@ swayWrapped = pkgs.writeShellScriptBin "sway" ''
 
 in {
   environment.systemPackages = [
-    swayJoined 
+    swayJoined
     ]++ (with pkgs;[
     arc-theme
     arc-icon-theme
@@ -77,9 +77,9 @@ in {
 
   hardware.opengl.enable = true;
   programs.ssh.startAgent = true;
-  
+
   fonts.fonts = with pkgs; [nerdfonts];
-  
+
   services.upower.enable = true;
   services.udev.packages = with pkgs; [
     brightnessctl
@@ -87,9 +87,9 @@ in {
   ];
 
   environment.etc."sway/config".text = with pkgs; ''
-    set $shell LD_LIBRARY_PATH=${ldLibraryPath} ${pkgs.zsh}/bin/zsh
+    set $shell ${pkgs.zsh}/bin/zsh
     set $swaylock ${swaylock}/bin/swaylock
-    set $term LD_LIBRARY_PATH=${ldLibraryPath} ${alacritty}/bin/alacritty
+    set $term ${alacritty}/bin/alacritty
     set $fzf ${fzf}/bin/fzf
     set $brightness ${brightnessctl}/bin/brightnessctl
     set $grim ${grim}/bin/grim
@@ -98,7 +98,7 @@ in {
     set $xclip ${xclip}/bin/xclip
     set $mako ${mako}/bin/mako
     set $i3blocks ${i3blocks}/bin/i3blocks
-    set $i3blocksconf ${i3blocksconf} 
+    set $i3blocksconf ${i3blocksconf}
 
     output * bg ${./wallpaper.jpg} fill
     output "Goldstar Company Ltd LG ULTRAWIDE 0x0000B7AA" bg ${./wallpaper_2560x1080.jpg} fill
@@ -106,7 +106,7 @@ in {
     output "Dell Inc. DELL U2515H 9X2VY74E0FFL" bg ${./wallpaper_2560x1080.jpg} fill
     output "Dell Inc. DELL U2518D 3C4YP773ARUL" bg ${./wallpaper_2560x1080.jpg} fill
 
-    ${builtins.readFile ./config} 
+    ${builtins.readFile ./config}
 
     include ${sway}/etc/sway/config.d/*
 
