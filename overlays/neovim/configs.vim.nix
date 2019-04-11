@@ -133,5 +133,8 @@ noremap <silent> <Bs> :call fzf#run(fzf#wrap({
   \ 'options': '-m --expect='.join(keys(buffer_action), ',')
   \ }))<CR>
 
+" signify
+let g:signify_realtime = 1
+
 ''
 
