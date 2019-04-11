@@ -38,7 +38,7 @@ set inccommand=nosplit
 set updatetime=750
 set list listchars=tab:▷\ ,space:·,extends:»,precedes:«,nbsp:⦸
 set statusline=2
-set shell=/usr/bin/env\ bash
+set wildmode=longest:full,full
 
 if has('termguicolors')
   set termguicolors
