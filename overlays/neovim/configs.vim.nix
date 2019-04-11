@@ -122,7 +122,7 @@ function! BufferSink(lines)
 endfunction
 
 nnoremap <silent> <C-p> :call FZFD()<CR>
-noremap <Bs> :call fzf#run(fzf#wrap({
+noremap <silent> <Bs> :call fzf#run(fzf#wrap({
   \ 'source':  reverse(<sid>buflist()),
   \ 'sink*':  function('BufferSink'),
   \ 'options': '-m --expect='.join(keys(buffer_action), ',')
