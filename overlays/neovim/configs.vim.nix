@@ -74,6 +74,7 @@ let g:highlightedyank_highlight_duration = 300
 let g:loaded_netrw       = 1
 let g:loaded_netrwPlugin = 1
 let g:dirvish_mode = ':sort ,^.*[\/],'
+let g:dirvish_relative_paths = 1
 
 function! SetupDirvish()
   nmap <buffer> <right> <cr>
@@ -82,8 +83,6 @@ endfunction
 augroup dirvish
   autocmd!
   autocmd FileType dirvish call SetupDirvish()
-  autocmd FileType dirvish nnoremap <silent><buffer>
-    \ gh :silent keeppatterns g@\v/\.[^\/]+/?$@d _<cr>:setl cole=3<cr>
 augroup END
 
 "fzf plugin
