@@ -1,6 +1,14 @@
 {ag, fzf, fd}:
 # vim: set syntax=vim:
 ''
+" core
+let g:loaded_zipPlugin    = 1
+let g:loaded_zip          = 1
+let g:loaded_tarPlugin    = 1
+let g:g_loaded_tar        = 1
+let g:loaded_netrw        = 1
+let g:loaded_netrwPlugin  = 1
+
 " ack
 let g:ackhighlight = 1
 let g:ack_mappings = { 'o': '<CR>zz' }
@@ -69,10 +77,7 @@ let g:EditorConfig_max_line_indicator = 'none'
 " highlight and yank plugin
 let g:highlightedyank_highlight_duration = 300
 
-
 " dirvish
-let g:loaded_netrw       = 1
-let g:loaded_netrwPlugin = 1
 let g:dirvish_mode = ':sort ,^.*[\/],'
 let g:dirvish_relative_paths = 1
 
