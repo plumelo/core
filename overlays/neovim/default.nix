@@ -18,6 +18,13 @@ in {
       sha256 = "1vzifx60yi3p37fy8fkc6icmzgf9abl3jbn65s1iizv2q5zdd7gf";
     };
     NIX_CFLAGS_COMPILE = "-O3 -march=native";
+    prePatch = ''
+      rm runtime/autoload/netrwSettings.vim
+      rm runtime/syntax/netrw.vim
+      rm runtime/plugin/netrwPlugin.vim
+      rm runtime/autoload/netrw_gitignore.vim
+      rm runtime/autoload/netrwFileHandlers.vim
+    '';
   });
 
   neovim = neovim.override {
