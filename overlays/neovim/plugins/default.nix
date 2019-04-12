@@ -27,6 +27,48 @@ with vimUtils;
     configurePhase =":";
   };
 
+  yats = buildVimPlugin {
+    pname= "yats-vim";
+    version = "0.1";
+    src = fetchFromGitHub {
+      owner = "HerringtonDarkholme";
+      repo = "yats.vim";
+      rev = "2126e8306cd21a58fb5e089376af8272abe36bb5";
+      sha256 = "1dqaikhcpcqnsnk4a0bwjm2kxsvxsb26357j999sqk1ciq9iy5iy";
+    };
+
+    buildPhase = ":";
+    configurePhase =":";
+  };
+
+  twig = buildVimPlugin {
+    pname= "twig-vim";
+    version = "0.1";
+    src = fetchFromGitHub {
+      owner = "lumiliet";
+      repo = "vim-twig";
+      rev = "ad115512725bcc156f7f89b72ff563b9fa44933b";
+      sha256 = "1p7sfhk0mwx4xk88b29ijb9nfbjwsf6hf3nab2ybcw291qaa75nj";
+    };
+
+    buildPhase = ":";
+    configurePhase =":";
+  };
+
+  jsx = buildVimPlugin {
+    pname= "jsx-vim";
+    version = "0.1";
+    src = fetchFromGitHub {
+      owner = "neoclide";
+      repo = "vim-jsx-improve";
+      rev = "1567a5e684676012e93ed5d44ee52a9818b970dc";
+      sha256 = "1qzlfrhyvfy0vc8fpcam134axqdhhw0mx7vpib630zi0mqjh5h46";
+    };
+
+    buildPhase = ":";
+    configurePhase =":";
+  };
+
   starsearch = buildVimPlugin {
     pname= "starsearch-vim";
     version = "0.1";
