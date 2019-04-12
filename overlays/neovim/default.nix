@@ -43,7 +43,6 @@ in {
       packages.myVimPackage = with pkgs.vimPlugins; {
         start = [
           lightline-vim
-          polyglot
           fugitive
           vim-dirvish
           plugins.nvim-typescript
@@ -56,6 +55,7 @@ in {
           repeat
           vim-highlightedyank
           vim-signify
+          vim-nix
           editorconfig-vim
           vim-eunuch
         ]++ (with plugins; [
@@ -63,6 +63,9 @@ in {
           onehalfdark
           quickfix
           largefile
+          jsx
+          yats
+          twig
         ]);
       };
     };

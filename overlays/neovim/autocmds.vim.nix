@@ -27,7 +27,10 @@ function g:LazyPlugins(...)
   packadd largefile-vim
   packadd ale
   packadd starsearch-vim
-
+  packadd jsx-vim
+  packadd yats-vim
+  packadd vim-nix
+  packadd twig-vim
   packadd vim-signify
   packadd editorconfig-vim
   packadd vim-eunuch

@@ -78,7 +78,7 @@ let g:EditorConfig_max_line_indicator = 'none'
 let g:highlightedyank_highlight_duration = 300
 
 " dirvish
-let g:dirvish_mode = ':sort ,^.*[\/],'
+let dirvish_mode = ':sort|sort r /[^\/]$/'
 let g:dirvish_relative_paths = 1
 
 function! SetupDirvish()
@@ -136,5 +136,7 @@ noremap <silent> <Bs> :call fzf#run(fzf#wrap({
 " signify
 let g:signify_realtime = 1
 
+" vim-jsx-improve
+let g:jsx_ext_required = 0
 ''
 
