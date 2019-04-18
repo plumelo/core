@@ -1,36 +1,35 @@
 { config, lib, pkgs, ... }:
 let
   ldLibraryPath = config.environment.sessionVariables.LD_LIBRARY_PATH;
-  i3blocksexec="${pkgs.i3blocks}/libexec/i3blocks";
-  i3blocksconf = pkgs.writeText "i3blocksconf" ''
-  command=${i3blocksexec}/$BLOCK_NAME
-  separator_block_width=15
-  markup=none
-  color=#E0E0E0
+  i3status-rust = pkgs.i3status-rust;
+  i3status-rustconf = pkgs.writeText "i3status-config.toml" ''
+    theme = "modern"
+    icons = "awesome"
 
-  [memory]
-  label=MEM
-  separator=false
-  interval=5
+    [[block]]
+    block = "memory"
+    display_type = "memory"
+    format_mem = "{Mup}%"
+    format_swap = "{SUp}%"
 
-  [temperature]
-  command=${i3blocksexec}/temperature -w 70 -c 90
-  label=
-  interval=1
+    [[block]]
+    block = "cpu"
+    interval = 1
 
-  [volume]
-  label=
-  interval=1
+    [[block]]
+    block = "temperature"
+    collapsed = false
+    interval = 10
+    format = "{average}°"
 
-  [battery]
-  label=⚡
-  interval=5
+    [[block]]
+    block = "sound"
 
-  [date]
-  command=date '+%b %d %H:%M'
-  interval=60
-  label=
-'';
+    [[block]]
+    block = "time"
+    interval = 60
+    format = "%a %d/%m %R"
+  '';
 swayPackage = pkgs.sway;
 swayWrapped = pkgs.writeShellScriptBin "sway" ''
     export XKB_DEFAULT_LAYOUT=us
@@ -56,6 +55,7 @@ in {
     android-udev-rules
     jmtpfs
     xdg_utils
+    lm_sensors
   ]);
   security.wrappers.sway = {
     program = "sway-setcap";
@@ -98,8 +98,10 @@ in {
     set $slurp ${slurp}/bin/slurp
     set $xclip ${xclip}/bin/xclip
     set $mako ${mako}/bin/mako
-    set $i3blocks ${i3blocks}/bin/i3blocks
-    set $i3blocksconf ${i3blocksconf}
+
+    set $menu $term --title "fzf-menu" -e bash -c '${dmenu}/bin/dmenu_path | sort -u | $fzf | xargs -I ? -r swaymsg exec "$shell -c ?"'
+
+    set $status ${i3status-rust}/bin/i3status-rs ${i3status-rustconf}
 
     output * bg ${./wallpaper.jpg} fill
     output "Goldstar Company Ltd LG ULTRAWIDE 0x0000B7AA" bg ${./wallpaper_2560x1080.jpg} fill
@@ -108,8 +110,6 @@ in {
     output "Dell Inc. DELL U2518D 3C4YP773ARUL" bg ${./wallpaper_2560x1080.jpg} fill
 
     ${builtins.readFile ./config}
-
-    include ${sway}/etc/sway/config.d/*
 
     exec ${tmux}/bin/tmux start-server \; run-shell ${tmuxPlugins.resurrect}/share/tmux-plugins/resurrect/scripts/restore.sh
   '';

@@ -4,7 +4,6 @@ set $left h
 set $down j
 set $up k
 set $right l
-set $menu $term --title "fzf-menu" -e bash -c 'compgen -c | sort -u | $fzf | xargs -I ? -r swaymsg exec "$shell -c ?"'
 
 # input
 input "2:14:ETPS/2_Elantech_Touchpad" {
@@ -145,7 +144,7 @@ set $base0F #be5046
 # Status Bar:
 bar {
   position bottom
-  status_command $i3blocks -c $i3blocksconf
+  status_command $status
   colors {
       background $base00
       separator  $base01
