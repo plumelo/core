@@ -1,10 +1,6 @@
 self: super:
 let
-  alacritty = (with super; super.callPackage ./unwrapped.nix {
-    inherit (xorg) libXcursor libXxf86vm libXi;
-    inherit (darwin) cf-private;
-    inherit (darwin.apple_sdk.frameworks) AppKit CoreFoundation CoreGraphics CoreServices CoreText Foundation OpenGL;
-  });
+  alacritty = super.alacritty;
 in {
   alacritty = super.symlinkJoin {
     name = "alacritty-with-config-${alacritty.version}";

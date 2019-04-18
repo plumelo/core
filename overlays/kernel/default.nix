@@ -2,12 +2,12 @@ self: super:
 let
   config = import ./config.nix;
   buildLinux = (cfg: super.buildLinux rec {
-    version = "5.0.7";
-    modDirVersion = "5.0.7";
+    version = "5.0.8";
+    modDirVersion = "5.0.8";
     extraMeta.branch = "5.0";
     src = super.fetchurl {
       url = "mirror://kernel/linux/kernel/v5.x/linux-${version}.tar.xz";
-      sha256 = "1v2lxwamnfm879a9qi9fwp5zyvlzjw9qa0aizidjbiwz5dk7gq8n";
+      sha256 = "0dalr3vym2ixmblnlrw10dfx0icdf2aab38z2j9y1qfcx128140i";
     };
     ignoreConfigErrors = true;
     extraConfig = cfg;
@@ -40,15 +40,15 @@ let
   '');
 
   gag3w = buildLinux (with config; ''
-    KALLSYMS_ALL y 
+    KALLSYMS_ALL y
     ${ryzen}
-    DRM_NOUVEAU n 
-    DRM_I915 n 
+    DRM_NOUVEAU n
+    DRM_I915 n
     DRM_RADEON n
     DRM_AMDGPU_SI y
     DRM_AMDGPU_CIK y
     DRM_AMD_DC_PRE_VEGA y
-    NR_CPUS 16 
+    NR_CPUS 16
     BT n
     ${exclude.uncommon}
     ${exclude.fs}
