@@ -43,7 +43,14 @@ swayWrapped = pkgs.writeShellScriptBin "sway" ''
     name = "sway-joined";
     paths = [ swayWrapped swayPackage ];
   };
-
+  askPassword = "${pkgs.gnome-ssh-askpass3}/bin/gnome-ssh-askpass3";
+  askPasswordWrapper = pkgs.writeScript "kssh-askpass-wrapper"
+  ''
+    #! ${pkgs.runtimeShell} -e
+    # export DISPLAY="$(systemctl --user show-environment | ${pkgs.gnused}/bin/sed 's/^DISPLAY=\(.*\)/\1/; t; d')"
+    export DISPLAY=:0
+    exec ${askPassword} 2>/tmp/ask.log
+  '';
 in {
   environment.systemPackages = [
     swayJoined
@@ -78,6 +85,8 @@ in {
 
   hardware.opengl.enable = true;
   programs.ssh.startAgent = true;
+  systemd.user.services.ssh-agent.environment.SSH_ASKPASS= lib.mkForce askPasswordWrapper;
+  environment.variables.SSH_ASKPASS = lib.mkForce askPassword;
 
   fonts.fonts = with pkgs; [nerdfonts];
 
