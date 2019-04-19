@@ -2,12 +2,23 @@
 # vim: set syntax=vim:
 ''
 " core
-let g:loaded_zipPlugin    = 1
-let g:loaded_zip          = 1
-let g:loaded_tarPlugin    = 1
-let g:g_loaded_tar        = 1
-let g:loaded_netrw        = 1
-let g:loaded_netrwPlugin  = 1
+let g:loaded_rrhelper = 1
+let g:did_install_default_menus = 1
+let g:is_bash = 1
+let g:sh_noisk = 1
+
+" fugitive
+function! s:load_fugitive()
+  if exists('b:git_dir')
+    call plug#load('vim-fugitive')
+    autocmd! load_fugitive
+    call fugitive#detect(expand('%:p'))
+  endif
+endfunction
+augroup load_fugitive
+  autocmd!
+  autocmd BufWinEnter * packadd vim-fugitive
+augroup END
 
 " ack
 let g:ackhighlight = 1
@@ -64,11 +75,12 @@ let g:ale_linters = {
   \ 'yaml': ['yamllint'],
   \ 'vim': ['vint'],
   \ 'nix': ['nix'],
-  \ 'html': ['elsint'],
+  \ 'html': ['eslint'],
   \ 'typescript': ['eslint','tsserver']
   \}
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
+nnoremap <leader>a :ALEFix<space>
 
 " editorconfig plugin
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
@@ -77,17 +89,20 @@ let g:EditorConfig_max_line_indicator = 'none'
 " highlight and yank plugin
 let g:highlightedyank_highlight_duration = 300
 
-" dirvish
-let dirvish_mode = ':sort|sort r /[^\/]$/'
-let g:dirvish_relative_paths = 1
+" netrw
+let g:netrw_localrmdir='rm -rf'
+let g:netrw_bufsettings = 'noma nomod nu nowrap ro nobl'
+let g:netrw_sort_dotfiles_first = 1
+let g:netrw_altfile = 1
 
-function! SetupDirvish()
+function! InNetrw()
   nmap <buffer> <right> <cr>
   nmap <buffer> <left> -
 endfunction
-augroup dirvish
+
+augroup in_netrw
   autocmd!
-  autocmd FileType dirvish call SetupDirvish()
+  autocmd FileType netrw call InNetrw() | set hidden
 augroup END
 
 "fzf plugin
@@ -132,9 +147,6 @@ noremap <silent> <Bs> :call fzf#run(fzf#wrap({
   \ 'sink*':  function('BufferSink'),
   \ 'options': '-m --expect='.join(keys(buffer_action), ',')
   \ }))<CR>
-
-" signify
-let g:signify_realtime = 1
 
 " vim-jsx-improve
 let g:jsx_ext_required = 0

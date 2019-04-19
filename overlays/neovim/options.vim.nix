@@ -11,7 +11,6 @@ set lazyredraw
 set noswapfile
 set shortmess+=I
 set noshowmode
-set hidden
 set nowrap
 set splitbelow
 set splitright
