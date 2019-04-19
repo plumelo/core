@@ -84,9 +84,16 @@ in {
   networking.networkmanager.enable = true;
 
   hardware.opengl.enable = true;
+
   programs.ssh.startAgent = true;
   systemd.user.services.ssh-agent.environment.SSH_ASKPASS= lib.mkForce askPasswordWrapper;
   environment.variables.SSH_ASKPASS = lib.mkForce askPassword;
+  programs.ssh.extraConfig = ''
+    Host github.com
+    ControlMaster auto
+    ControlPath ~/.ssh/sockets-%r@%h-%p
+    ControlPersist 600
+  '';
 
   fonts.fonts = with pkgs; [nerdfonts];
 
