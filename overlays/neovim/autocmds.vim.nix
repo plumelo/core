@@ -11,11 +11,6 @@ if !v:vim_did_enter && has('reltime')
   augroup END
 endif
 
-" general group
-augroup MyAutoCmd
-  autocmd!
-augroup END
-
 function g:LazyPlugins(...)
   packadd vim-repeat
   packadd vim-commentary
@@ -34,12 +29,28 @@ function g:LazyPlugins(...)
   packadd vim-signify
   packadd editorconfig-vim
   packadd vim-eunuch
+  packadd vim-fugitive
 endfunction
 
 " autocmds
-autocmd MyAutoCmd BufEnter * call timer_start(300, function('g:LazyPlugins'))
-autocmd MyAutoCmd BufEnter * syntax sync fromstart
-autocmd MyAutoCmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line('$') | exe 'normal! g`"zz' | endif
-autocmd MyAutoCmd InsertEnter * set listchars-=trail:␣
-autocmd MyAutoCmd InsertLeave * set listchars+=trail:␣
+augroup lazy_plugins
+  autocmd!
+  autocmd BufEnter * call timer_start(300, function('g:LazyPlugins'))
+augroup END
+
+augroup syntax_sync
+  autocmd!
+  autocmd BufEnter * syntax sync fromstart
+augroup END
+
+augroup remember_position
+  autocmd!
+  autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line('$') | exe 'normal! g`"zz' | endif
+augroup END
+
+augroup list_trail
+autocmd!
+  autocmd InsertEnter * set listchars-=trail:␣
+  autocmd InsertLeave * set listchars+=trail:␣
+augroup END
 ''
