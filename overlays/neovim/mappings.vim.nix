@@ -22,6 +22,7 @@ vnoremap <leader>s :s/
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 nnoremap <space><space> :tabnew %<CR>
 nnoremap <space>q :close<CR>
+nnoremap <leader>q :bn<cr>:bd#<CR>
 nnoremap <Space>w viw"+p
 nnoremap <Space>p :put+<CR>
 nnoremap <Space>P :put!+<CR>
