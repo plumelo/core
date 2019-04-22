@@ -91,7 +91,7 @@ let g:highlightedyank_highlight_duration = 300
 
 " netrw
 let g:netrw_localrmdir='rm -rf'
-let g:netrw_bufsettings = 'noma nomod nu nowrap ro nobl'
+let g:netrw_bufsettings = 'nomodifiable nomodified number nowrap readonly nobuflisted hidden'
 let g:netrw_sort_dotfiles_first = 1
 let g:netrw_altfile = 1
 
@@ -102,7 +102,7 @@ endfunction
 
 augroup in_netrw
   autocmd!
-  autocmd FileType netrw call InNetrw() | set hidden
+  autocmd FileType netrw call InNetrw()
 augroup END
 
 "fzf plugin
