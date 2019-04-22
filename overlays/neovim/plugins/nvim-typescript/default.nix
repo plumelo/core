@@ -22,8 +22,8 @@ in
     src = fetchFromGitHub {
       owner = "mhartington";
       repo = "nvim-typescript";
-      rev = "eca2bb92d45f09fc500317ededace5bc849063c1";
-      sha256 = "10lh0yn7r4dfw8nkhrl676aasidwdiiln7gs9ac27yw77xz8p5zp";
+      rev = "2fd4da80cd31cd0314b437a9f68b6536ec67b2a2";
+      sha256 = "1hykl7q6f6qi54dmw4ggk1jzjizy9zy6inwkm24kxfafq8n79gh9";
     };
     buildInputs = [nodejs];
     buildPhase = ''

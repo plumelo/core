@@ -76,6 +76,15 @@ let
         sha1 = "bb935d48582cba168c06834957a54a3e07124f11";
       };
     };
+    "isexe-2.0.0" = {
+      name = "isexe";
+      packageName = "isexe";
+      version = "2.0.0";
+      src = fetchurl {
+        url = "https://registry.npmjs.org/isexe/-/isexe-2.0.0.tgz";
+        sha1 = "e8fbf374dc556ff8947a10dcb0572d633f2cfa10";
+      };
+    };
     "isstream-0.1.2" = {
       name = "isstream";
       packageName = "isstream";
@@ -112,6 +121,15 @@ let
         sha1 = "bbe67406c79aa85c5cfec766fe5734555dfa1274";
       };
     };
+    "semver-5.7.0" = {
+      name = "semver";
+      packageName = "semver";
+      version = "5.7.0";
+      src = fetchurl {
+        url = "https://registry.npmjs.org/semver/-/semver-5.7.0.tgz";
+        sha512 = "Ya52jSX2u7QKghxeoFGpLwCtGlt7j0oY9DYb5apt9nPlJ42ID+ulTXESnt/qAQcoSERyZ5sl3LDIOw0nAn/5DA==";
+      };
+    };
     "stack-trace-0.0.10" = {
       name = "stack-trace";
       packageName = "stack-trace";
@@ -130,6 +148,15 @@ let
         sha1 = "cbdf560fd7b9af632502fed40f918c157ea97137";
       };
     };
+    "which-1.3.1" = {
+      name = "which";
+      packageName = "which";
+      version = "1.3.1";
+      src = fetchurl {
+        url = "https://registry.npmjs.org/which/-/which-1.3.1.tgz";
+        sha512 = "HxJdYWq1MTIQbJ3nw0cqssHoTNU267KlrDuGZ1WYlxDStUtKUhOaJmh112/TZmHxxUfuJqPXSOm7tDyas0OSIQ==";
+      };
+    };
     "winston-2.4.4" = {
       name = "winston";
       packageName = "winston";
@@ -145,10 +172,10 @@ in
   "@types/node-^10.12.18" = nodeEnv.buildNodePackage {
     name = "_at_types_slash_node";
     packageName = "@types/node";
-    version = "10.14.4";
+    version = "10.14.5";
     src = fetchurl {
-      url = "https://registry.npmjs.org/@types/node/-/node-10.14.4.tgz";
-      sha512 = "DT25xX/YgyPKiHFOpNuANIQIVvYEwCWXgK2jYYwqgaMrYE6+tq+DtmMwlD3drl6DJbUwtlIDnn0d7tIn/EbXBg==";
+      url = "https://registry.npmjs.org/@types/node/-/node-10.14.5.tgz";
+      sha512 = "Ja7d4s0qyGFxjGeDq5S7Si25OFibSAHUi6i17UWnwNnpitADN7hah9q0Tl25gxuV5R1u2Bx+np6w4LHXfHyj/g==";
     };
     buildInputs = globalBuildInputs;
     meta = {
@@ -174,13 +201,13 @@ in
     production = true;
     bypassCache = true;
   };
-  "typescript-^3.2.2" = nodeEnv.buildNodePackage {
+  "typescript-3.4.0-rc" = nodeEnv.buildNodePackage {
     name = "typescript";
     packageName = "typescript";
-    version = "3.4.2";
+    version = "3.4.0-rc";
     src = fetchurl {
-      url = "https://registry.npmjs.org/typescript/-/typescript-3.4.2.tgz";
-      sha512 = "Og2Vn6Mk7JAuWA1hQdDQN/Ekm/SchX80VzLhjKN9ETYrIepBFAd8PkOdOTK2nKt0FCkmMZKBJvQ1dV1gIxPu/A==";
+      url = "https://registry.npmjs.org/typescript/-/typescript-3.4.0-rc.tgz";
+      sha512 = "wtm2GwuV0Yy2zvmpFaMDtWHnRbzfERi9FLpL+K+JqGkHoclgEQ6TmD1AMxMIjs80NWRIq0Xp1veQyuZbGsUYsg==";
     };
     buildInputs = globalBuildInputs;
     meta = {
@@ -191,13 +218,13 @@ in
     production = true;
     bypassCache = true;
   };
-  "neovim-4.2.1" = nodeEnv.buildNodePackage {
+  "neovim-4.5.0" = nodeEnv.buildNodePackage {
     name = "neovim";
     packageName = "neovim";
-    version = "4.2.1";
+    version = "4.5.0";
     src = fetchurl {
-      url = "https://registry.npmjs.org/neovim/-/neovim-4.2.1.tgz";
-      sha512 = "2Kto3HlBsFFtgyAmV8ecNtBBUrydoXp2EfIHwIvuhOIiVinCuKJaUmp1+1u5eGGu1TDZHUiHwvFv0T05eG8T+w==";
+      url = "https://registry.npmjs.org/neovim/-/neovim-4.5.0.tgz";
+      sha512 = "+Q5EEIYIZG14NYAAQmvHHdYZ8hg0TbcsFo9vDf2rHhwidqdJv7jrDk0vQz+kUrNvhNQO/pqkBrZ08yEWZbD/0A==";
     };
     dependencies = [
       sources."async-1.0.0"
@@ -208,17 +235,37 @@ in
       sources."ieee754-1.1.13"
       sources."int64-buffer-0.1.10"
       sources."isarray-1.0.0"
+      sources."isexe-2.0.0"
       sources."isstream-0.1.2"
       sources."lodash-4.17.11"
       sources."msgpack-lite-0.1.26"
+      sources."semver-5.7.0"
       sources."stack-trace-0.0.10"
       sources."traverse-0.6.6"
+      sources."which-1.3.1"
       sources."winston-2.4.4"
     ];
     buildInputs = globalBuildInputs;
     meta = {
       description = "Neovim client API and neovim remote plugin provider";
       homepage = https://github.com/neovim/node-client;
+      license = "MIT";
+    };
+    production = true;
+    bypassCache = true;
+  };
+  "lodash-4.17.11" = nodeEnv.buildNodePackage {
+    name = "lodash";
+    packageName = "lodash";
+    version = "4.17.11";
+    src = fetchurl {
+      url = "https://registry.npmjs.org/lodash/-/lodash-4.17.11.tgz";
+      sha512 = "cQKh8igo5QUhZ7lg38DYWAxMvjSAKG0A8wGSVimP07SIUEK2UO+arSRKbRZWtelMtN5V0Hkwh5ryOto/SshYIg==";
+    };
+    buildInputs = globalBuildInputs;
+    meta = {
+      description = "Lodash modular utilities.";
+      homepage = https://lodash.com/;
       license = "MIT";
     };
     production = true;
