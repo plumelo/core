@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 let
   waybar = pkgs.waybar;
-  waybarConfig = pkgs.writeText "config" (builtins.readFile ./waybar-config);
+  waybarConfig = pkgs.writeText "config" (pkgs.callPackage ./waybar-config.nix {});
   waybarStyle = pkgs.writeText "config" (builtins.readFile ./waybar.css);
   askPassword = "${pkgs.gnome-ssh-askpass3}/bin/gnome-ssh-askpass3";
   askPasswordWrapper = pkgs.writeScript "kssh-askpass-wrapper"
