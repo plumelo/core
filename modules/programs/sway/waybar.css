@@ -1,35 +1,38 @@
 * {
   border: none;
   border-radius: 0;
-  font-family: "Mononoki Nerd Font";
-  font-size: 14px;
+  font-family: "SauceCodePro Nerd Font";
+  font-size: 12px;
   min-height: 0;
 }
 
 window#waybar {
-  background: rgba(40, 44, 52, 1);
+  background: #282c34;
   color: #bcd1d6;
 }
 
 #workspaces button {
-  margin: 0 7px 0px 0;
   padding: 0 8px;
-  background: rgba(43, 48, 59, 1);
-  color: #dce5d0;
-  box-shadow: 1px 0px 1px #333;
+  color: #ffffff;
+}
+
+#workspaces button:hover {
+  box-shadow: inherit;
+  text-shadow: inherit;
+  background: #282c34;
+  border: #282c34;
+  padding: 0 8px;
 }
 
 #workspaces button.focused {
-  margin: 0 7px 0px 0;
-  padding: 0 8px;
-  background: rgba(43, 48, 59, 1);
-  color: #b28cff;
+  background: #00427a;
+  color: #ffffff;
 }
 
-#mode, #clock, #battery, #cpu, #memory, #backlight, #network, #pulseaudio, #idle_inhibitor, #tray {
-  background: rgba(43, 48, 59, 1);
-  padding: 0 8px;
-  margin: 0 5px 0px 5px;
+#mode, #pulseaudio, #cpu, #temperature, #memory, #network, #tray {
+  color: #dce5d0;
+  padding: 0 5px;
+  margin: 0 0 0 5px;
 }
 
 #battery {
@@ -59,33 +62,5 @@ window#waybar {
 }
 
 #tray {
-  background: #1f4b66;
-}
-
-#clock {
-  color: #dce5d0;
-}
-
-#cpu {
-  color: #b28cff;
-}
-
-#memory {
-  color: #b28cff;
-}
-
-#backlight {
-  color: #b28cff;
-}
-
-#network {
-  color: #dce5d0;
-}
-
-#pulseaudio {
-  color: #dce5d0;
-}
-
-#idle_inhibitor {
-  color: green;
+  background: #00427a;
 }
