@@ -1,44 +1,18 @@
 { config, lib, pkgs, ... }:
 let
   ldLibraryPath = config.environment.sessionVariables.LD_LIBRARY_PATH;
-  i3status-rust = pkgs.i3status-rust;
-  i3status-rustconf = pkgs.writeText "i3status-config.toml" ''
-    theme = "modern"
-    icons = "awesome"
-
-    [[block]]
-    block = "memory"
-    display_type = "memory"
-    format_mem = "{Mup}%"
-    format_swap = "{SUp}%"
-
-    [[block]]
-    block = "cpu"
-    interval = 1
-
-    [[block]]
-    block = "temperature"
-    collapsed = false
-    interval = 10
-    format = "{average}°"
-
-    [[block]]
-    block = "sound"
-
-    [[block]]
-    block = "time"
-    interval = 60
-    format = "%a %d/%m %R"
-  '';
-swayPackage = pkgs.sway;
-swayWrapped = pkgs.writeShellScriptBin "sway" ''
+  waybar = pkgs.waybar;
+  waybarConfig = pkgs.writeText "config" (builtins.readFile ./waybar-config);
+  waybarStyle = pkgs.writeText "config" (builtins.readFile ./waybar.css);
+  swayPackage = pkgs.sway;
+  swayWrapped = pkgs.writeShellScriptBin "sway" ''
     export XKB_DEFAULT_LAYOUT=us
     if [[ "$#" -ge 1 ]]; then
       exec sway-setcap "$@" -c /etc/sway/config
     else
       exec ${pkgs.dbus.dbus-launch} --exit-with-session sway-setcap -c /etc/sway/config
     fi
-'';
+  '';
   swayJoined = pkgs.symlinkJoin {
     name = "sway-joined";
     paths = [ swayWrapped swayPackage ];
@@ -54,7 +28,7 @@ swayWrapped = pkgs.writeShellScriptBin "sway" ''
 in {
   environment.systemPackages = [
     swayJoined
-    ]++ (with pkgs;[
+  ]++ (with pkgs;[
     arc-theme
     arc-icon-theme
     paper-icon-theme
@@ -117,7 +91,7 @@ in {
 
     set $menu $term --title "fzf-menu" -e bash -c '${dmenu}/bin/dmenu_path | sort -u | $fzf | xargs -I ? -r swaymsg exec "$shell -c ?"'
 
-    set $status ${i3status-rust}/bin/i3status-rs ${i3status-rustconf}
+    set $status ${waybar}/bin/waybar -c ${waybarConfig} -s ${waybarStyle}
 
     output * bg ${./wallpaper.jpg} fill
     output "Goldstar Company Ltd LG ULTRAWIDE 0x0000B7AA" bg ${./wallpaper_2560x1080.jpg} fill
