@@ -14,8 +14,8 @@ in {
     src = fetchFromGitHub {
       owner = "neovim";
       repo = "neovim";
-      rev = "052ced4954075eca360ff7689afea82252f1c599";
-      sha256 = "1vzifx60yi3p37fy8fkc6icmzgf9abl3jbn65s1iizv2q5zdd7gf";
+      rev = "24a9516ff41b69e649f0dac131ad20efbe19eb4b";
+      sha256 = "101wx26ybs078wd5gd3dyxmmdflsb22cr1y9fp22nxidhvnnwlyw";
     };
     NIX_CFLAGS_COMPILE = "-O3 -march=native";
   });
