@@ -145,7 +145,7 @@ set $base0F #be5046
 # Status Bar:
 bar {
   position bottom
-  status_command $status
+  swaybar_command $status
   colors {
       background $base00
       separator  $base01
