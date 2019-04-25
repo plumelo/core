@@ -118,6 +118,7 @@ bindsym $mod+r mode "resize"
 gaps inner 2
 gaps outer 0
 smart_gaps on
+hide_edge_borders smart
 default_border pixel 1
 default_floating_border pixel 1
 
@@ -129,7 +130,7 @@ set $base01 #353b45
 set $base02 #3e4451
 set $base03 #545862
 set $base04 #565c64
-set $base05 #abb2bf
+set $base05 #0059a3
 set $base06 #b6bdca
 set $base07 #c8ccd4
 set $base08 #e06c75
