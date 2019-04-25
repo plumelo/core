@@ -15,6 +15,7 @@
     "temperature",
     "memory",
     "battery",
+    "backlight",
     "pulseaudio",
     "tray"
   ],
@@ -72,13 +73,20 @@
   "tray": {
     "spacing": 10
   },
+  "backlight": {
+    "device": "intel_backlight",
+    "format": "{percent}% {icon}",
+    "format-icons": ["", ""]
+  },
   "pulseaudio": {
     "format": "{volume}% {icon}",
-    "format-muted": "",
+    "format-muted": "🔇",
     "format-icons": {
-      "default": ["", ""]
+      "default": ["🔈", "🔊"]
     },
-    "scroll-step": 1,
-    "on-click": "pavucontrol"
+    "scroll-step": 5,
+    "on-click": "pavucontrol",
+    "on-click-right": "pactl set-sink-mute 2 toggle",
+    "tooltip": false
   }
 }
