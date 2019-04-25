@@ -1,0 +1,84 @@
+{
+  "layer": "bottom", // Waybar at top layer
+    "position": "bottom", // Waybar at the bottom of your screen
+    "height": 22, // Waybar height
+    "modules-left": ["sway/workspaces", "sway/mode"],
+    "modules-center": ["clock#1", "clock#2", "clock#3"],
+    "modules-right": ["idle_inhibitor", "pulseaudio", "network", "cpu", "memory", "backlight", "battery", "tray"],
+    "sway/workspaces": {
+      "all-outputs": false,
+      "format": "{name}"
+    },
+    "sway/mode": {
+      "format": "<span style=\"italic\">{}</span>"
+    },
+    "idle_inhibitor": {
+      "format": "{icon}",
+      "format-icons": {
+        "activated": "",
+        "deactivated": ""
+      }
+    },
+    "tray": {
+      // "icon-size": 21,
+      "spacing": 10
+    },
+    "clock#1": {
+      "format": "{:%a}",
+      "tooltip": "false"
+    },
+    "clock#2": {
+      "format": "{:%H:%M}",
+      "tooltip": "false"
+    },
+    "clock#3": {
+      "format": "{:%m-%d}",
+      "tooltip": "false"
+    },
+    "cpu": {
+      "interval": 10,
+      "format": "{}% ",
+      "max-length": 10
+    },
+    "memory": {
+      "format": "{}% "
+    },
+    "backlight": {
+      "format": "{percent}% {icon}",
+      "format-icons": ["", ""]
+    },
+    "battery": {
+      "states": {
+        "good": 97,
+        "warning": 30,
+        "critical": 15
+      },
+      "format": "{capacity}% {icon}",
+      "format-icons": ["", "", "", "", ""]
+    },
+    "battery#bat2": {
+      "bat": "BAT2"
+    },
+    "network": {
+      "format-wifi": "{essid} ({signalStrength}%) ",
+      "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
+      "format-disconnected": "Disconnected ⚠"
+    },
+    "pulseaudio": {
+      //"scroll-step": 1,
+      "format": "{volume}% {icon}",
+      "format-bluetooth": "{volume}% {icon}",
+      "format-muted": "",
+      "format-icons": {
+        "headphones": "",
+        "handsfree": "",
+        "headset": "",
+        "phone": "",
+        "portable": "",
+        "car": "",
+        "default": ["", ""]
+      },
+      "on-click": "pavucontrol",
+      "tooltip": "false"
+    }
+}
