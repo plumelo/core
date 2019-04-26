@@ -44,8 +44,8 @@ in buildRustPackage rec {
   src = fetchFromGitHub {
     owner = "jwilm";
     repo = pname;
-    rev = "494348abe80f591dfdd68fd4987bafc59fcb32c1";
-    sha256 = "0hifa7y47gg7mrjw4iz553frpqzbq0bh66a2z1dmb4k7chysn0sf";
+    rev = "9c6d12ea2c863ba76015bdedc00db13b7307725a";
+    sha256 = "1ljfdnkwica7l6m1w0s7vqkq6p642q7nhw14ja4k6vbnfbbkn8xh";
   };
 
   cargoSha256 = "1nwhmyikhzrkzyvxv25rbg8xmch4j7y25h3s95lsrrzj5kkdna5z";
