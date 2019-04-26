@@ -1,6 +1,8 @@
 self: super:
 let
-  alacritty = super.alacritty;
+  alacritty = (with super; super.callPackage ./unwrapped.nix {
+    inherit (xorg) libXcursor libXxf86vm libXi;
+  });
 in {
   alacritty = super.symlinkJoin {
     name = "alacritty-with-config-${alacritty.version}";
@@ -16,4 +18,5 @@ in {
 
     passthru.terminfo = alacritty.terminfo;
   };
+
 }
