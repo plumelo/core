@@ -71,7 +71,7 @@
       "format": "{}% "
     },
     "battery": {
-      "bat": "BAT2",
+      "bat": "BAT1",
       "interval": 60,
       "states": {
         "warning": 40,
