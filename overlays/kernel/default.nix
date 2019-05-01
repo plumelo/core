@@ -17,20 +17,6 @@ let
     ];
   });
 
-  raven = buildLinux (with config; ''
-    ${ryzen}
-    DRM_NOUVEAU n
-    DRM_I915 n
-    DRM_RADEON n
-    DRM_AMD_DC y
-    DRM_AMD_DC_DCN1_0 y
-    NR_CPUS 8
-    ${exclude.uncommon}
-    ${exclude.fs}
-    ${exclude.net}
-    ${exclude.wlan}
-  '');
-
   slim = buildLinux (with config; ''
     ${ryzen}
     ${exclude.uncommon}
@@ -39,26 +25,7 @@ let
     ${exclude.wlan}
   '');
 
-  gag3w = buildLinux (with config; ''
-    KALLSYMS_ALL y
-    ${ryzen}
-    DRM_NOUVEAU n
-    DRM_I915 n
-    DRM_RADEON n
-    DRM_AMDGPU_SI y
-    DRM_AMDGPU_CIK y
-    DRM_AMD_DC_PRE_VEGA y
-    NR_CPUS 16
-    BT n
-    ${exclude.uncommon}
-    ${exclude.fs}
-    ${exclude.net}
-    ${exclude.wlan}
-  '');
-
 in {
     linuxPackages_plumelo   = super.linuxPackagesFor super.buildLinux;
-    linuxPackages_raven     = super.linuxPackagesFor raven;
     linuxPackages_slim      = super.linuxPackagesFor slim;
-    linuxPackages_gag3w     = super.linuxPackagesFor gag3w;
 }
