@@ -44,11 +44,11 @@ in buildRustPackage rec {
   src = fetchFromGitHub {
     owner = "jwilm";
     repo = pname;
-    rev = "9c6d12ea2c863ba76015bdedc00db13b7307725a";
-    sha256 = "1ljfdnkwica7l6m1w0s7vqkq6p642q7nhw14ja4k6vbnfbbkn8xh";
+    rev = "37b66a7cd2e53fae93e3c2c8bc3ddbd9cbe140d2";
+    sha256 = "1hqhk4xmfbg4x998jnn2sg471czvbqbxmr7j74h3d9p5sbgkp04h";
   };
 
-  cargoSha256 = "1nwhmyikhzrkzyvxv25rbg8xmch4j7y25h3s95lsrrzj5kkdna5z";
+  cargoSha256 = "1wz6spa34a3833jl76f6vijxnwi6wjk8fi3bpqq8hgzni1ihgnf1";
 
   nativeBuildInputs = [
     cmake
