@@ -167,7 +167,7 @@ client.urgent           $base08 $base08 $base00 $base08 $base08
 #client.placeholder      $base00 $base00 $base05 $base00 $base00
 #client.background       $base07
 
-exec --no-startup-id $mako --default-timeout 10000
+exec --no-startup-id $mako --default-timeout=10000 --font=DejaVuSans Book-8 --background-color=#282c34 --border-color=#0059a3 --max-icon-size=40
 
 #Window clases
 for_window [title="fzf-menu"] floating enable
