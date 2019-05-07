@@ -82,9 +82,6 @@ self: super:
       avocode
       distrobuilder
 
-      #files
-      ranger
-
       # sway
       pavucontrol
       imv
