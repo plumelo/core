@@ -19,6 +19,8 @@ self: super:
       usbutils
       killall
       neomutt
+      lf
+      bat
 
       # monitoring
       htop
