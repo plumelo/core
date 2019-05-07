@@ -151,4 +151,3 @@ noremap <silent> <Bs> :call fzf#run(fzf#wrap({
 " vim-jsx-improve
 let g:jsx_ext_required = 0
 ''
-
