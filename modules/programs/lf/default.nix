@@ -1,17 +1,18 @@
 { config, lib, pkgs, ... }:
-let previewer = pkgs.writeShellScriptBin "lf-preview" ''
+with pkgs;
+let lf-preview = writeShellScriptBin "lf-preview" ''
   export COLORTERM=256color
   case "$1" in
-    *.tar*) ${pkgs.gnutar}/bin/tar tf "$1";;
-    *.zip) ${pkgs.unzip}/bin/unzip -l "$1";;
-    *.rar) ${pkgs.unrar}/bin/unrar l "$1";;
-    *.7z) ${pkgs.p7zip}/bin/7z l "$1";;
+    *.tar*) ${gnutar}/bin/tar tf "$1";;
+    *.zip) ${unzip}/bin/unzip -l "$1";;
+    *.rar) ${unrar}/bin/unrar l "$1";;
+    *.7z) ${p7zip}/bin/7z l "$1";;
     *.pdf) pdftotext "$1" -;;
-    *) ${pkgs.bat}/bin/bat --color always --terminal-width=$2 --theme OneHalfDark "$1";;
+    *) ${bat}/bin/bat --color always --terminal-width=$2 --theme OneHalfDark "$1";;
   esac
 '';
 in {
-  environment.etc."lf/lfrc".text = with pkgs; ''
+  environment.etc."lf/lfrc".text = ''
     set shell zsh
     set shellopts '-eu'
     set color256 on
@@ -19,7 +20,7 @@ in {
 
     set scrolloff 10
     set hidden!
-    set previewer '${previewer}/bin/lf-preview'
+    set previewer '${lf-preview}/bin/lf-preview'
 
     map <enter> shell
     map x $$f
