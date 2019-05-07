@@ -1,22 +1,8 @@
 { config, lib, pkgs, ... }:
 let
-  ldLibraryPath = config.environment.sessionVariables.LD_LIBRARY_PATH;
   waybar = pkgs.waybar;
   waybarConfig = pkgs.writeText "config" (builtins.readFile ./waybar-config);
   waybarStyle = pkgs.writeText "config" (builtins.readFile ./waybar.css);
-  swayPackage = pkgs.sway;
-  swayWrapped = pkgs.writeShellScriptBin "sway" ''
-    export XKB_DEFAULT_LAYOUT=us
-    if [[ "$#" -ge 1 ]]; then
-      exec sway-setcap "$@" -c /etc/sway/config
-    else
-      exec ${pkgs.dbus.dbus-launch} --exit-with-session sway-setcap -c /etc/sway/config
-    fi
-  '';
-  swayJoined = pkgs.symlinkJoin {
-    name = "sway-joined";
-    paths = [ swayWrapped swayPackage ];
-  };
   askPassword = "${pkgs.gnome-ssh-askpass3}/bin/gnome-ssh-askpass3";
   askPasswordWrapper = pkgs.writeScript "kssh-askpass-wrapper"
   ''
@@ -26,38 +12,25 @@ let
     exec ${askPassword} 2>/tmp/ask.log
   '';
 in {
-  environment.systemPackages = [
-    swayJoined
-  ]++ (with pkgs;[
-    arc-theme
-    arc-icon-theme
-    paper-icon-theme
-    xwayland
-    android-udev-rules
-    jmtpfs
-    xdg_utils
-    lm_sensors
-  ]);
-  security.wrappers.sway = {
-    program = "sway-setcap";
-    source = "${swayPackage}/bin/sway";
-    capabilities = "cap_sys_ptrace,cap_sys_tty_config=eip";
-    owner = "root";
-    group = "sway";
-    permissions = "u+rx,g+rx";
+  programs.sway = {
+    enable=true;
+    extraPackages = (with pkgs; [
+      arc-theme
+      arc-icon-theme
+      paper-icon-theme
+      xwayland
+      android-udev-rules
+      jmtpfs
+      xdg_utils
+    ]);
+    extraSessionCommands= ''
+      export XKB_DEFAULT_LAYOUT=us
+    '';
   };
-
-  users.groups.sway = {};
-  security.pam.services.swaylock = {};
-
-  fonts.enableDefaultFonts = lib.mkDefault true;
-  programs.dconf.enable = lib.mkDefault true;
 
   boot.kernel.sysctl."fs.inotify.max_user_watches" = lib.mkDefault 524288;
 
   networking.networkmanager.enable = true;
-
-  hardware.opengl.enable = true;
 
   programs.ssh.startAgent = true;
   systemd.user.services.ssh-agent.environment.SSH_ASKPASS= lib.mkForce askPasswordWrapper;
@@ -78,7 +51,7 @@ in {
   ];
 
   environment.etc."sway/config".text = with pkgs; ''
-    set $shell LD_LIBRARY_PATH=${ldLibraryPath} ${pkgs.zsh}/bin/zsh
+    set $shell ${pkgs.zsh}/bin/zsh
     set $swaylock ${swaylock}/bin/swaylock
     set $term ${alacritty}/bin/alacritty
     set $fzf ${fzf}/bin/fzf
@@ -89,7 +62,7 @@ in {
     set $xclip ${xclip}/bin/xclip
     set $mako ${mako}/bin/mako
 
-    set $menu $term --title "fzf-menu" -e bash -c '${dmenu}/bin/dmenu_path | sort -u | $fzf | xargs -I ? -r swaymsg exec "$shell -c ?"'
+    set $menu $term --title "fzf-menu" -e bash -c '${dmenu}/bin/dmenu_path | sort -u | $fzf | xargs -I ? -r swaymsg exec ?'
 
     set $status ${waybar}/bin/waybar -c ${waybarConfig} -s ${waybarStyle}
 
