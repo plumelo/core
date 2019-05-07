@@ -1,5 +1,4 @@
 { config, options, lib, pkgs, ... }:
-# TO DO: move more of this into separate
 let local = ../local.nix;
 in
 {
