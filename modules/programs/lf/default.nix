@@ -75,4 +75,5 @@ in {
     cmd usage ''${{${coreutils}/bin/du -h -d1 | ${less}/bin/less}}
 
   '';
+  environment.systemPackages = [lf];
 }
