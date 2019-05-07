@@ -38,6 +38,7 @@ in {
           lightline-vim
           vinegar
           plugins.nvim-typescript
+          vim-nix
         ];
         opt = [
           ale
@@ -47,7 +48,6 @@ in {
           repeat
           vim-highlightedyank
           vim-signify
-          vim-nix
           editorconfig-vim
           vim-eunuch
           fugitive
