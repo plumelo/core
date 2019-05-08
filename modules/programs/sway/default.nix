@@ -42,7 +42,7 @@ in {
     ControlPersist 600
   '';
 
-  fonts.fonts = with pkgs; [nerdfonts];
+  fonts.fonts = with pkgs; [overpass nerdfonts];
 
   services.upower.enable = true;
   services.udev.packages = with pkgs; [
