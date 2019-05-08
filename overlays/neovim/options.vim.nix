@@ -34,7 +34,7 @@ set tabstop=2
 set shiftwidth=2
 set shiftround
 set inccommand=nosplit
-set updatetime=750
+set updatetime=500
 set list listchars=tab:▷\ ,space:·,extends:»,precedes:«,nbsp:⦸
 set statusline=2
 set wildmode=longest:full,full

@@ -47,6 +47,19 @@ augroup remember_position
   autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line('$') | exe 'normal! g`"zz' | endif
 augroup END
 
+augroup check_modified
+  autocmd!
+  autocmd FocusGained,CursorHold,CursorHoldI * if !bufexists("[Command Line]") | checktime | endif
+augroup END
+
+function! SignRefresh()
+  autocmd FocusGained,CursorHold,CursorHoldI * SignifyRefresh
+endfunction
+
+augroup sign_refresh
+  autocmd BufRead * call SignRefresh()
+augroup END
+
 augroup list_trail
 autocmd!
   autocmd InsertEnter * set listchars-=trail:␣
