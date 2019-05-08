@@ -10,6 +10,7 @@ set show-changes               = yes
 set status-show-untracked-dirs = yes
 set refresh-mode               = periodic
 set refresh-interval           = 5
+set line-graphics              = utf-8
 
 # Bindings
 

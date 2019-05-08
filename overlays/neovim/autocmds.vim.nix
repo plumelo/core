@@ -29,6 +29,9 @@ function g:LazyPlugins(...)
   packadd editorconfig-vim
   packadd vim-eunuch
   packadd vim-fugitive
+
+  doautocmd User VimLazyPacksLoaded
+
 endfunction
 
 " autocmds
@@ -48,8 +51,13 @@ augroup remember_position
 augroup END
 
 augroup list_trail
-autocmd!
+  autocmd!
   autocmd InsertEnter * set listchars-=trail:␣
   autocmd InsertLeave * set listchars+=trail:␣
 augroup END
+
+augroup signify_refresh
+  autocmd!
+  autocmd User VimLazyPacksLoaded autocmd FocusGained,CursorHold * SignifyRefresh
+  augroup END
 ''

@@ -41,7 +41,7 @@ let g:lightline = {
   \ },
   \ 'component_function': {
   \   'gitbranch': 'fugitive#head',
-  \ }
+  \}
   \}
 let g:lightline.separator = {
   \ 'left': '', 'right': ''
@@ -96,8 +96,9 @@ let g:netrw_sort_dotfiles_first = 1
 let g:netrw_altfile = 1
 
 function! InNetrw()
-  nmap <buffer> <right> <cr>
-  nmap <buffer> <left> -
+  nmap <buffer><silent> <right> <cr>
+  nmap <buffer><silent> <left> -
+  nmap <buffer><silent> qq :bn<cr>:bd#<CR>
 endfunction
 
 augroup in_netrw
@@ -150,4 +151,7 @@ noremap <silent> <Bs> :call fzf#run(fzf#wrap({
 
 " vim-jsx-improve
 let g:jsx_ext_required = 0
+
+" nvim_typescript
+let g:nvim_typescript#diagnostics_enable = 0
 ''
