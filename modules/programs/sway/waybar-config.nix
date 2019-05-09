@@ -1,3 +1,6 @@
+{alacritty}:
+# vim: set syntax=json:
+''
 {
   "layer": "bottom",
     "position": "bottom",
@@ -36,7 +39,7 @@
         "ethernet": [""],
         "disconnected": [""]
       },
-      "on-click": "lxterminal -e nmtui",
+      "on-click": "${alacritty}/bin/alacritty --title 'nmtui' -e nmtui",
       "tooltip": false
     },
     "clock": {
@@ -98,3 +101,4 @@
       "tooltip": false
     }
 }
+''
