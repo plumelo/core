@@ -29,7 +29,7 @@ window#waybar {
   color: #ffffff;
 }
 
-#mode, #backlight, #pulseaudio, #cpu, #temperature.cpu, #temperature.gpu, #memory, #network, #tray {
+#mode, #pulseaudio, #cpu, #temperature.cpu, #temperature.gpu, #memory, #network, #tray {
   color: #dce5d0;
   padding: 0 5px;
   margin: 0 0 0 5px;

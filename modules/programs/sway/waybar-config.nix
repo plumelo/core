@@ -55,14 +55,14 @@
     },
     "temperature#cpu": {
       "thermal-zone": 1,
-      "hwmon-path": "/sys/class/hwmon/hwmon1/temp1_input",
+      "hwmon-path": "/sys/class/hwmon/hwmon0/temp1_input",
       "critical-threshold": 80,
       "format-critical": "{temperatureC}°C ",
       "format": "{temperatureC}°C "
     },
     "temperature#gpu": {
       "thermal-zone": 2,
-      "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+      "hwmon-path": "/sys/class/hwmon/hwmon1/temp1_input",
       "critical-threshold": 80,
       "format-critical": "{temperatureC}°C ",
       "format": "{temperatureC}°C "
@@ -83,11 +83,6 @@
     },
     "tray": {
       "spacing": 10
-    },
-    "backlight": {
-      "device": "intel_backlight",
-      "format": "{percent}% {icon}",
-      "format-icons": ["", ""]
     },
     "pulseaudio": {
       "format": "{volume}% {icon}",
