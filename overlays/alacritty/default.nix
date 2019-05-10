@@ -13,7 +13,6 @@ in {
     postBuild = ''
       wrapProgram $out/bin/alacritty \
         --add-flags "--config-file ${./config}" \
-        --set-default "WINIT_HIDPI_FACTOR" "1" \
     '';
 
     passthru.terminfo = alacritty.terminfo;
