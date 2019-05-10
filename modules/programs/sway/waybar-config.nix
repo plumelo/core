@@ -18,7 +18,6 @@
       "temperature#cpu",
       "temperature#gpu",
       "memory",
-      "backlight",
       "pulseaudio",
       "battery",
       "tray"
