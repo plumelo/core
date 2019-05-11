@@ -8,10 +8,10 @@
     lxc = {
       text = ''
         mkdir -p /usr/share
-        ln -sfn /run/current-system/sw/share/lxc  /usr/share/lxc
+        ln -sfn /run/current-system/sw/share/lxc /usr/share/lxc
       '';
       deps = [];
-    }; 
+    };
   };
 
   virtualisation = {

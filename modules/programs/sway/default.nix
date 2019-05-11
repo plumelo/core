@@ -4,10 +4,8 @@ let
   waybarConfig = pkgs.writeText "config" (pkgs.callPackage ./waybar-config.nix {});
   waybarStyle = pkgs.writeText "config" (builtins.readFile ./waybar.css);
   askPassword = "${pkgs.gnome-ssh-askpass3}/bin/gnome-ssh-askpass3";
-  askPasswordWrapper = pkgs.writeScript "kssh-askpass-wrapper"
-  ''
+  askPasswordWrapper = pkgs.writeScript "kssh-askpass-wrapper" ''
     #! ${pkgs.runtimeShell} -e
-    # export DISPLAY="$(systemctl --user show-environment | ${pkgs.gnused}/bin/sed 's/^DISPLAY=\(.*\)/\1/; t; d')"
     export DISPLAY=:0
     exec ${askPassword} 2>/tmp/ask.log
   '';
@@ -27,8 +25,6 @@ in {
       export XKB_DEFAULT_LAYOUT=us
     '';
   };
-
-  boot.kernel.sysctl."fs.inotify.max_user_watches" = lib.mkDefault 524288;
 
   networking.networkmanager.enable = true;
 

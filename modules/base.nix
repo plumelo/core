@@ -14,7 +14,7 @@ in
     ./users.nix
   ];
 
-
+  system.stateVersion = "19.03";
   i18n = {
     consoleFont = "Lat2-Terminus16";
     consoleKeyMap = "us";
@@ -23,9 +23,6 @@ in
 
   time.timeZone = "Europe/Bucharest";
 
-  powerManagement = {
-    enable = true;
-  };
 
   programs = {
     java.enable = true;
@@ -45,6 +42,8 @@ in
     initrd.availableKernelModules = [
       "hid-logitech-hidpp"
     ];
+
+    kernel.sysctl."fs.inotify.max_user_watches" = lib.mkDefault 524288;
     kernelPackages = pkgs.linuxPackages_latest;
   };
 
