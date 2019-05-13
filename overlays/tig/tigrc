@@ -20,9 +20,9 @@ bind generic m none
 bind generic r none
 bind generic s none
 bind generic p none
-bind generic v  none
-bind generic u  none
-bind generic c  none
+bind generic v none
+bind generic u none
+bind generic c none
 
 bind generic gg move-first-line
 bind main    G move-last-line
@@ -65,7 +65,7 @@ bind main pu ?git pull --ff-only
 bind status a ?git commit --amend
 bind status + ?git commit --amend --allow-empty
 # revert commit
-bind main r !?git revert %(commit)
+bind main cr !?git revert %(commit)
 # tag the selected commit
 bind main T !?@git tag %(prompt) %(commit)
 # add current file to gitignore
@@ -82,7 +82,8 @@ bind generic m status-merge
 bind generic l stage-update-line
 bind generic - stage-split-chunk
 
-bind generic c !git commit
+bind generic cc !git commit
+bind generic + !git commit --amend
 bind generic a !?@git commit --amend --no-edit
 
 # COLORS
