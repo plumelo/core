@@ -77,10 +77,10 @@ bind generic <C-f> move-page-down
 bind generic <C-b> move-page-up
 
 bind generic s status-update
-bind generic r status-revert
+bind status - ?status-revert
 bind generic m status-merge
 bind generic l stage-update-line
-bind generic - stage-split-chunk
+bind generic x stage-split-chunk
 
 bind generic cc !git commit
 bind generic + !git commit --amend
