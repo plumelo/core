@@ -39,7 +39,7 @@ bind refs   H ?git reset --hard %(branch)
 bind status H ?git reset --hard HEAD
 
 # rebase
-bind refs <Ctrl-R> ?git rebase %(branch)
+bind refs r ?git rebase %(branch)
 
 # rebase interactive
 bind main \r ?git rebase -i %(branch)
