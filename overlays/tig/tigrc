@@ -42,13 +42,14 @@ bind main <Ctrl-a> ?git rebase --abort
 bind refs <Ctrl-a> ?git rebase --abort
 
 # push
-bind generic P ?git push -u %(remote) %(repo:head)
-bind status P ?git push -u %(remote) %(repo:head)
-bind main   w !?git push -f %(remote) %(repo:head)
-bind status w !?git push -f %(remote) %(repo:head)
+bind generic p none
+bind generic ps ?git push -u %(remote) %(repo:head)
+bind status ps ?git push -u %(remote) %(repo:head)
+bind main   pf !?git push -f %(remote) %(repo:head)
+bind status pf !?git push -f %(remote) %(repo:head)
 
 # pull
-bind main <Ctrl-p> ?git pull --ff-only
+bind main pu ?git pull --ff-only
 
 # commit
 bind status a ?git commit --amend
@@ -62,9 +63,6 @@ bind stage 1 stage-update-line
 
 # tag the selected commit
 bind main T !?@git tag %(prompt) %(commit)
-
-# add current file to gitignore
-bind status <Ctrl-r> ?sh -c "echo %(file) >> .gitignore"
 
 # copy sha to clipboard
 bind generic 9 !sh -c "echo -n %(commit) | xclip -selection c && echo Copied %(commit) to clipboard"
