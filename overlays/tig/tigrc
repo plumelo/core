@@ -5,6 +5,11 @@ set main-view = \
   date:relative-compact \
   author:email-user \
   commit-title:yes,graph,refs,overflow=no
+set refs-view = \
+  line-number:no \
+  id:no \
+  date:relative-compact \
+  author:full ref commit-title
 
 set blame-options              = -C -C -C
 set show-notes                 = yes
@@ -14,11 +19,13 @@ set refresh-mode               = after-command
 set main-view-commit-title-graph = v1
 set line-graphics              = utf-8
 
-# Bindings
-
 # branch
 bind refs n !@git branch "%(prompt Enter branch name: )"
-bind main <C-n> !@git branch "%(prompt Enter branch name: )" %(commit)
+bind main \n !@git branch "%(prompt Enter branch name: )" %(commit)
+bind main \c ?git checkout %(commit)
+bind refs <del> ?git branch -d %(branch)
+bind refs \<del> !?git push %(remote) --delete %(branch)
+bind main <del> !?git push %(remote) --delete %(branch)
 
 #Fetch
 bind generic F none
@@ -35,11 +42,11 @@ bind status H ?git reset --hard HEAD
 bind refs <Ctrl-R> ?git rebase %(branch)
 
 # rebase interactive
-bind main B ?git rebase -i %(branch)
-bind main <Ctrl-B> ?git rebase -i %(commit)
-bind refs B ?git rebase -i %(branch)
-bind main <Ctrl-a> ?git rebase --abort
-bind refs <Ctrl-a> ?git rebase --abort
+bind main \r ?git rebase -i %(branch)
+bind main \R ?git rebase -i %(commit)
+bind refs \r ?git rebase -i %(branch)
+bind main a ?git rebase --abort
+bind refs a ?git rebase --abort
 
 # push
 bind generic p none
@@ -52,6 +59,7 @@ bind status pf !?git push -f %(remote) %(repo:head)
 bind main pu ?git pull --ff-only
 
 # commit
+bind main \C ?git cherry-pick -n %(commit)
 bind status a ?git commit --amend
 bind status + ?git commit --amend --allow-empty
 
