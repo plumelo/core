@@ -33,10 +33,8 @@ bind generic F ?git fetch -p %(remote)
 bind main    F ?git fetch -p %(remote)
 
 # reset
-bind main   \! ?git reset --hard %(commit)
-bind diff   \! ?git reset --hard %(commit)
-bind refs   \! ?git reset --hard %(branch)
-bind status \! ?git reset --hard HEAD
+bind main   ! ?git reset --hard %(commit)
+bind refs   ! ?git reset --hard %(branch)
 bind main \s ?git reset --soft HEAD~"%(prompt Enter number: )"
 
 # rebase
@@ -64,9 +62,6 @@ bind generic A none
 bind main \C ?git cherry-pick -n %(commit)
 bind main A ?git commit --amend
 bind main + ?git commit --amend --no-edit
-
-# revert commit
-bind main ! !?git revert %(commit)
 
 # tag the selected commit
 bind main T !?@git tag %(prompt) %(commit)
