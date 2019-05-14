@@ -66,9 +66,6 @@ bind status + ?git commit --amend --allow-empty
 # revert commit
 bind main ! !?git revert %(commit)
 
-# chunk under cursor on diff (stage or unstage)
-bind stage 1 stage-update-line
-
 # tag the selected commit
 bind main T !?@git tag %(prompt) %(commit)
 
@@ -136,8 +133,8 @@ color   pp_refs                 213     default
 # status
 color   status.header           221     default
 color   status.section          81      default
-color   stat_staged             213     default
-color   stat_unstaged           213     default
+color   stat_staged             10     default
+color   stat_unstaged           11     default
 color   stat_untracked          213     default
 
 # raw commit header
