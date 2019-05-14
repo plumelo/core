@@ -1,90 +1,73 @@
 # Settings
-set main-view-author-display = email-user
-set main-view-date         = custom
-set main-view-date-local   = yes
-set main-view-date-format = "%Y-%m-%d %H:%M"
+set main-view = \
+  line-number:no,interval=5 \
+  id:yes \
+  date:relative-compact \
+  author:email-user \
+  commit-title:yes,graph,refs,overflow=no
 
 set blame-options              = -C -C -C
 set show-notes                 = yes
 set show-changes               = yes
 set status-show-untracked-dirs = yes
 set refresh-mode               = after-command
-# set refresh-interval           = 5
 set main-view-commit-title-graph = v1
 set line-graphics              = utf-8
 
 # Bindings
-# unbind
-bind generic g none
-bind generic m none
-bind generic r none
-bind generic s none
-bind generic p none
-bind generic v none
-bind generic u none
-bind generic c none
 
-bind generic gg move-first-line
-bind main    G move-last-line
-bind generic G move-last-line
-# views
-bind generic vm view-main
-bind generic vd view-diff
-bind generic vl view-log
-bind generic vt view-tree
-bind generic vb view-blob
-bind generic vx view-blame
-bind generic vr view-refs
-bind generic vs view-status
-bind generic vu view-stage
-bind generic vy view-stash
-bind generic vg view-grep
-bind generic vp view-pager
-bind generic vh view-help
-# fetch
-bind generic f ?git fetch -p %(remote)
-bind main f ?git fetch -p %(remote)
-# reset hard
-bind main rh ?git reset --hard %(commit)
-bind diff rh ?git reset --hard %(commit)
-bind refs rh ?git reset --hard %(branch)
-bind status rh ?git reset --hard HEAD
+# branch
+bind refs n !@git branch "%(prompt Enter branch name: )"
+bind main <C-n> !@git branch "%(prompt Enter branch name: )" %(commit)
+
+#Fetch
+bind generic F none
+bind generic F ?git fetch -p %(remote)
+bind main    F ?git fetch -p %(remote)
+
+# reset
+bind main   H ?git reset --hard %(commit)
+bind diff   H ?git reset --hard %(commit)
+bind refs   H ?git reset --hard %(branch)
+bind status H ?git reset --hard HEAD
+
 # rebase
-bind refs rb ?git rebase %(branch)
-bind main ri ?git rebase -i %(branch)
-bind main ri ?git rebase -i %(commit)
-bind refs ri ?git rebase -i %(branch)
+bind refs <Ctrl-R> ?git rebase %(branch)
+
+# rebase interactive
+bind main B ?git rebase -i %(branch)
+bind main <Ctrl-B> ?git rebase -i %(commit)
+bind refs B ?git rebase -i %(branch)
+bind main <Ctrl-a> ?git rebase --abort
+bind refs <Ctrl-a> ?git rebase --abort
+
 # push
-bind generic ps ?git push -u %(remote) %(repo:head)
-bind status ps ?git push -u %(remote) %(repo:head)
-bind main   pf !?git push -f %(remote) %(repo:head)
-bind status pf !?git push -f %(remote) %(repo:head)
+bind generic P ?git push -u %(remote) %(repo:head)
+bind status P ?git push -u %(remote) %(repo:head)
+bind main   w !?git push -f %(remote) %(repo:head)
+bind status w !?git push -f %(remote) %(repo:head)
+
 # pull
-bind main pu ?git pull --ff-only
+bind main <Ctrl-p> ?git pull --ff-only
+
 # commit
 bind status a ?git commit --amend
 bind status + ?git commit --amend --allow-empty
+
 # revert commit
-bind main cr !?git revert %(commit)
+bind main ! !?git revert %(commit)
+
+# chunk under cursor on diff (stage or unstage)
+bind stage 1 stage-update-line
+
 # tag the selected commit
 bind main T !?@git tag %(prompt) %(commit)
+
 # add current file to gitignore
-  bind status <Ctrl-r> ?sh -c "echo %(file) >> .gitignore"
+bind status <Ctrl-r> ?sh -c "echo %(file) >> .gitignore"
+
 # copy sha to clipboard
-  bind generic 9 !sh -c "echo -n %(commit) | xclip -selection c && echo Copied %(commit) to clipboard"
-
-bind generic <C-f> move-page-down
-bind generic <C-b> move-page-up
-
-bind generic s status-update
-bind status - ?status-revert
-bind generic m status-merge
-bind generic l stage-update-line
-bind generic x stage-split-chunk
-
-bind status cc !git commit
-bind generic a !git commit --amend
-bind generic + !?@git commit --amend --no-edit
+bind generic 9 !sh -c "echo -n %(commit) | xclip -selection c && echo Copied %(commit) to clipboard"
 
 # COLORS
 
