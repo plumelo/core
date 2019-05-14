@@ -39,12 +39,12 @@ bind refs   H ?git reset --hard %(branch)
 bind status H ?git reset --hard HEAD
 
 # rebase
-bind refs r ?git rebase %(branch)
+bind refs \r ?git rebase %(branch)
 
 # rebase interactive
 bind main \r ?git rebase -i %(branch)
 bind main \R ?git rebase -i %(commit)
-bind refs \r ?git rebase -i %(branch)
+bind refs r ?git rebase -i %(branch)
 bind main a ?git rebase --abort
 bind refs a ?git rebase --abort
 
@@ -59,9 +59,10 @@ bind status pf !?git push -f %(remote) %(repo:head)
 bind main pu ?git pull --ff-only
 
 # commit
+bind generic A none
 bind main \C ?git cherry-pick -n %(commit)
-bind status a ?git commit --amend
-bind status + ?git commit --amend --allow-empty
+bind main A ?git commit --amend
+bind main + ?git commit --amend --no-edit
 
 # revert commit
 bind main ! !?git revert %(commit)
@@ -70,7 +71,7 @@ bind main ! !?git revert %(commit)
 bind main T !?@git tag %(prompt) %(commit)
 
 # copy sha to clipboard
-bind generic 9 !sh -c "echo -n %(commit) | xclip -selection c && echo Copied %(commit) to clipboard"
+bind generic Y !sh -c "echo -n %(commit) | xclip -selection c && echo Copied %(commit) to clipboard"
 
 # COLORS
 
@@ -98,9 +99,6 @@ color   main-tracked            221     default     bold
 color   main-ref                81      default
 color   main-head               213     default     bold
 color   graph-commit            226     default
-
-# status
-#color  stat-head       81      default
 
 # Diff   colors
 color   diff_add                10      default
