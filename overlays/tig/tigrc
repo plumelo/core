@@ -33,10 +33,11 @@ bind generic F ?git fetch -p %(remote)
 bind main    F ?git fetch -p %(remote)
 
 # reset
-bind main   H ?git reset --hard %(commit)
-bind diff   H ?git reset --hard %(commit)
-bind refs   H ?git reset --hard %(branch)
-bind status H ?git reset --hard HEAD
+bind main   \! ?git reset --hard %(commit)
+bind diff   \! ?git reset --hard %(commit)
+bind refs   \! ?git reset --hard %(branch)
+bind status \! ?git reset --hard HEAD
+bind main \s ?git reset --soft HEAD~"%(prompt Enter number: )"
 
 # rebase
 bind refs \r ?git rebase %(branch)
