@@ -82,9 +82,9 @@ bind generic m status-merge
 bind generic l stage-update-line
 bind generic x stage-split-chunk
 
-bind generic cc !git commit
-bind generic + !git commit --amend
-bind generic a !?@git commit --amend --no-edit
+bind status cc !git commit
+bind generic a !git commit --amend
+bind generic + !?@git commit --amend --no-edit
 
 # COLORS
 
