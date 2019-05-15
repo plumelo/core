@@ -16,7 +16,6 @@ set show-notes                 = yes
 set show-changes               = yes
 set status-show-untracked-dirs = yes
 set refresh-mode               = after-command
-set main-view-commit-title-graph = v1
 set line-graphics              = utf-8
 
 # branch
