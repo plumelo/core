@@ -1,4 +1,6 @@
 # Settings
+set main-options = --exclude=refs/stash --all
+
 set main-view-author-display = email-user
 set main-view-date         = custom
 set main-view-date-local   = yes
@@ -24,17 +26,15 @@ bind main    <Ctrl-f> ?git fetch -p %(remote)
 
 # reset
 bind main   H ?git reset --hard %(commit)
-bind diff   H ?git reset --hard %(commit)
 bind refs   H ?git reset --hard %(branch)
-bind status H ?git reset --hard HEAD
 
 # rebase
 bind refs <Ctrl-R> ?git rebase %(branch)
 
 # rebase interactive
 bind main B ?git rebase -i %(branch)
-bind main <Ctrl-B> ?git rebase -i %(commit)
 bind refs B ?git rebase -i %(branch)
+
 bind main <Ctrl-a> ?git rebase --abort
 bind refs <Ctrl-a> ?git rebase --abort
 
@@ -54,17 +54,11 @@ bind status + ?git commit --amend --allow-empty
 # revert commit
 bind main ! !?git revert %(commit)
 
-# chunk under cursor on diff (stage or unstage)
-bind stage 1 stage-update-line
-
 # tag the selected commit
 bind main T !?@git tag %(prompt) %(commit)
 
-# add current file to gitignore
-bind status <Ctrl-r> ?sh -c "echo %(file) >> .gitignore"
-
 # copy sha to clipboard
-bind generic 9 !sh -c "echo -n %(commit) | xclip -selection c && echo Copied %(commit) to clipboard"
+bind generic Y !sh -c "echo -n %(commit) | xclip -selection c && echo Copied %(commit) to clipboard"
 
 # COLORS
 
@@ -92,9 +86,6 @@ color   main-tracked            221     default     bold
 color   main-ref                81      default
 color   main-head               213     default     bold
 color   graph-commit            226     default
-
-# status
-#color  stat-head       81      default
 
 # Diff   colors
 color   diff_add                10      default
