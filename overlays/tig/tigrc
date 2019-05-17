@@ -1,58 +1,78 @@
 # Settings
-set main-options = --exclude=refs/stash --all
-
-set main-view-author-display = email-user
-set main-view-date         = custom
-set main-view-date-local   = yes
-set main-view-date-format = "%Y-%m-%d %H:%M"
+set main-view = \
+  line-number:no,interval=5 \
+  id:yes \
+  date:relative-compact \
+  author:email-user \
+  commit-title:yes,graph,refs,overflow=no
+set refs-view = \
+  line-number:no \
+  id:no \
+  date:relative-compact \
+  author:full ref commit-title
 
 set blame-options              = -C -C -C
 set show-notes                 = yes
 set show-changes               = yes
 set status-show-untracked-dirs = yes
-set refresh-mode               = periodic
-set refresh-interval           = 5
+set refresh-mode = auto
 set line-graphics              = utf-8
 
-# Bindings
+# unbind g
+bind generic g none
+
+# grep
+bind generic gg view-grep
 
 # branch
-bind refs n !@git branch "%(prompt Enter branch name: )"
-bind main <C-n> !@git branch "%(prompt Enter branch name: )" %(commit)
+bind refs gn  !@git branch "%(prompt Enter branch name: )" %(branch)
+bind main gn  !@git branch "%(prompt Enter branch name: )" %(commit)
+bind main gco ?git checkout %(commit)
+bind main gcb ?git checkout %(branch)
+bind refs gd  ?git branch -d %(branch)
+bind refs gD  !?git push %(remote) --delete %(branch)
+bind main gD  !?git push %(remote) --delete %(branch)
 
 #Fetch
-bind generic <Ctrl-f> ?git fetch -p %(remote)
-bind main    <Ctrl-f> ?git fetch -p %(remote)
+bind generic gf ?git fetch --all --prune
+bind refs gf ?git fetch %(remote) %(branch):%(branch)
 
 # reset
-bind main   H ?git reset --hard %(commit)
-bind refs   H ?git reset --hard %(branch)
-
-# rebase
-bind refs <Ctrl-R> ?git rebase %(branch)
+bind main grh ?git reset --hard %(commit)
+bind refs grh ?git reset --hard %(branch)
+bind main grs ?git reset --soft %(commit)
 
 # rebase interactive
-bind main B ?git rebase -i %(branch)
-bind refs B ?git rebase -i %(branch)
-
-bind main <Ctrl-a> ?git rebase --abort
-bind refs <Ctrl-a> ?git rebase --abort
+bind main grb ?git rebase -i %(branch)
+bind main gri ?git rebase -i %(commit)
+bind refs grb ?git rebase -i %(branch)
+bind main gra ?git rebase --abort
+bind refs gra ?git rebase --abort
+bind main grc ?git rebase --continue
+bind main grk ?git rebase --skip
 
 # push
-bind generic P ?git push -u %(remote) %(repo:head)
-bind status P ?git push -u %(remote) %(repo:head)
-bind main   w !?git push -f %(remote) %(repo:head)
-bind status w !?git push -f %(remote) %(repo:head)
+bind generic gps ?git push -u %(remote) %(repo:head)
+bind status  gps ?git push -u %(remote) %(repo:head)
+bind main    gpf !?git push -f %(remote) %(repo:head)
+bind main    gpp !?git push
+bind status  gpf !?git push -f %(remote) %(repo:head)
 
-# pull
-bind main <Ctrl-p> ?git pull --ff-only
+# pull without merge
+bind main gpu ?git pull --ff-only
+bind main gpr ?git pull --rebase --autostash
 
 # commit
-bind status a ?git commit --amend
-bind status + ?git commit --amend --allow-empty
+bind main   gC  ?git cherry-pick %(commit)
+bind main   gCn ?git cherry-pick -n %(commit)
+bind status gca ?git commit --amend
+bind status gcn ?git commit --amend --no-edit
 
-# revert commit
-bind main ! !?git revert %(commit)
+# stash
+bind main  gst ?git stash
+bind stash gsa ?git stash apply %(stash)
+bind stash gsp ?git stash pop %(stash)
+bind stash gsd ?git stash drop %(stash)
 
 # tag the selected commit
 bind main T !?@git tag %(prompt) %(commit)
@@ -61,8 +81,6 @@ bind main T !?@git tag %(prompt) %(commit)
 bind generic Y !sh -c "echo -n %(commit) | xclip -selection c && echo Copied %(commit) to clipboard"
 
 # COLORS
-
-# Try to mimic gitk's colors.
 
 color date      default default
 
@@ -118,8 +136,8 @@ color   pp_refs                 213     default
 # status
 color   status.header           221     default
 color   status.section          81      default
-color   stat_staged             213     default
-color   stat_unstaged           213     default
+color   stat_staged             10     default
+color   stat_unstaged           11     default
 color   stat_untracked          213     default
 
 # raw commit header
