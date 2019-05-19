@@ -1,9 +1,6 @@
 { config, options, lib, pkgs, ... }:
-let local = ../local.nix;
-in
 {
-  imports = (if builtins.pathExists local then [local] else []) ++
-  [
+  imports = [
     ./pkgs.nix
     ./programs/tmux.nix
     ./programs/lf/default.nix
