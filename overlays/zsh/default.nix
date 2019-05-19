@@ -1,4 +1,4 @@
-self: super: 
+self: super:
 with super;
 {
   zshThemes = {
@@ -35,8 +35,8 @@ with super;
         src = fetchFromGitHub {
           owner = "chisui";
           repo = pname;
-          rev= "3f4dd5eebd7bc4f49768b63dd90ad874fb04dd16";
-          sha256 = "03z89h8rrj8ynxnai77kmb5cx77gmgsfn6rhw77gaix2j3scr2kk";
+          rev= "b2609ca787803f523a18bb9f53277d0121e30389";
+          sha256 = "01w59zzdj12p4ag9yla9ycxx58pg3rah2hnnf3sw4yk95w3hlzi6";
         };
 
         buildInputs = [ zsh ];
