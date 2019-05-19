@@ -15,6 +15,7 @@ in
   ];
 
   system.stateVersion = "19.03";
+
   i18n = {
     consoleFont = "Lat2-Terminus16";
     consoleKeyMap = "us";
