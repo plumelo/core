@@ -6,7 +6,7 @@ let
 in {
   neovim-unwrapped = (neovim-unwrapped
   .override {
-    stdenv= gcc8Stdenv;
+    stdenv= gcc9Stdenv;
   })
   .overrideAttrs(old: rec {
     name = "neovim-unwrapped-${version}";
@@ -14,8 +14,8 @@ in {
     src = fetchFromGitHub {
       owner = "neovim";
       repo = "neovim";
-      rev = "974b43fd7940cd807e5a6b67c77cb2e0462b11a4";
-      sha256 = "1hgvrcwi7dzzci7kg0l83pnd74syiwrqy4vkk2dd1s7daxlzrgvv";
+      rev = "c6cd6081b8c449fa9890c18b5e2151e3af9bd45d";
+      sha256 = "1v978z88ikw3lldd5y8zsdyy9rzciwy10q298z0s8m4aal8612bs";
     };
     NIX_CFLAGS_COMPILE = "-O3 -march=native";
   });
