@@ -2,6 +2,18 @@
 with vimUtils;
 {
   nvim-typescript= callPackage ./nvim-typescript/default.nix {};
+
+  ale = buildVimPluginFrom2Nix {
+    pname = "ale";
+    version = "2019-02-15";
+    src = fetchFromGitHub {
+      owner = "w0rp";
+      repo = "ale";
+      rev = "27146ade32d6686fefde27de76b65bcdf353eab5";
+      sha256 = "0cdjf3j3vk7iiyhj123biirk702pnyqlw0qidfyjx6n2f1mnk3z6";
+    };
+  };
+
   largefile = buildVimPlugin {
     pname= "largefile-vim";
     version = "5";
@@ -33,8 +45,8 @@ with vimUtils;
     src = fetchFromGitHub {
       owner = "HerringtonDarkholme";
       repo = "yats.vim";
-      rev = "2126e8306cd21a58fb5e089376af8272abe36bb5";
-      sha256 = "1dqaikhcpcqnsnk4a0bwjm2kxsvxsb26357j999sqk1ciq9iy5iy";
+      rev = "80ae726dfdc87ef25df3225c35d8ba3fd10a36c0";
+      sha256 = "12hhsqk9qrfqdaz1xkl3vqadk5hvyg5r6a8ydjvbvp1ykai7lqm8";
     };
 
     buildPhase = ":";

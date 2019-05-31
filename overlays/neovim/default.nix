@@ -41,7 +41,6 @@ in {
           vim-nix
         ];
         opt = [
-          ale
           ack-vim
           commentary
           surround
@@ -52,6 +51,7 @@ in {
           vim-eunuch
           fugitive
         ]++ (with plugins; [
+          ale
           starsearch
           onehalfdark
           quickfix
