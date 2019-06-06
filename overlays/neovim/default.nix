@@ -38,6 +38,7 @@ in {
           lightline-vim
           vinegar
           vim-nix
+          fugitive
         ];
         opt = [
           ack-vim
@@ -48,7 +49,6 @@ in {
           vim-signify
           editorconfig-vim
           vim-eunuch
-          fugitive
         ]++ (with plugins; [
           ale
           starsearch
