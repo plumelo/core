@@ -37,7 +37,6 @@ in {
         start = [
           lightline-vim
           vinegar
-          plugins.nvim-typescript
           vim-nix
         ];
         opt = [
