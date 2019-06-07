@@ -33,9 +33,15 @@ set softtabstop=2
 set tabstop=2
 set shiftwidth=2
 set shiftround
+set diffopt+=context:3,indent-heuristic,algorithm:patience
 set inccommand=nosplit
-set updatetime=750
+set updatetime=500
 set list listchars=tab:▷\ ,space:·,extends:»,precedes:«,nbsp:⦸
+augroup list_trail
+  autocmd InsertEnter * set listchars-=trail:␣
+  autocmd InsertLeave * set listchars+=trail:␣
+augroup END
+
 set statusline=2
 set wildmode=longest:full,full
 
