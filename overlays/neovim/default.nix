@@ -59,7 +59,6 @@ in {
           vinegar
           vim-nix
           rust-vim
-          vim-lsc
         ];
         opt = [
           ack-vim

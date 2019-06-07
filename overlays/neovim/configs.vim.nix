@@ -7,19 +7,6 @@ let g:did_install_default_menus = 1
 let g:is_bash = 1
 let g:sh_noisk = 1
 
-" fugitive
-function! s:load_fugitive()
-  if exists('b:git_dir')
-    call plug#load('vim-fugitive')
-    autocmd! load_fugitive
-    call fugitive#detect(expand('%:p'))
-  endif
-endfunction
-augroup load_fugitive
-  autocmd!
-  autocmd BufWinEnter * packadd vim-fugitive
-augroup END
-
 " ack
 let g:ackhighlight = 1
 let g:ack_mappings = { 'o': '<CR>zz' }
@@ -53,6 +40,7 @@ let g:lightline.subseparator = {
 " ale lint plugin
 let g:ale_linters_explicit = 1
 let g:ale_set_highlights = 0
+let g:ale_completion_enabled = 1
 let g:ale_sign_info = 'i'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 let g:ale_pattern_options_enabled = 1
@@ -65,13 +53,15 @@ let g:ale_sign_warning = '●'
 let g:ale_sign_error = '●'
 let g:ale_fixers = {
   \ 'javascript': ['eslint'],
-  \ 'html': ['eslint']
+  \ 'html': ['eslint'],
+  \ 'rust': ['rustfmt']
   \}
 let g:ale_linter_aliases = {
   \ 'html': 'javascript'
   \}
 let g:ale_linters = {
   \ 'javascript': ['eslint'],
+  \ 'rust': ['rls', 'cargo','rustc'],
   \ 'yaml': ['yamllint'],
   \ 'vim': ['vint'],
   \ 'nix': ['nix'],
@@ -151,7 +141,4 @@ noremap <silent> <Bs> :call fzf#run(fzf#wrap({
 
 " markdown
 let g:markdown_fenced_languages = ['html', 'vim', 'javascript', 'python', 'bash=sh']
-
-" lsc
-let g:lsc_server_commands = {'rust': 'rls'}
 ''
