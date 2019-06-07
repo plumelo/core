@@ -74,7 +74,7 @@ in {
           vim-jinja
           vim-markdown
         ]++ (with plugins; [
-          ale
+          mergetool
           starsearch
           onehalfdark
           quickfix

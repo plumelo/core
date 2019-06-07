@@ -1,28 +1,53 @@
 pkgs:
 # vim: set syntax=vim:
 ''
-function g:LazyPlugins(...)
-  packadd vim-repeat
-  packadd vim-commentary
-  packadd vim-surround
-  packadd ack-vim
-  packadd vim-highlightedyank
-  packadd vim-visualstar
-  packadd quickfix-vim
-  packadd ale
-  packadd starsearch-vim
-  packadd vim-signify
-  packadd editorconfig-vim
-  packadd vim-eunuch
-  packadd vim-fugitive
-
-  doautocmd User VimLazyPacksLoaded
-
-endfunction
-
 " autocmds
-augroup lazy_plugins
-  autocmd BufEnter * call timer_start(300, function('g:LazyPlugins'))
+augroup plugins
+  if !exists("g:loaded_EditorConfig")
+    autocmd BufReadPre * packadd editorconfig-vim
+  endif
+
+  if !exists('g:loaded_ale')
+    autocmd BufRead * packadd ale
+  endif
+
+  if !exists('g:loaded_mergetool')
+    packadd mergetool-vim
+  endif
+
+  if !exists('g:loaded_eunuch')
+    autocmd CmdLineEnter * packadd vim-eunuch
+  endif
+
+  if !exists('g:loaded_commentary')
+    autocmd BufRead * packadd vim-commentary
+  endif
+
+  if !exists('g:loaded_repeat')
+    autocmd BufRead * packadd vim-repeat
+  endif
+
+  if !exists('g:loaded_surround')
+    autocmd BufRead * packadd vim-surround
+  endif
+
+  if !exists('g:loaded_ack')
+    autocmd BufRead * packadd ack-vim
+  endif
+
+  if !exists('g:loaded_starsearch')
+    autocmd BufRead * packadd starsearch-vim
+  endif
+
+  if !exists("g:loaded_highlightedyank")
+    autocmd BufRead * packadd vim-highlightedyank
+  endif
+
+  if !exists('g:loaded_signify')
+    packadd vim-signify
+  endif
+
+  autocmd FileType qf packadd quickfix-vim
 augroup END
 
 augroup set_filetype
@@ -49,7 +74,7 @@ augroup remember_position
 augroup END
 
 augroup signify_refresh
-  autocmd User VimLazyPacksLoaded autocmd FocusGained,CursorHold * SignifyRefresh
+  autocmd FocusGained,CursorHold * if !bufexists("[Command Line]") | checktime | SignifyRefresh | endif
 augroup END
 
 augroup diff_update
