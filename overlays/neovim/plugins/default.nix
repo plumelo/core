@@ -1,30 +1,6 @@
 { vimUtils, fetchFromGitHub, makeWrapper, callPackage }:
 with vimUtils;
 {
-  nvim-typescript= callPackage ./nvim-typescript/default.nix {};
-
-  ale = buildVimPluginFrom2Nix {
-    pname = "ale";
-    version = "2019-06-05";
-    src = fetchFromGitHub {
-      owner = "w0rp";
-      repo = "ale";
-      rev = "7b78f2b846e2f3443dcb2ceacee54eb99e37f040";
-      sha256 = "1f6kldvcysa525xn6fnzg09chp39s63m7nxsq008lzykm30v00jr";
-    };
-  };
-
-  largefile = buildVimPlugin {
-    pname= "largefile-vim";
-    version = "5";
-    src = fetchFromGitHub {
-      owner = "PanagiotisS";
-      repo = "LargeFile";
-      rev = "76abe439fcd3ea9906935236ee3ef595479e037b";
-      sha256 = "0ww5cf70znvi7pk5a23wkbrsxcazyg4ym02p1rrigcpdzj1syaiy";
-    };
-  };
-
   quickfix = buildVimPlugin {
     pname= "quickfix-vim";
     version = "0.1";
@@ -69,12 +45,40 @@ with vimUtils;
 
   jsx = buildVimPlugin {
     pname= "jsx-vim";
-    version = "0.1";
+    version = "2.0.1";
     src = fetchFromGitHub {
-      owner = "neoclide";
-      repo = "vim-jsx-improve";
-      rev = "1567a5e684676012e93ed5d44ee52a9818b970dc";
-      sha256 = "1qzlfrhyvfy0vc8fpcam134axqdhhw0mx7vpib630zi0mqjh5h46";
+      owner = "MaxMEllon";
+      repo = "vim-jsx-pretty";
+      rev = "007b85e1d51f4dbbba2c15ca4a34b5ff7a8db9ef";
+      sha256 = "1pg6sy41ai212jq8p15pz70w4wkn77wd12362j133myd14nsahjf";
+    };
+
+    buildPhase = ":";
+    configurePhase =":";
+  };
+
+  javascript_syntax = buildVimPlugin {
+    pname= "vim-javascript-syntax";
+    version = "0.8.2";
+    src = fetchFromGitHub {
+      owner = "jelera";
+      repo = "vim-javascript-syntax";
+      rev = "139ec9080f219536a94281aef7980654ab7c1a1c";
+      sha256 = "18468dljr9fqfy89jfs8ahcfj6a26cp5c4iqi526wwj25irbxf71";
+    };
+
+    buildPhase = ":";
+    configurePhase =":";
+  };
+
+  html_template = buildVimPlugin {
+    pname= "vim-html-template-literals";
+    version = "0.2.0";
+    src = fetchFromGitHub {
+      owner = "jonsmithers";
+      repo = "vim-html-template-literals";
+      rev = "3499e075ecb780f773375640e2a45ac9dc53ceef";
+      sha256 = "01cmxp56r2796inmii3kdj22p0wc8f66ba2p1fhlbhrzz5yaxwh4";
     };
 
     buildPhase = ":";
@@ -107,4 +111,3 @@ with vimUtils;
     configurePhase =":";
   };
 }
-

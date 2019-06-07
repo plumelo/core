@@ -149,9 +149,11 @@ noremap <silent> <Bs> :call fzf#run(fzf#wrap({
   \ 'options': '-m --expect='.join(keys(buffer_action), ',')
   \ }))<CR>
 
-" vim-jsx-improve
-let g:jsx_ext_required = 0
+" markdown
+let g:markdown_fenced_languages = ['html', 'vim', 'javascript', 'python', 'bash=sh']
 
-" nvim_typescript
-let g:nvim_typescript#diagnostics_enable = 0
+" lsc
+let g:lsc_auto_map = v:true
+let g:lsc_server_commands = {'rust': 'rls'}
+
 ''
