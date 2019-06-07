@@ -1,6 +1,17 @@
 { vimUtils, fetchFromGitHub, makeWrapper, callPackage }:
 with vimUtils;
 {
+  ale = buildVimPluginFrom2Nix {
+    pname = "ale";
+    version = "2019-06-05";
+    src = fetchFromGitHub {
+      owner = "w0rp";
+      repo = "ale";
+      rev = "7b78f2b846e2f3443dcb2ceacee54eb99e37f040";
+      sha256 = "1f6kldvcysa525xn6fnzg09chp39s63m7nxsq008lzykm30v00jr";
+    };
+  };
+
   mergetool = buildVimPlugin {
     pname= "mergetool-vim";
     version = "0.1";
