@@ -25,7 +25,7 @@ in {
   };
 
   config = mkIf cfg.enable ( mkMerge [
-    ({
+    {
       environment.systemPackages = with pkgs; [
         lxc-templates
       ];
@@ -45,10 +45,10 @@ in {
           lxc.apparmor.profile = unconfined
         '';
       };
+    }
 
-    })
-
-    (mkIf cfg.net.enable {
+    (mkIf cfg.net.enable (mkMerge [
+    {
       environment.etc."default/lxc" = {
         text = ''
           [ ! -f /etc/default/lxc-net ] || . /etc/default/lxc-net
@@ -85,7 +85,12 @@ in {
           };
         };
       };
+    }
+    (mkIf (config.networking.networkmanager.dns == "dnsmasq") {
+      environment.etc."NetworkManager/dnsmasq.d/10-dns-lxc.conf".text = ''
+        server=/${cfg.net.domain}/${cfg.net.address}
+      '';
     })
-
+    ]))
   ]);
 }

@@ -6,6 +6,7 @@
     ./programs/lf/default.nix
     ./virtualisation/lxc.nix
     ./virtualisation/lxd.nix
+    ./virtualisation/virtualbox.nix
     ./hardware/ssd.nix
     ./hardware/zram.nix
     ./users.nix
@@ -49,17 +50,6 @@
 
   networking.networkmanager = {
     dns = "dnsmasq";
-    dynamicHosts =  {
-      enable = true;
-      hostsDirs."${config.users.defaultUser.name}"= {
-        user=config.users.defaultUser.name;
-      };
-    };
   };
-
-  environment.etc."NetworkManager/dnsmasq.d/10-dns-lxcd.conf".text = ''
-    server=/local/10.0.3.1
-    server=/lxd/10.0.4.1
-  '';
 }
 

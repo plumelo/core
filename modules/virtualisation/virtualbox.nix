@@ -1,10 +1,11 @@
 { config, lib, pkgs, ... }:
-
-{
-  virtualisation.virtualbox = {
-    host.enable = true;
-    host.enableExtensionPack = true;
+with lib;
+let
+  cfg = config.virtualbox.host;
+in {
+  config = mkIf cfg.host.enable {
+    virtualisation.virtualbox.host = {
+      enableExtensionPack = true;
+    };
   };
-
 }
-
