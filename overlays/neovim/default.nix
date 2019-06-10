@@ -80,6 +80,7 @@ in {
           quickfix
           javascript_syntax
           jsx
+          html_template
           yats
           twig
         ]);
