@@ -32,7 +32,7 @@ augroup plugins
   endif
 
   if !exists('g:loaded_ack')
-    autocmd BufRead * packadd ack-vim
+    autocmd BufEnter * packadd ack-vim
   endif
 
   if !exists('g:loaded_starsearch')
