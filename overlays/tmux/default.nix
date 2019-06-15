@@ -1,4 +1,4 @@
-self: super: 
+self: super:
 with super;
 {
   tmuxPlugins = tmuxPlugins // (with tmuxPlugins; {
@@ -13,8 +13,8 @@ with super;
     resurrect = resurrect.overrideAttrs (old : rec {
       src = fetchgit {
         url = "https://github.com/tmux-plugins/tmux-resurrect";
-        rev = "b020b2481e9365d5ac09f22033f2bb01a86c0f2e";
-        sha256 = "0vzb8zd7k48sy34ynb3mzrwb9qnsvqs2cdmg9916nid7a27av017";
+        rev = "e3f05dd34f396a6f81bd9aa02f168e8bbd99e6b2";
+        sha256 = "0ffh0664bbpbv2v3nsdv7lxvy0k09ixkpgrw1vq2my6nb22nmj4m";
       };
     });
 
