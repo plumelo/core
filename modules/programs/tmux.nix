@@ -32,9 +32,10 @@ with pkgs.tmuxPlugins;
       set -g status-left-length 30
       set -g status-right '#{prefix_highlight}'
 
-      set -g @resurrect-processes '"~nvim->nvim"'
-      set -g @resurrect-processes '"~tig>tig"'
-
+      set -g @resurrect-processes '\
+        "~nvim->nvim" \
+        "~tig->tig" \
+      '
       run-shell ${pain-control.rtp}
       run-shell ${sensible.rtp}
       run-shell ${resurrect.rtp}
