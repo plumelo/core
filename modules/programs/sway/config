@@ -95,8 +95,15 @@ bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 bindsym XF86MonBrightnessDown exec $brightness set 10%-
 bindsym XF86MonBrightnessUp exec $brightness set +10%
 
-bindsym $mod+Control+l exec $grim /tmp/lock.png && $mogrify -scale 10% -scale 1000% /tmp/lock.png && $swaylock -i /tmp/lock.png
 bindsym Print exec $slurp | $grim -g - /tmp/screenshot.png && cat /tmp/screenshot.png | $xclip -selection clipboard -target image/png -i
+
+bindsym --release $mod+Control+l exec loginctl lock-session
+exec $idle -w \
+  timeout 300 '$lock' \
+  timeout 600 'swaymsg "output * dpms off"' \
+    resume 'swaymsg "output * dpms on"' \
+  before-sleep '$lock' \
+  lock '$lock'
 
 # Resizing containers:
 mode "resize" {

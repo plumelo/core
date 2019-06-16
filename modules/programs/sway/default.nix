@@ -56,6 +56,8 @@ in {
     set $slurp ${slurp}/bin/slurp
     set $xclip ${xclip}/bin/xclip
     set $mako ${mako}/bin/mako
+    set $idle ${swayidle}/bin/swayidle
+    set $lock $grim /tmp/lock.png && $mogrify -scale 10% -scale 1000% /tmp/lock.png && $swaylock -f -i /tmp/lock.png
 
     set $menu $term --title "fzf-menu" -e bash -c '${dmenu}/bin/dmenu_path | sort -u | $fzf | xargs -I ? -r swaymsg exec ?'
 
