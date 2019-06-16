@@ -13,7 +13,7 @@ let lf-preview = writeShellScriptBin "lf-preview" ''
 '';
 in {
   environment.etc."lf/lfrc".text = ''
-    set shell zsh
+    set shell bash
     set shellopts '-eu'
     set color256 on
     set ifs "\n"
