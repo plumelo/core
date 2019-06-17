@@ -24,4 +24,7 @@ self: super:
     ];
     buildInputs = [lxc];
   };
+  sqlite-replication = with super; sqlite-replication.overrideAttrs (old: {
+    enableParallelBuilding = false;
+  });
 }
