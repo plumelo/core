@@ -1,14 +1,11 @@
 self: super:
-let
-  alacritty = (with super; super.callPackage ./unwrapped.nix {
-    inherit (xorg) libXcursor libXxf86vm libXi;
-  });
-in {
-  alacritty = super.symlinkJoin {
+with super;
+{
+  alacritty = symlinkJoin {
     name = "alacritty-with-config-${alacritty.version}";
 
     paths = [ alacritty ];
-    nativeBuildInputs = [ super.makeWrapper ];
+    nativeBuildInputs = [ makeWrapper ];
 
     postBuild = ''
       wrapProgram $out/bin/alacritty \
