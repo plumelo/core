@@ -20,6 +20,7 @@ in {
       android-udev-rules
       jmtpfs
       xdg_utils
+      wl-clipboard
     ]);
     extraSessionCommands= ''
       export XKB_DEFAULT_LAYOUT=us
