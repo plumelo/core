@@ -28,7 +28,7 @@
       }
       active_nix_shell() {
         if [ -n "$IN_NIX_SHELL" ]; then
-          export NSHELL=" "
+          export NSHELL="  "
         fi
       }
       PROMPT_COMMAND='\
@@ -77,9 +77,6 @@
       set output-meta on
       set convert-meta off
 
-      VISUAL=vim
-      EDITOR="$VISUAL"
-      PAGER=less
       LESS='-XFr'
 
       shopt -s histappend
@@ -102,5 +99,4 @@
       stty -ixon
     '';
   };
-  users.defaultUserShell = pkgs.bash;
 }

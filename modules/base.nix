@@ -2,7 +2,7 @@
 {
   imports = [
     ./pkgs.nix
-    ./programs/bash.nix
+    ./programs/bash/default.nix
     ./programs/tmux.nix
     ./programs/lf/default.nix
     ./virtualisation/lxc.nix
