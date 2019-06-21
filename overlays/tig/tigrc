@@ -78,7 +78,7 @@ bind stash gsd ?git stash drop %(stash)
 bind main T !?@git tag %(prompt) %(commit)
 
 # copy sha to clipboard
-bind generic Y !sh -c "echo -n %(commit) | xclip -selection c && echo Copied %(commit) to clipboard"
+bind generic Y !@sh -c "echo -n %(commit) | wl-copy"
 
 # COLORS
 
