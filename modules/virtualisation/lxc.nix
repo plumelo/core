@@ -29,6 +29,7 @@ in {
       environment.systemPackages = with pkgs; [
         lxc-templates
       ];
+      environment.pathsToLink = ["/share/lxc"];
 
       system.activationScripts = {
         lxc = {
