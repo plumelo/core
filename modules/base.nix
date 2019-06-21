@@ -4,6 +4,7 @@
     ./pkgs.nix
     ./programs/bash/default.nix
     ./programs/tmux.nix
+    ./programs/git
     ./programs/lf/default.nix
     ./virtualisation/lxc.nix
     ./virtualisation/lxd.nix
