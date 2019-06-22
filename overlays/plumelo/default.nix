@@ -69,12 +69,6 @@ self: super:
       transmission_gtk
       stress
 
-      # git
-      gitAndTools.tig
-      git-lfs
-      git
-      gitkraken
-
       # configuration management
       vagrant
       redir

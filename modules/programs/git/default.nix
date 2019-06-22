@@ -4,13 +4,13 @@ let
   cfg = config.programs.git;
 
   difftools = {
-    nvim   = "${pkgs.nvim}/bin/nvim -d \"$LOCAL\" \"$REMOTE\"";
+    nvim   = "${pkgs.neovim}/bin/nvim -d \"$LOCAL\" \"$REMOTE\"";
     vim    = "${pkgs.vim}/bin/vim -d \"$LOCAL\" \"$REMOTE\"";
     kdiff3 = "${pkgs.kdiff3}/bin/kdiff3 \"$LOCAL\" \"$REMOTE\"";
   };
 
   mergetools = {
-    nvim   = "${pkgs.nvim}/bin/nvim -f -c \"MergetoolStart\" \"$MERGED\" \"$BASE\" \"$LOCAL\" \"$REMOTE\"";
+    nvim   = "${pkgs.neovim}/bin/nvim -f -c \"MergetoolStart\" \"$MERGED\" \"$BASE\" \"$LOCAL\" \"$REMOTE\"";
     vim    = "${pkgs.vim}/bin/vim -f -c \"MergetoolStart\" \"$MERGED\" \"$BASE\" \"$LOCAL\" \"$REMOTE\"";
     kdiff3 = "${pkgs.kdiff3}/bin/kdiff3 \"$BASE\" \"$LOCAL\" \"$REMOTE\" -o \"$MERGED\"";
   };
@@ -24,7 +24,7 @@ in {
 
       lfsEnable = mkOption {
         type = types.bool;
-        default = false;
+        default = true;
       };
 
       name =  mkOption {
@@ -39,7 +39,7 @@ in {
 
       editor =  mkOption {
         type = types.string;
-        default = "${pkgs.nvim}/bin/nvim";
+        default = "${pkgs.neovim}/bin/nvim";
       };
 
       pager =  mkOption {
