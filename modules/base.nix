@@ -12,6 +12,7 @@
     ./hardware/ssd.nix
     ./hardware/zram.nix
     ./users.nix
+    ./services/redshift/default.nix
   ];
 
   system.stateVersion = "19.03";

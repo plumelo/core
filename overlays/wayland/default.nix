@@ -16,4 +16,5 @@ in {
     };
 
   }));
+  redshift-wayland = waylandPkgs.redshift-wayland;
 }
