@@ -8,6 +8,9 @@ let
     export DISPLAY=:0
     exec ${askPassword} 2>/tmp/ask.log
   '';
+  domainToHostname = i: "Hostname " + i + "\n";
+  phostsMap = map domainToHostname cfg.persistentHosts;
+  hosts = lib.concatStrings phostsMap;
 in {
   options = {
     programs.ssh = {
@@ -20,11 +23,11 @@ in {
 
   config = {
     programs.ssh.startAgent = true;
-    systemd.user.services.ssh-agent.environment.SSH_ASKPASS = lib.mkForce askPasswordWrapper;
-    environment.variables.SSH_ASKPASS = lib.mkForce askPassword;
+    systemd.user.services.ssh-agent.environment.SSH_ASKPASS = mkForce askPasswordWrapper;
+    environment.variables.SSH_ASKPASS = mkForce askPassword;
     programs.ssh.extraConfig = ''
       Host github.com
-      HostName ${cfg.persistentHosts}
+      ${hosts}
       ControlMaster auto
       ControlPath ~/.ssh/sockets-%r@%h-%p
       ControlPersist 600
