@@ -5,6 +5,7 @@
     ./programs/bash/default.nix
     ./programs/tmux.nix
     ./programs/git
+    ./programs/ssh
     ./programs/lf/default.nix
     ./virtualisation/lxc.nix
     ./virtualisation/lxd.nix
