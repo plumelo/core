@@ -8,15 +8,12 @@ let
     export DISPLAY=:0
     exec ${askPassword} 2>/tmp/ask.log
   '';
-  domainToHostname = i: "Hostname " + i + "\n";
-  phostsMap = map domainToHostname cfg.persistentHosts;
-  hosts = lib.concatStrings phostsMap;
 in {
   options = {
     programs.ssh = {
       persistentHosts = mkOption {
         type = types.listOf types.str;
-        default = [];
+        default = [ "github.com" "bitbucket.org" ];
       };
     };
   };
@@ -26,11 +23,10 @@ in {
     systemd.user.services.ssh-agent.environment.SSH_ASKPASS = mkForce askPasswordWrapper;
     environment.variables.SSH_ASKPASS = mkForce askPassword;
     programs.ssh.extraConfig = ''
-      Host github.com
-      ${hosts}
-      ControlMaster auto
-      ControlPath ~/.ssh/sockets-%r@%h-%p
-      ControlPersist 600
+      Host ${builtins.concatStringsSep " " cfg.persistentHosts}
+        ControlMaster auto
+        ControlPath ~/.ssh/sockets-%r@%h-%p
+        ControlPersist 600
     '';
   };
 }
