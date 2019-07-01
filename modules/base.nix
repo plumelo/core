@@ -10,6 +10,7 @@
     ./virtualisation/lxc.nix
     ./virtualisation/lxd.nix
     ./virtualisation/virtualbox.nix
+    ./virtualisation/wine.nix
     ./hardware/ssd.nix
     ./hardware/zram.nix
     ./users.nix
