@@ -1,6 +1,5 @@
 self: super:
-with super;
-{
+with super; {
   alacritty = symlinkJoin {
     name = "alacritty-with-config-${alacritty.version}";
 
