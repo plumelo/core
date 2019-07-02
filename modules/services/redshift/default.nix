@@ -1,7 +1,8 @@
-{ config, lib, pkgs, ... }:
-{
+{ config, lib, pkgs, ... }: {
   services.redshift = {
-    package   = pkgs.redshift-wayland;
-    provider  = "geoclue2";
+    enable = true;
+    package = pkgs.redshift-wayland;
+    latitude = "47.15";
+    longitude = "27.59";
   };
 }
