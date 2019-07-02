@@ -15,6 +15,7 @@
     ./hardware/zram.nix
     ./users.nix
     ./services/redshift/default.nix
+    ./services/networking/syncthing.nix
   ];
 
   system.stateVersion = "19.03";
