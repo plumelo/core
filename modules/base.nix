@@ -1,6 +1,7 @@
 { config, options, lib, pkgs, ... }: {
   imports = [
     ./pkgs.nix
+    ./users.nix
     ./programs/bash/default.nix
     ./programs/tmux.nix
     ./programs/git
@@ -12,7 +13,6 @@
     ./virtualisation/wine.nix
     ./hardware/ssd.nix
     ./hardware/zram.nix
-    ./users.nix
     ./services/redshift/default.nix
     ./services/networking/syncthing.nix
   ];

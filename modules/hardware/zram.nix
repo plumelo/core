@@ -1,8 +1,7 @@
-{ config, lib, pkgs, ... }:
-{
+{ config, lib, pkgs, ... }: {
   zramSwap = {
     algorithm = "zstd";
-    enable    = true;
-    priority  = 6;
+    enable = true;
+    priority = 6;
   };
 }

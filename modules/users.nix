@@ -1,31 +1,28 @@
 { config, options, lib, pkgs, ... }:
 with lib;
-let
-  cfg = config.users.defaultUser;
+let cfg = config.users.defaultUser;
 
 in {
   options.users.defaultUser = {
     name = mkOption {
       type = types.str;
-      default= null;
+      default = null;
     };
     packages = mkOption {
       type = types.listOf types.package;
-      default = [];
+      default = [ ];
     };
 
     extraGroups = mkOption {
       type = types.listOf types.str;
-      default = [];
+      default = [ ];
       description = "The user's auxiliary groups.";
     };
   };
 
   config = mkIf (cfg.name != null) {
     users = {
-      groups."${cfg.name}" = {
-        gid = 1000;
-      };
+      groups."${cfg.name}" = { gid = 1000; };
       users."${cfg.name}" = {
         isNormalUser = true;
         uid = 1000;
@@ -37,10 +34,6 @@ in {
           "video"
           "networkmanager"
           "systemd-journal"
-          "lxd"
-          "docker"
-          "vboxusers"
-          "sway"
         ] ++ cfg.extraGroups;
         initialPassword = "${cfg.name}";
         packages = mkDefault cfg.packages;

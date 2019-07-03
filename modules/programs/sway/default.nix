@@ -21,6 +21,7 @@ in {
     '';
   };
 
+  users.defaultUser.extraGroups = [ "sway" ];
   networking.networkmanager.enable = true;
 
   fonts.fonts = with pkgs; [overpass nerdfonts];
