@@ -21,6 +21,7 @@ in {
     set scrolloff 10
     set hidden!
     set previewer '${lf-preview}/bin/lf-preview'
+    set icons on
 
     map <enter> shell
     map x $$f
@@ -45,29 +46,29 @@ in {
     cmd extract ''${{
     set -f
     case $f in
-    *.tar.bz|*.tar.bz2|*.tbz|*.tbz2) ${gnutar}/bin/tar xjvf $f;;
-    *.tar.gz|*.tgz) ${gnutar}/bin/tar xzvf $f;;
-    *.tar.xz|*.txz) ${gnutar}/bin/tar xJvf $f;;
-    *.zip) ${unzip}/bin/unzip $f;;
-    *.rar) ${unrar}/bin/unrar x $f;;
-    *.7z) ${p7zip}/bin/7z x $f;;
-    esac
+      *.tar.bz|*.tar.bz2|*.tbz|*.tbz2) ${gnutar}/bin/tar xjvf $f;;
+      *.tar.gz|*.tgz) ${gnutar}/bin/tar xzvf $f;;
+      *.tar.xz|*.txz) ${gnutar}/bin/tar xJvf $f;;
+      *.zip) ${unzip}/bin/unzip $f;;
+      *.rar) ${unrar}/bin/unrar x $f;;
+      *.7z) ${p7zip}/bin/7z x $f;;
+      esac
     }}
 
     cmd tar ''${{
-    set -f
-    mkdir $1
-    cp -r $fx $1
-    ${gnutar}/bin/tar czf $1.tar.gz $1
-    rm -rf $1
+      set -f
+      mkdir $1
+      cp -r $fx $1
+      ${gnutar}/bin/tar czf $1.tar.gz $1
+      rm -rf $1
     }}
 
     cmd zip ''${{
-    set -f
-    mkdir $1
-    cp -r $fx $1
-    ${gzip}/bin/zip -r $1.zip $1
-    rm -rf $1
+      set -f
+      mkdir $1
+      cp -r $fx $1
+      ${gzip}/bin/zip -r $1.zip $1
+      rm -rf $1
     }}
 
     map i ''${{BAT_PAGER="less -R" ${bat}/bin/bat $f}}
@@ -76,4 +77,163 @@ in {
 
   '';
   environment.systemPackages = [lf];
+  programs.bash.interactiveShellInit = ''
+    export LF_ICONS="\
+    di=:\
+    fi=:\
+    ln=:\
+    or=:\
+    ex=:\
+    *.c=:\
+    *.cc=:\
+    *.clj=:\
+    *.coffee=:\
+    *.cpp=:\
+    *.css=:\
+    *.d=:\
+    *.dart=:\
+    *.erl=:\
+    *.exs=:\
+    *.fs=:\
+    *.go=:\
+    *.h=:\
+    *.hh=:\
+    *.hpp=:\
+    *.hs=:\
+    *.html=:\
+    *.java=:\
+    *.jl=:\
+    *.js=:\
+    *.json=:\
+    *.lua=:\
+    *.md=:\
+    *.php=:\
+    *.pl=:\
+    *.pro=:\
+    *.py=:\
+    *.rb=:\
+    *.rs=:\
+    *.scala=:\
+    *.ts=:\
+    *.vim=:\
+    *.cmd=:\
+    *.ps1=:\
+    *.sh=:\
+    *.bash=:\
+    *.zsh=:\
+    *.fish=:\
+    *.tar=:\
+    *.tgz=:\
+    *.arc=:\
+    *.arj=:\
+    *.taz=:\
+    *.lha=:\
+    *.lz4=:\
+    *.lzh=:\
+    *.lzma=:\
+    *.tlz=:\
+    *.txz=:\
+    *.tzo=:\
+    *.t7z=:\
+    *.zip=:\
+    *.z=:\
+    *.dz=:\
+    *.gz=:\
+    *.lrz=:\
+    *.lz=:\
+    *.lzo=:\
+    *.xz=:\
+    *.zst=:\
+    *.tzst=:\
+    *.bz2=:\
+    *.bz=:\
+    *.tbz=:\
+    *.tbz2=:\
+    *.tz=:\
+    *.deb=:\
+    *.rpm=:\
+    *.jar=:\
+    *.war=:\
+    *.ear=:\
+    *.sar=:\
+    *.rar=:\
+    *.alz=:\
+    *.ace=:\
+    *.zoo=:\
+    *.cpio=:\
+    *.7z=:\
+    *.rz=:\
+    *.cab=:\
+    *.wim=:\
+    *.swm=:\
+    *.dwm=:\
+    *.esd=:\
+    *.jpg=:\
+    *.jpeg=:\
+    *.mjpg=:\
+    *.mjpeg=:\
+    *.gif=:\
+    *.bmp=:\
+    *.pbm=:\
+    *.pgm=:\
+    *.ppm=:\
+    *.tga=:\
+    *.xbm=:\
+    *.xpm=:\
+    *.tif=:\
+    *.tiff=:\
+    *.png=:\
+    *.svg=:\
+    *.svgz=:\
+    *.mng=:\
+    *.pcx=:\
+    *.mov=:\
+    *.mpg=:\
+    *.mpeg=:\
+    *.m2v=:\
+    *.mkv=:\
+    *.webm=:\
+    *.ogm=:\
+    *.mp4=:\
+    *.m4v=:\
+    *.mp4v=:\
+    *.vob=:\
+    *.qt=:\
+    *.nuv=:\
+    *.wmv=:\
+    *.asf=:\
+    *.rm=:\
+    *.rmvb=:\
+    *.flc=:\
+    *.avi=:\
+    *.fli=:\
+    *.flv=:\
+    *.gl=:\
+    *.dl=:\
+    *.xcf=:\
+    *.xwd=:\
+    *.yuv=:\
+    *.cgm=:\
+    *.emf=:\
+    *.ogv=:\
+    *.ogx=:\
+    *.aac=:\
+    *.au=:\
+    *.flac=:\
+    *.m4a=:\
+    *.mid=:\
+    *.midi=:\
+    *.mka=:\
+    *.mp3=:\
+    *.mpc=:\
+    *.ogg=:\
+    *.ra=:\
+    *.wav=:\
+    *.oga=:\
+    *.opus=:\
+    *.spx=:\
+    *.xspf=:\
+    *.pdf=:\
+"
+  '';
 }
