@@ -19,43 +19,27 @@
       reset=$(tput sgr0)
       prompt_command(){
         local retval="''${?#0}"
-        history -n; history -w; history -c; history -r
         local prompt="\n"
-        local uid=""
-        local job="\j"
+        local prompt_end=""
+        local jobsval=`jobs -p | wc -l`
 
-        [ $(id -u) -eq 0 ]  && uid+="$jobs\n\[$red\]#\[$reset\]" || uid+="$jobs\n\[$magenta\]❯\[$reset\]"
-        if [ -n "$(jobs -p)" ]; then uid+="$job"; fi
-        if [ -n "$retval" ]; then prompt+="\[$red\]$retval\[$reset\] " ;fi
-        if [ -n "$IN_NIX_SHELL" ]; then prompt+="\[$cyan\] \[$reset\] "; fi
-        prompt+="\[$bold\]\[$yellow\]\w\[$reset\]"
+        [ -n "$retval" ] && prompt+="$red$retval$reset "
+        [ -n "$IN_NIX_SHELL" ] && prompt+="$cyan $reset "
+        prompt+="$bold$yellow\w$reset"
 
-        __git_ps1 "$prompt" "$uid "
+        [ $jobsval -ne 0 ] && prompt_end+=" $jobsval"
+        prompt_end+="\n"
+        [ $(id -u) -eq 0 ] && prompt_end+="\[$red\]#\[$reset\]" || prompt_end+="\[$magenta\]❯\[$reset\]"
 
+        __git_ps1 "$prompt" "$prompt_end "
+        history -n; history -w; history -c; history -r
       }
       PROMPT_COMMAND=prompt_command
-      PROMPT_DIRTRIM=3
     '';
     interactiveShellInit= ''
+      PROMPT_DIRTRIM=3
       set -o notify
-      bind "set completion-ignore-case on"
-      bind "set completion-map-case on"
-      bind "set show-all-if-ambiguous on"
-      bind "set menu-complete-display-prefix on"
-      bind "set mark-symlinked-directories on"
-      bind "set colored-stats on"
-      bind "set skip-completed-text on"
-      bind "set visible-stats on"
-      bind "set page-completions off"
-      bind "set bell-style none"
-      bind '"\t": menu-complete'
-      bind '"\e[Z": menu-complete-backward'
-      bind '"\e[P": delete-char'
-      bind '"\e[A": history-search-backward'
-      bind '"\e[B": history-search-forward'
-      bind '"\C-h": backward-kill-word'
-      bind '"\e[M": kill-word'
-      bind Space:magic-space
+
       shopt -s checkwinsize
       shopt -s globstar 2> /dev/null
       shopt -s nocaseglob;
@@ -63,14 +47,31 @@
       shopt -s dirspell 2> /dev/null
       shopt -s cdspell 2> /dev/null
       shopt -s histappend
-      shopt -s histreedit
-      shopt -s histverify
       shopt -s cmdhist
-      shopt -s lithist
+
+      bind "set completion-ignore-case on"
+      bind "set completion-map-case on"
+      bind "set show-all-if-ambiguous on"
+      bind "set menu-complete-display-prefix on"
+      bind "set mark-symlinked-directories on"
+      bind "set colored-stats on"
+      bind "set visible-stats on"
+      bind "set page-completions off"
+      bind "set skip-completed-text on"
+      bind "set bell-style none"
+
+      bind '"\t": menu-complete'
+      bind '"\e[Z": menu-complete-backward'
+      bind '"\e[A": history-search-backward'
+      bind '"\e[B": history-search-forward'
+      bind '"\e[M": kill-word'
+      bind '"\C-h": backward-kill-word'
+
       HISTFILESIZE=-1
       HISTSIZE=''${HISTFILESIZE}
-      HH_CONFIG=hicolor
-      HISTCONTROL=ignoreboth:erasedups
+      HISTCONTROL="erasedups:ignoreboth"
+      HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history:?:??"
+
       eval `${pkgs.coreutils}/bin/dircolors "${./dircolors}"`
       source ${pkgs.fzf}/share/fzf/completion.bash
       source ${pkgs.fzf}/share/fzf/key-bindings.bash
