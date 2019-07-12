@@ -1,18 +1,6 @@
 { config, lib, pkgs, ... }:
 let cfg = config.programs.waybar;
 in {
-  options.programs.waybar = {
-    config = lib.mkOptions {
-      type = lib.types.lines;
-      default = "";
-    };
-
-    style = lib.mkOptions {
-      type = lib.types.lines;
-      default = "";
-    };
-  };
-
   config = {
     environment.etc."xdg/waybar/config".text = with pkgs; ''
       {
@@ -52,7 +40,6 @@ in {
               "ethernet": [""],
               "disconnected": [""]
             },
-            "on-click": "st --title 'nmtui' -e nmtui",
             "tooltip": false
           },
           "clock": {
@@ -104,7 +91,6 @@ in {
               "default": ["🔈", "🔊"]
             },
             "scroll-step": 5,
-            "on-click": "pavucontrol",
             "on-click-right": "pactl set-sink-mute 0 toggle",
             "tooltip": false
           }
