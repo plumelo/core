@@ -1,17 +1,6 @@
 { vimUtils, fetchFromGitHub, makeWrapper, callPackage }:
 with vimUtils;
 {
-  ale = buildVimPluginFrom2Nix {
-    pname = "ale";
-    version = "2019-06-05";
-    src = fetchFromGitHub {
-      owner = "w0rp";
-      repo = "ale";
-      rev = "7b78f2b846e2f3443dcb2ceacee54eb99e37f040";
-      sha256 = "1f6kldvcysa525xn6fnzg09chp39s63m7nxsq008lzykm30v00jr";
-    };
-  };
-
   mergetool = buildVimPlugin {
     pname= "mergetool-vim";
     version = "0.1";
@@ -34,20 +23,6 @@ with vimUtils;
       repo = "quickfix-reflector.vim";
       rev = "c76b7a1f496864315eea3ff2a9d02a53128bad50";
       sha256 = "02vb7qkdprx3ksj4gwnj3j180kkdal8jky69dcjn8ivr0x8g26s8";
-    };
-
-    buildPhase = ":";
-    configurePhase =":";
-  };
-
-  yats = buildVimPlugin {
-    pname= "yats-vim";
-    version = "0.1";
-    src = fetchFromGitHub {
-      owner = "HerringtonDarkholme";
-      repo = "yats.vim";
-      rev = "80ae726dfdc87ef25df3225c35d8ba3fd10a36c0";
-      sha256 = "12hhsqk9qrfqdaz1xkl3vqadk5hvyg5r6a8ydjvbvp1ykai7lqm8";
     };
 
     buildPhase = ":";

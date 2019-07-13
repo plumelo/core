@@ -72,6 +72,8 @@ in {
           vim-coffee-script
           vim-jinja
           vim-markdown
+          ale
+          yats-vim
         ]++ (with plugins; [
           ale
           mergetool
@@ -81,7 +83,6 @@ in {
           javascript_syntax
           jsx
           html_template
-          yats
           twig
         ]);
       };
