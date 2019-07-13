@@ -31,10 +31,6 @@ self: super:
       mplayer
       cava
 
-      # office
-      #libreoffice-fresh
-      #unoconv
-
       # browsers
       firefox
       chromium
@@ -66,8 +62,6 @@ self: super:
 
       # misc
       keepassxc
-      transmission_gtk
-      stress
 
       # configuration management
       vagrant
