@@ -27,11 +27,16 @@
         [ -n "$IN_NIX_SHELL" ] && prompt+="$cyan $reset "
         prompt+="$bold$yellow\w$reset"
 
-        [ $jobsval -ne 0 ] && prompt_end+=" $jobsval"
+        [ $jobsval -ne 0 ] && prompt_end+=" $bold$cyan$jobsval$reset"
         prompt_end+="\n"
-        [ $(id -u) -eq 0 ] && prompt_end+="\[$red\]#\[$reset\]" || prompt_end+="\[$magenta\]❯\[$reset\]"
+        [ $(id -u) -eq 0 ] && prompt_end+="\[$red\]#" || prompt_end+="\[$magenta\]❯"
+        prompt_end+="\[$reset\] "
 
-        __git_ps1 "$prompt" "$prompt_end "
+        if type -t __git_ps1 > /dev/null 2>&1 ; then
+          __git_ps1 "$prompt" "$prompt_end"
+        else
+          PS1="$prompt $prompt_end"
+        fi
         history -n; history -w; history -c; history -r
       }
       PROMPT_COMMAND=prompt_command
@@ -72,7 +77,7 @@
       HISTCONTROL="erasedups:ignoreboth"
       HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history:?:??"
 
-      eval `${pkgs.coreutils}/bin/dircolors "${./dircolors}"`
+      eval `${pkgs.coreutils}/bin/dircolors -b "${./dircolors}"`
       source ${pkgs.fzf}/share/fzf/completion.bash
       source ${pkgs.fzf}/share/fzf/key-bindings.bash
       bind '"\C-r": "\C-a hh -- \C-j"';
