@@ -19,7 +19,7 @@ self: super:
       usbutils
       killall
       neomutt
-      nixfmt
+      # nixfmt
 
       # monitoring
       htop
