@@ -2,19 +2,20 @@
   imports = [
     ./pkgs.nix
     ./users.nix
-    ./programs/bash/default.nix
+    ./programs/bash
     ./programs/tmux.nix
     ./programs/git
     ./programs/ssh
-    ./programs/lf/default.nix
+    ./programs/lf
     ./virtualisation/lxc.nix
     ./virtualisation/lxd.nix
     ./virtualisation/virtualbox.nix
     ./virtualisation/wine.nix
     ./hardware/ssd.nix
     ./hardware/zram.nix
-    ./services/redshift/default.nix
+    ./services/redshift
     ./services/networking/syncthing.nix
+    ./programs/sway
   ];
 
   system.stateVersion = "19.03";
