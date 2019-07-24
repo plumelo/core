@@ -19,7 +19,6 @@ self: super:
       usbutils
       killall
       neomutt
-      nixfmt
 
       # monitoring
       htop
@@ -51,14 +50,8 @@ self: super:
       ledger
 
       # editors
-      editorconfig-core-c
-      vim
-      vim-vint
+      vimHugeX
       neovim
-      python27Packages.yamllint
-
-      # langs
-      ruby
 
       # misc
       keepassxc

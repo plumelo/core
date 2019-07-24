@@ -1,4 +1,4 @@
-{ag, fzf, fd}:
+{ag, fzf, fd, nixfmt, python27Packages, vim-vint, editorconfig-core-c}:
 # vim: set syntax=vim:
 ''
 " core
@@ -59,6 +59,8 @@ let g:ale_fixers = {
 let g:ale_linter_aliases = {
   \ 'html': 'javascript'
   \}
+let g:ale_yaml_yamllint_executable = '${python27Packages.yamllint}/bin/yamllint'
+let g:ale_vim_vint_executable = '${vim-vint}/bin/vint'
 let g:ale_linters = {
   \ 'javascript': ['eslint'],
   \ 'rust': ['rls', 'cargo','rustc'],
@@ -73,6 +75,7 @@ nmap <silent> <C-j> <Plug>(ale_next_wrap)
 nnoremap <leader>a :ALEFix<space>
 
 " editorconfig plugin
+let g:EditorConfig_exec_path = '${editorconfig-core-c}/bin/editorconfig'
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
 let g:EditorConfig_max_line_indicator = 'none'
 
@@ -141,4 +144,7 @@ noremap <silent> <Bs> :call fzf#run(fzf#wrap({
 
 " markdown
 let g:markdown_fenced_languages = ['html', 'vim', 'javascript', 'python', 'bash=sh']
+
+command! -nargs=0 NixFormat silent! execute "!${nixfmt}/bin/nixfmt %"
+
 ''
