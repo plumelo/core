@@ -2,8 +2,8 @@ self: super:
 let
   waylandPkgs = ((import (builtins.fetchTarball {
     url =
-    "https://github.com/colemickens/nixpkgs-wayland/archive/a6ba3f1233233bd3bced584d33ae3fc4b961eb3b.tar.gz";
-    sha256 = "0c64y2qhcwd3afxm9sy3pj9m7c5kj9ff0vv11paz7xwx67xig8lk";
+    "https://github.com/colemickens/nixpkgs-wayland/archive/937a0dfc97cbc0db62f71a3d21490f58045ca82c.tar.gz";
+    sha256 = "17a0h00q09xwzhsdna7166g4414p6kql6i48zph6aznhkxmk429a";
   })) self super).waylandPkgs;
 in {
   waybar = super.waybar.override { pulseSupport = true; };
