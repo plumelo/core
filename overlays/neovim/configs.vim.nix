@@ -1,4 +1,4 @@
-{ag, fzf, fd}:
+{ag, fzf, fd, nixfmt}:
 # vim: set syntax=vim:
 ''
 " core
@@ -141,4 +141,7 @@ noremap <silent> <Bs> :call fzf#run(fzf#wrap({
 
 " markdown
 let g:markdown_fenced_languages = ['html', 'vim', 'javascript', 'python', 'bash=sh']
+
+command! -nargs=0 NixFormat silent! execute "!${nixfmt}/bin/nixfmt %"
+
 ''
