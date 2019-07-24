@@ -1,4 +1,4 @@
-{ag, fzf, fd, nixfmt, python27Packages, vim-vint}:
+{ag, fzf, fd, nixfmt, python27Packages, vim-vint, editorconfig-core-c}:
 # vim: set syntax=vim:
 ''
 " core
@@ -75,6 +75,7 @@ nmap <silent> <C-j> <Plug>(ale_next_wrap)
 nnoremap <leader>a :ALEFix<space>
 
 " editorconfig plugin
+let g:EditorConfig_exec_path = '${editorconfig-core-c}/bin/editorconfig'
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
 let g:EditorConfig_max_line_indicator = 'none'
 

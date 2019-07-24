@@ -19,7 +19,6 @@ self: super:
       usbutils
       killall
       neomutt
-      # nixfmt
 
       # monitoring
       htop
@@ -51,7 +50,6 @@ self: super:
       ledger
 
       # editors
-      editorconfig-core-c
       vimHugeX
       neovim
 
