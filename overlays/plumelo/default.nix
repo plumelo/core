@@ -63,14 +63,6 @@ self: super:
       # misc
       keepassxc
 
-      # configuration management
-      vagrant
-      redir
-      bridge-utils
-      ansible_2_7
-      avocode
-      distrobuilder
-
       # sway
       pavucontrol
       imv
