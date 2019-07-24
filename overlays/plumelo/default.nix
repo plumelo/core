@@ -52,13 +52,8 @@ self: super:
 
       # editors
       editorconfig-core-c
-      vim
-      vim-vint
+      vimHugeX
       neovim
-      python27Packages.yamllint
-
-      # langs
-      ruby
 
       # misc
       keepassxc

@@ -1,4 +1,4 @@
-{ag, fzf, fd, nixfmt}:
+{ag, fzf, fd, nixfmt, python27Packages, vim-vint}:
 # vim: set syntax=vim:
 ''
 " core
@@ -59,6 +59,8 @@ let g:ale_fixers = {
 let g:ale_linter_aliases = {
   \ 'html': 'javascript'
   \}
+let g:ale_yaml_yamllint_executable = '${python27Packages.yamllint}/bin/yamllint'
+let g:ale_vim_vint_executable = '${vim-vint}/bin/vint'
 let g:ale_linters = {
   \ 'javascript': ['eslint'],
   \ 'rust': ['rls', 'cargo','rustc'],
