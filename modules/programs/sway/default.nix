@@ -1,11 +1,32 @@
 { config, lib, pkgs, ... }:
 let
+  cfg = config.programs.sway;
   waybar = pkgs.waybar;
   waybarConfig = pkgs.writeText "config" (pkgs.callPackage ./waybar-config.nix {});
   waybarStyle = pkgs.writeText "config" (builtins.readFile ./waybar.css);
 in {
+
+  options.programs.sway = {
+    extraConfig = lib.mkOption {
+      type = lib.types.lines;
+      default = "";
+    };
+
+    terminal = lib.mkOption {
+      type = lib.types.string;
+      default = "${pkgs.alacritty}/bin/alacritty";
+    };
+
+    menu = lib.mkOption {
+      type = lib.types.string;
+      default = "$term --title 'fzf-menu' -e bash -c '${pkgs.dmenu}/bin/dmenu_path | sort -u | $fzf | xargs -I ? -r swaymsg exec ?'";
+    };
+
+  };
+
+  config= {
+
   programs.sway = {
-    enable=true;
     extraPackages = (with pkgs; [
       arc-theme
       arc-icon-theme
@@ -16,7 +37,7 @@ in {
       xdg_utils
       wl-clipboard
     ]);
-    extraSessionCommands= ''
+    extraSessionCommands = ''
       export XKB_DEFAULT_LAYOUT=us
     '';
   };
@@ -34,7 +55,7 @@ in {
 
   environment.etc."sway/config".text = with pkgs; ''
     set $swaylock ${swaylock}/bin/swaylock
-    set $term ${alacritty}/bin/alacritty
+    set $term ${cfg.terminal}
     set $fzf ${fzf}/bin/fzf
     set $brightness ${brightnessctl}/bin/brightnessctl
     set $grim ${grim}/bin/grim
@@ -44,7 +65,7 @@ in {
     set $idle ${swayidle}/bin/swayidle
     set $lock $grim /tmp/lock.png && $mogrify -scale 10% -scale 1000% /tmp/lock.png && $swaylock -f -i /tmp/lock.png
 
-    set $menu $term --title "fzf-menu" -e bash -c '${dmenu}/bin/dmenu_path | sort -u | $fzf | xargs -I ? -r swaymsg exec ?'
+    set $menu ${cfg.menu}
 
     set $status ${waybar}/bin/waybar -c ${waybarConfig} -s ${waybarStyle}
 
@@ -57,6 +78,7 @@ in {
     ${builtins.readFile ./config}
 
     exec ${tmux}/bin/tmux start-server \; run-shell ${tmuxPlugins.resurrect}/share/tmux-plugins/resurrect/scripts/restore.sh
+    ${cfg.extraConfig}
   '';
-
+  };
 }
