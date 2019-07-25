@@ -16,6 +16,7 @@
     ./services/redshift
     ./services/networking/syncthing.nix
     ./programs/sway
+    ./programs/waybar
   ];
 
   system.stateVersion = "19.03";
