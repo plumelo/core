@@ -1,28 +1,28 @@
 { config, lib, pkgs, ... }:
 with lib;
-let
-  cfg = config.programs.sway;
-  waybar = pkgs.waybar;
-  waybarConfig =
-  pkgs.writeText "config" (pkgs.callPackage ./waybar-config.nix { });
-  waybarStyle = pkgs.writeText "config" (builtins.readFile ./waybar.css);
+let cfg = config.programs.sway;
 in {
 
   options.programs.sway = {
-    extraConfig = lib.mkOption {
-      type = lib.types.lines;
+    extraConfig = mkOption {
+      type = types.lines;
       default = "";
     };
 
-    terminal = lib.mkOption {
-      type = lib.types.string;
+    terminal = mkOption {
+      type = types.string;
       default = "${pkgs.alacritty}/bin/alacritty";
     };
 
-    menu = lib.mkOption {
-      type = lib.types.string;
+    menu = mkOption {
+      type = types.string;
       default =
       "$term --title 'fzf-menu' -e bash -c '${pkgs.dmenu}/bin/dmenu_path | sort -u | $fzf | xargs -I ? -r swaymsg exec ?'";
+    };
+
+    keybind = mkOption {
+      type = types.lines;
+      default = "";
     };
 
   };
@@ -84,6 +84,7 @@ in {
       } fill
 
       ${builtins.readFile ./config}
+      ${cfg.keybind}
 
       exec ${tmux}/bin/tmux start-server \; run-shell ${tmuxPlugins.resurrect}/share/tmux-plugins/resurrect/scripts/restore.sh
       ${cfg.extraConfig}
