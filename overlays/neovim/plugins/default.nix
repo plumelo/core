@@ -110,4 +110,19 @@ with vimUtils;
     buildPhase = ":";
     configurePhase =":";
   };
+
+  auto-git-diff = buildVimPlugin {
+    pname= "auto-git-diff";
+    version = "0.1";
+    src = fetchFromGitHub {
+      owner = "hotwatermorning";
+      repo = "auto-git-diff";
+      rev = "1be2fec036f747fe44ec7f0a3868af0b0980954f";
+      sha256 = "1yvbz4pn73j8jyarjbwidr88zg7vw3gq3hvh4334148iq2fj8529";
+    };
+
+    buildPhase = ":";
+    configurePhase =":";
+  };
+
 }

@@ -84,6 +84,7 @@ in {
           jsx
           html_template
           twig
+          auto-git-diff
         ]);
       };
     };

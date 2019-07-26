@@ -47,6 +47,10 @@ augroup plugins
     packadd vim-signify
   endif
 
+  if !exists('g:did_auto_git_diff')
+    packadd auto-git-diff
+  endif
+
   autocmd FileType qf packadd quickfix-vim
 augroup END
 
