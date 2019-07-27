@@ -67,7 +67,7 @@ in {
 
       set $menu ${cfg.menu}
 
-      set $status ${waybar}/bin/waybar
+      set $status ${waybar.override {pulseSupport = true;} }/bin/waybar
 
       output * bg ${./wallpaper.jpg} fill
       output "Goldstar Company Ltd LG ULTRAWIDE 0x0000B7AA" bg ${
