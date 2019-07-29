@@ -104,7 +104,6 @@ with vimUtils;
     unpackCmd = ''
       mkdir -p out/colors;
       ln -s $curSrc out/colors/onehalfdark.vim
-      ls -al $curSrc
     '';
 
     buildPhase = ":";
