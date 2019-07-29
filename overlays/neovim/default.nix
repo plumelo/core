@@ -2,21 +2,49 @@ self: super:
 with super;
 
 let
-  plugins = callPackage ./plugins/default.nix {};
+  plugins = callPackage ./plugins/default.nix { };
+  luv-dev = lua.pkgs.luv.override ({
+    propagatedBuildInputs = [ libuv ];
+    preBuild = ''
+      sed -i 's,\(option(WITH_SHARED_LIBUV.*\)OFF,\1ON,' CMakeLists.txt
+      sed -i 's,\(option(BUILD_MODULE.*\)ON,\1OFF,' CMakeLists.txt
+      sed -i 's,$'' + ''
+      {INSTALL_INC_DIR},${placeholder "out"}/include/luv,' CMakeLists.txt
+           rm -rf deps/libuv
+          '';
+    postInstall = ''
+      rm -rf $out/luv-*-rocks
+    '';
+  });
+  neovimLuaEnv = lua.withPackages
+  (ps: (with ps; [ compat53 lpeg luabitop luv luv-dev mpack ]));
 in {
-  neovim-unwrapped = (neovim-unwrapped
-  .override {
-    stdenv= gcc9Stdenv;
-  })
-  .overrideAttrs(old: rec {
+  neovim-unwrapped =
+  (neovim-unwrapped.override { stdenv = gcc9Stdenv; }).overrideAttrs (old: rec {
     name = "neovim-unwrapped-${version}";
     version = "0.4.0-dev";
     src = fetchFromGitHub {
       owner = "neovim";
       repo = "neovim";
-      rev = "16ee24082f72162d3bdfbddb0b40b5abc2c90fda";
-      sha256 = "1hqharf1l4jgjwv76rjxislc3z3nmhqp52fx6dy58whll5rj2l6r";
+      rev = "fe2ada737510b91655bda3aac4f6385de6410c0d";
+      sha256 = "0pggnpxp3kjxrnk73wy7lkdfsn0jp5d91x2kw8r5d6li9x0i57na";
     };
+    buildInputs = [
+      libtermkey
+      libuv
+      msgpack
+      ncurses
+      libvterm-neovim
+      unibilium
+      gperf
+      neovimLuaEnv
+    ];
+    cmakeFlags = [
+      "-DGPERF_PRG=${gperf}/bin/gperf"
+      "-DLUA_PRG=${neovimLuaEnv.interpreter}"
+      "-DLIBLUV_LIBRARY=${luv-dev}/lib/lua/${lua.luaversion}/libluv.a"
+      "-DLIBLUV_INCLUDE_DIR=${luv-dev}/include"
+    ] ++ stdenv.lib.optional (!lua.pkgs.isLuaJIT) "-DPREFER_LUA=ON";
     NIX_CFLAGS_COMPILE = "-O3 -march=native";
   });
 
@@ -40,10 +68,10 @@ in {
         """" large file
         let g:LargeFile = 20*1024*1024 " 20MB
 
-        ${ callPackage ./options.vim.nix {}}
-        ${ callPackage ./mappings.vim.nix {}}
-        ${ callPackage ./autocmds.vim.nix {}}
-        ${ callPackage ./configs.vim.nix {}}
+        ${callPackage ./options.vim.nix { }}
+        ${callPackage ./mappings.vim.nix { }}
+        ${callPackage ./autocmds.vim.nix { }}
+        ${callPackage ./configs.vim.nix { }}
 
         syntax enable
         filetype plugin indent on
@@ -53,13 +81,7 @@ in {
       '';
 
       packages.myVimPackage = with pkgs.vimPlugins; {
-        start = [
-          fugitive
-          lightline-vim
-          vinegar
-          vim-nix
-          rust-vim
-        ];
+        start = [ fugitive lightline-vim vinegar vim-nix rust-vim ];
         opt = [
           ack-vim
           commentary
@@ -74,7 +96,7 @@ in {
           vim-markdown
           ale
           yats-vim
-        ]++ (with plugins; [
+        ] ++ (with plugins; [
           ale
           mergetool
           starsearch
