@@ -96,17 +96,16 @@ in {
           vim-markdown
           ale
           yats-vim
-        ] ++ (with plugins; [
-          ale
-          mergetool
-          starsearch
-          onehalfdark
-          quickfix
-          javascript_syntax
-          jsx
-          html_template
-          twig
+          vim-mergetool
+          starsearch-vim
+          quickfix-reflector-vim
+          vim-javascript-syntax
+          vim-jsx-pretty
+          vim-html-template-literals
+          vim-twig
           auto-git-diff
+        ] ++ (with plugins; [
+          onehalfdark
         ]);
       };
     };
