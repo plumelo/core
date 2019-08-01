@@ -12,7 +12,7 @@ augroup plugins
   endif
 
   if !exists('g:loaded_mergetool')
-    packadd mergetool-vim
+    packadd vim-mergetool
   endif
 
   if !exists('g:loaded_eunuch')
