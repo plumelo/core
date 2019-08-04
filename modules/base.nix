@@ -29,8 +29,6 @@
 
   time.timeZone = "Europe/Bucharest";
 
-  programs = { java.enable = true; };
-
   hardware = {
     pulseaudio.enable = true;
     cpu.amd.updateMicrocode = true;
