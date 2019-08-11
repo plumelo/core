@@ -9,44 +9,45 @@ let
       sed -i 's,\(option(WITH_SHARED_LIBUV.*\)OFF,\1ON,' CMakeLists.txt
       sed -i 's,\(option(BUILD_MODULE.*\)ON,\1OFF,' CMakeLists.txt
       sed -i 's,$'' + ''
-      {INSTALL_INC_DIR},${placeholder "out"}/include/luv,' CMakeLists.txt
-           rm -rf deps/libuv
-          '';
+        {INSTALL_INC_DIR},${placeholder "out"}/include/luv,' CMakeLists.txt
+             rm -rf deps/libuv
+            '';
     postInstall = ''
       rm -rf $out/luv-*-rocks
     '';
   });
   neovimLuaEnv = lua.withPackages
-  (ps: (with ps; [ compat53 lpeg luabitop luv luv-dev mpack ]));
+    (ps: (with ps; [ compat53 lpeg luabitop luv luv-dev mpack ]));
 in {
   neovim-unwrapped =
-  (neovim-unwrapped.override { stdenv = gcc9Stdenv; }).overrideAttrs (old: rec {
-    name = "neovim-unwrapped-${version}";
-    version = "0.4.0-dev";
-    src = fetchFromGitHub {
-      owner = "neovim";
-      repo = "neovim";
-      rev = "0bb1008e7fbbe493e66c517afd26309e27be6860";
-      sha256 = "0a57pl3k9zplcyf77n7fhlszim0i5353iy644pjyjqw5q8xxccxl";
-    };
-    buildInputs = [
-      libtermkey
-      libuv
-      msgpack
-      ncurses
-      libvterm-neovim
-      unibilium
-      gperf
-      neovimLuaEnv
-    ];
-    cmakeFlags = [
-      "-DGPERF_PRG=${gperf}/bin/gperf"
-      "-DLUA_PRG=${neovimLuaEnv.interpreter}"
-      "-DLIBLUV_LIBRARY=${luv-dev}/lib/lua/${lua.luaversion}/libluv.a"
-      "-DLIBLUV_INCLUDE_DIR=${luv-dev}/include"
-    ] ++ stdenv.lib.optional (!lua.pkgs.isLuaJIT) "-DPREFER_LUA=ON";
-    NIX_CFLAGS_COMPILE = "-O3 -march=native";
-  });
+    (neovim-unwrapped.override { stdenv = gcc9Stdenv; }).overrideAttrs
+    (old: rec {
+      name = "neovim-unwrapped-${version}";
+      version = "0.4.0-dev";
+      src = fetchFromGitHub {
+        owner = "neovim";
+        repo = "neovim";
+        rev = "c190415dc29b518e87db9bcd2956933873bd81bf";
+        sha256 = "06qiygwf1v1w5mdlmd9wg74bwd84p5lbq10qc7fxbgfmd9s81zw3";
+      };
+      buildInputs = [
+        libtermkey
+        libuv
+        msgpack
+        ncurses
+        libvterm-neovim
+        unibilium
+        gperf
+        neovimLuaEnv
+      ];
+      cmakeFlags = [
+        "-DGPERF_PRG=${gperf}/bin/gperf"
+        "-DLUA_PRG=${neovimLuaEnv.interpreter}"
+        "-DLIBLUV_LIBRARY=${luv-dev}/lib/lua/${lua.luaversion}/libluv.a"
+        "-DLIBLUV_INCLUDE_DIR=${luv-dev}/include"
+      ] ++ stdenv.lib.optional (!lua.pkgs.isLuaJIT) "-DPREFER_LUA=ON";
+      NIX_CFLAGS_COMPILE = "-O3 -march=native";
+    });
 
   neovim = neovim.override {
     withNodeJs = true;
@@ -104,9 +105,7 @@ in {
           vim-html-template-literals
           vim-twig
           auto-git-diff
-        ] ++ (with plugins; [
-          onehalfdark
-        ]);
+        ] ++ (with plugins; [ onehalfdark ]);
       };
     };
   };
