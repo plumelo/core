@@ -1,7 +1,7 @@
 self: super:
 with super; {
-  yarn_completions = stdenv.mkDerivation rec {
-    name = "yarn-completions";
+  yarn-completion = stdenv.mkDerivation rec {
+    name = "yarn-completion";
     version = "0.15.0";
 
     src = fetchFromGitHub {
