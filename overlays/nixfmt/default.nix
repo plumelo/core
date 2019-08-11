@@ -1,8 +1,8 @@
 self: super: {
   nixfmt = (import (fetchTarball {
     url =
-    "https://github.com/serokell/nixfmt/archive/af09262aa7d08d2b0905b11d2e8958889aadcf46.tar.gz";
-    sha256 = "0njgjv6syv3sk97v8kq0cb4mhgrb7nag2shsj7rphs6h5b7k9nbx";
+      "https://github.com/serokell/nixfmt/archive/6f24303823efe4aa71e452ef1d9d5b330894429a.tar.gz";
+    sha256 = "1d8f3rblhpv6ill8r74s7iyqmpilcxbs6jpm0p7g0z01iv5czvzw";
   })) {
     pkgs = super;
     installOnly = true;
