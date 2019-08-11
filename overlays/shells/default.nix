@@ -7,5 +7,6 @@ with super; {
     ansible =
       super.callPackage ./ansible.nix { inherit (self) ansible-completion; };
     vagrant = super.callPackage ./vagrant.nix {};
+    mpsyt = super.callPackage ./mpsyt.nix {};
   };
 }
