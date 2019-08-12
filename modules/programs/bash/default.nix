@@ -2,7 +2,7 @@
 {
   programs.bash = {
     shellAliases= {
-      hh="${pkgs.hstr}/bin/hh";
+      hh="${pkgs.hstr}/bin/hstr";
       "~"="cd ~";
       grep="grep --color=auto";
     };
