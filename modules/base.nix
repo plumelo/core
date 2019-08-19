@@ -19,7 +19,7 @@
     ./programs/waybar
   ];
 
-  system.stateVersion = "19.03";
+  system.stateVersion = "19.09";
 
   i18n = {
     consoleFont = "Lat2-Terminus16";
