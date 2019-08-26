@@ -1,6 +1,5 @@
 self: super:
-with super;
-{
+with super; rec {
   lxc-templates = stdenv.mkDerivation rec {
     name = "lxc-templates-${version}";
     version = "3.0.4";
@@ -18,11 +17,28 @@ with super;
       done
     '';
     postInstall = ''
-        rm -rf $out/var
+      rm -rf $out/var
     '';
-    nativeBuildInputs = [
-      autoreconfHook pkgconfig
-    ];
-    buildInputs = [lxc];
+    nativeBuildInputs = [ autoreconfHook pkgconfig ];
+    buildInputs = [ lxc ];
   };
+  raft = callPackage ./raft.nix { };
+  libco = callPackage ./libco.nix { };
+  dqlite = callPackage ./dqlite.nix {
+    inherit raft;
+    inherit libco;
+  };
+
+  lxc = super.lxc.overrideAttrs (old: rec {
+    patches = old.patches ++ [
+      (fetchpatch {
+        name = "fix-cgroups-init.patch";
+        url =
+          "https://patch-diff.githubusercontent.com/raw/lxc/lxc/pull/3109.diff";
+        sha256 = "1jpskr58ih56dakp3hg2yhxgvmn5qidi1vzxw0nak9afbx1yy9d4";
+      })
+    ];
+  });
+  lxd = callPackage ./lxd.nix { inherit dqlite; inherit lxc;};
+
 }
