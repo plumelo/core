@@ -82,7 +82,14 @@ in {
       '';
 
       packages.myVimPackage = with pkgs.vimPlugins; {
-        start = [ fugitive lightline-vim vinegar vim-nix rust-vim ];
+        start = [
+          fugitive
+          lightline-vim
+          vinegar
+          vim-nix
+          rust-vim
+          quickfix-reflector-vim
+        ];
         opt = [
           ack-vim
           commentary
@@ -99,7 +106,6 @@ in {
           yats-vim
           vim-mergetool
           starsearch-vim
-          quickfix-reflector-vim
           vim-javascript-syntax
           vim-jsx-pretty
           vim-html-template-literals
