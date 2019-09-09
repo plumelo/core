@@ -27,8 +27,8 @@ in {
       src = fetchFromGitHub {
         owner = "neovim";
         repo = "neovim";
-        rev = "9df3a67";
-        sha256 = "1ilrqq60zfj92f36z3glq3niw9pi2vxrk2iqq57zaxbqr1dj8j2m";
+        rev = "554566c";
+        sha256 = "1vbsyrwrdfsdlypknh8pbq3ql1hs70g2fr1xyd1gmg7qkiqk2j46";
       };
       buildInputs = [
         libtermkey
