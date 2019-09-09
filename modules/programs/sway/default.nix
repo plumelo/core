@@ -10,14 +10,14 @@ in {
     };
 
     terminal = mkOption {
-      type = types.string;
+      type = types.str;
       default = "${pkgs.alacritty}/bin/alacritty";
     };
 
     menu = mkOption {
-      type = types.string;
+      type = types.str;
       default =
-      "$term --title 'fzf-menu' -e bash -c '${pkgs.dmenu}/bin/dmenu_path | sort -u | $fzf | xargs -I ? -r swaymsg exec ?'";
+        "$term --title 'fzf-menu' -e bash -c '${pkgs.dmenu}/bin/dmenu_path | sort -u | $fzf | xargs -I ? -r swaymsg exec ?'";
     };
 
     keybind = mkOption {
@@ -67,7 +67,7 @@ in {
 
       set $menu ${cfg.menu}
 
-      set $status ${waybar.override {pulseSupport = true;} }/bin/waybar
+      set $status ${waybar.override { pulseSupport = true; }}/bin/waybar
 
       output * bg ${./wallpaper.jpg} fill
       output "Goldstar Company Ltd LG ULTRAWIDE 0x0000B7AA" bg ${

@@ -4,15 +4,18 @@ let
   cfg = config.programs.git;
 
   difftools = {
-    nvim   = "${pkgs.neovim}/bin/nvim -d \"$LOCAL\" \"$REMOTE\"";
-    vim    = "${pkgs.vim}/bin/vim -d \"$LOCAL\" \"$REMOTE\"";
-    kdiff3 = "${pkgs.kdiff3}/bin/kdiff3 \"$LOCAL\" \"$REMOTE\"";
+    nvim = ''${pkgs.neovim}/bin/nvim -d "$LOCAL" "$REMOTE"'';
+    vim = ''${pkgs.vim}/bin/vim -d "$LOCAL" "$REMOTE"'';
+    kdiff3 = ''${pkgs.kdiff3}/bin/kdiff3 "$LOCAL" "$REMOTE"'';
   };
 
   mergetools = {
-    nvim   = "${pkgs.neovim}/bin/nvim -f -c \"MergetoolStart\" \"$MERGED\" \"$BASE\" \"$LOCAL\" \"$REMOTE\"";
-    vim    = "${pkgs.vim}/bin/vim -f -c \"MergetoolStart\" \"$MERGED\" \"$BASE\" \"$LOCAL\" \"$REMOTE\"";
-    kdiff3 = "${pkgs.kdiff3}/bin/kdiff3 \"$BASE\" \"$LOCAL\" \"$REMOTE\" -o \"$MERGED\"";
+    nvim = ''
+      ${pkgs.neovim}/bin/nvim -f -c "MergetoolStart" "$MERGED" "$BASE" "$LOCAL" "$REMOTE"'';
+    vim = ''
+      ${pkgs.vim}/bin/vim -f -c "MergetoolStart" "$MERGED" "$BASE" "$LOCAL" "$REMOTE"'';
+    kdiff3 =
+      ''${pkgs.kdiff3}/bin/kdiff3 "$BASE" "$LOCAL" "$REMOTE" -o "$MERGED"'';
   };
 in {
   options = {
@@ -27,55 +30,52 @@ in {
         default = true;
       };
 
-      name =  mkOption {
-        type = types.string;
+      name = mkOption {
+        type = types.str;
         default = "";
       };
 
-      email =  mkOption {
-        type = types.string;
+      email = mkOption {
+        type = types.str;
         default = "";
       };
 
-      editor =  mkOption {
-        type = types.string;
+      editor = mkOption {
+        type = types.str;
         default = "${pkgs.neovim}/bin/nvim";
       };
 
-      pager =  mkOption {
-        type = types.string;
+      pager = mkOption {
+        type = types.str;
         default = "${pkgs.less}/bin/less";
       };
 
-      extraConfig =  mkOption {
+      extraConfig = mkOption {
         type = types.lines;
-        default = '''';
+        default = "";
       };
 
-      difftool =  mkOption {
-        type = types.enum ["nvim" "vim" "kdiff3"];
+      difftool = mkOption {
+        type = types.enum [ "nvim" "vim" "kdiff3" ];
         default = "nvim";
       };
 
-      mergetool =  mkOption {
-        type = types.enum ["nvim" "vim" "kdiff3"];
+      mergetool = mkOption {
+        type = types.enum [ "nvim" "vim" "kdiff3" ];
         default = "nvim";
       };
 
-      interface =  mkOption {
+      interface = mkOption {
         type = types.package;
         default = pkgs.gitAndTools.tig;
       };
     };
   };
 
-  config = mkIf cfg.enable ( mkMerge [
+  config = mkIf cfg.enable (mkMerge [
     {
       environment = {
-        systemPackages = with pkgs; [
-          git
-          cfg.interface
-        ];
+        systemPackages = with pkgs; [ git cfg.interface ];
         etc."gitconfig".text = ''
           [user]
             name = ${cfg.name}
@@ -126,15 +126,14 @@ in {
       };
     }
 
-    ( mkIf cfg.lfsEnable
-    {
+    (mkIf cfg.lfsEnable {
       environment.systemPackages = [ pkgs.git-lfs ];
       environment.etc."gitconfig".text = mkAfter ''
-          [filter "lfs"]
-            clean = git-lfs clean -- %f
-            smudge = git-lfs smudge -- %f
-            process = git-lfs filter-process
-            required = true
+        [filter "lfs"]
+          clean = git-lfs clean -- %f
+          smudge = git-lfs smudge -- %f
+          process = git-lfs filter-process
+          required = true
       '';
     })
   ]);
