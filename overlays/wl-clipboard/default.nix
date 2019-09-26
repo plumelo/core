@@ -4,8 +4,8 @@ with super; {
     src = fetchFromGitHub {
       owner = "bugaevc";
       repo = "wl-clipboard";
-      rev = "c010972e6b0d2eb3002c49a6a1b5620ff5f7c910";
-      sha256 = "020l3jy9gsj6gablwdfzp1wfa8yblay3axdjc56i9q8pbhz7g12j";
+      rev = "cef29eac68d00e2c5e3d35c4f23804de24e15642";
+      sha256 = "0ayw14j7fq4y48mfgd57z2vsxqc4zgvpfc3ancs1yp3bvl6m6f9g";
     };
   });
 }

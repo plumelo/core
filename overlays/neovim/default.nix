@@ -18,6 +18,16 @@ let
   });
   neovimLuaEnv = lua.withPackages
     (ps: (with ps; [ compat53 lpeg luabitop luv luv-dev mpack ]));
+  libvterm = libvterm-neovim.overrideAttrs (old: {
+    pname = "libvterm-neovim";
+    version = "2018-09-17";
+    src = fetchFromGitHub {
+      owner = "neovim";
+      repo = "libvterm";
+      rev = "fcbccd3c79bfa811800fea24db3a77384941cb70";
+      sha256 = "1da17cmwwmfyz4jvj8lf3vqwjdv1583srp7gvf8rhypwvr6sb806";
+    };
+  });
 in {
   neovim-unwrapped =
     (neovim-unwrapped.override { stdenv = gcc9Stdenv; }).overrideAttrs
@@ -27,15 +37,15 @@ in {
       src = fetchFromGitHub {
         owner = "neovim";
         repo = "neovim";
-        rev = "554566c";
-        sha256 = "1vbsyrwrdfsdlypknh8pbq3ql1hs70g2fr1xyd1gmg7qkiqk2j46";
+        rev = "2621f44";
+        sha256 = "1s9a6jkl780ykxajk3yyfljnm5hil2c6xy00sy7njmhxbhhzvfmy";
       };
       buildInputs = [
         libtermkey
         libuv
         msgpack
         ncurses
-        libvterm-neovim
+        libvterm
         unibilium
         gperf
         neovimLuaEnv
