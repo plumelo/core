@@ -1,5 +1,7 @@
 self: super:
-with super; {
+with super;
+let alacritty = callPackage ./unwrapped.nix { };
+in {
   alacritty = symlinkJoin {
     name = "alacritty-with-config-${alacritty.version}";
 
