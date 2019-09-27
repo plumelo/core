@@ -1,10 +1,9 @@
-{ config, options, lib, pkgs, ... }:
-{
+{ config, options, lib, pkgs, ... }: {
   programs.bash = {
-    shellAliases= {
-      hh="${pkgs.hstr}/bin/hstr";
-      "~"="cd ~";
-      grep="grep --color=auto";
+    shellAliases = {
+      hh = "${pkgs.hstr}/bin/hstr";
+      "~" = "cd ~";
+      grep = "grep --color=auto";
     };
     promptInit = ''
       GIT_PS1_SHOWUNTRACKEDFILES=1
@@ -37,11 +36,11 @@
         else
           PS1="$prompt $prompt_end"
         fi
-        history -n; history -w; history -c; history -r
+        history -a; history -w
       }
       PROMPT_COMMAND=prompt_command
     '';
-    interactiveShellInit= ''
+    interactiveShellInit = ''
       PROMPT_DIRTRIM=3
       set -o notify
 
