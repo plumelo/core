@@ -4,6 +4,8 @@
       hh = "${pkgs.hstr}/bin/hstr";
       "~" = "cd ~";
       grep = "grep --color=auto";
+      hid =
+        "gawk -i inplace '!a[$0]++' .bash_history; sed -i 's/[[:space:]]*$//' .bash_history";
     };
     promptInit = ''
       GIT_PS1_SHOWUNTRACKEDFILES=1
@@ -36,7 +38,7 @@
         else
           PS1="$prompt $prompt_end"
         fi
-        history -a; history -w
+        history -a
       }
       PROMPT_COMMAND=prompt_command
     '';
