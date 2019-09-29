@@ -29,13 +29,10 @@ tabspaces: 8
 
 font:
   normal:
-    family: Mononoki Nerd Font
     style: Regular
   bold:
-    family: Mononoki Nerd Font
     style: Bold
   italic:
-    family: Mononoki Nerd Font
     style: Italic
   size: 11.0
   offset:
