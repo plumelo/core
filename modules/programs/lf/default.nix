@@ -30,10 +30,10 @@ in {
     map O $mimeopen --ask $f
 
     cmd open ''${{
-    case ''$(file --mime-type $f -b) in
-      text/* | */lfrc ) $EDITOR $fx;;
-      *) for f in $fx; do $OPENER $f > /dev/null 2> /dev/null & done;;
-    esac
+      case ''$(${file}/bin/file --mime-type $f -b) in
+        text/* | */lfrc ) $EDITOR $fx;;
+        *) for f in $fx; do $OPENER $f > /dev/null 2> /dev/null & done;;
+      esac
     }}
 
     cmd rename %[ -e $1 ] && printf "file exists" || mv $f $1
@@ -44,14 +44,14 @@ in {
     cmd rename %[ -e $1 ] && printf "file exists" || mv $f $1
 
     cmd extract ''${{
-    set -f
-    case $f in
-      *.tar.bz|*.tar.bz2|*.tbz|*.tbz2) ${gnutar}/bin/tar xjvf $f;;
-      *.tar.gz|*.tgz) ${gnutar}/bin/tar xzvf $f;;
-      *.tar.xz|*.txz) ${gnutar}/bin/tar xJvf $f;;
-      *.zip) ${unzip}/bin/unzip $f;;
-      *.rar) ${unrar}/bin/unrar x $f;;
-      *.7z) ${p7zip}/bin/7z x $f;;
+      set -f
+      case $f in
+        *.tar.bz|*.tar.bz2|*.tbz|*.tbz2) ${gnutar}/bin/tar xjvf $f;;
+        *.tar.gz|*.tgz) ${gnutar}/bin/tar xzvf $f;;
+        *.tar.xz|*.txz) ${gnutar}/bin/tar xJvf $f;;
+        *.zip) ${unzip}/bin/unzip $f;;
+        *.rar) ${unrar}/bin/unrar x $f;;
+        *.7z) ${p7zip}/bin/7z x $f;;
       esac
     }}
 
