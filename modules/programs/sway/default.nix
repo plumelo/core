@@ -48,8 +48,6 @@ in {
     users.defaultUser.extraGroups = [ "sway" ];
     networking.networkmanager.enable = true;
 
-    fonts.fonts = with pkgs; [ overpass nerdfonts ];
-
     services.upower.enable = true;
     services.udev.packages = with pkgs; [ brightnessctl android-udev-rules ];
 

@@ -1,5 +1,6 @@
 { config, options, lib, pkgs, ... }: {
   imports = [
+    ./fonts.nix
     ./pkgs.nix
     ./users.nix
     ./programs/bash
@@ -46,4 +47,3 @@
 
   networking.networkmanager = { dns = "dnsmasq"; };
 }
-
