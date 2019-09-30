@@ -5,7 +5,7 @@
       "~" = "cd ~";
       grep = "grep --color=auto";
       hid =
-        "${pkgs.gawk}/bin/gawk -i inplace '!a[$0]++' .bash_history; ${pkgs.gnused}/bin/sed -i 's/[[:space:]]*$//' .bash_history";
+        "${pkgs.gawk}/bin/gawk -i inplace '!a[$0]++' $HISTFILE; ${pkgs.gnused}/bin/sed -i 's/[[:space:]]*$//' $HISTFILE";
     };
     promptInit = ''
       GIT_PS1_SHOWUNTRACKEDFILES=1
