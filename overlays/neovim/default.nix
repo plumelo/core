@@ -1,63 +1,9 @@
 self: super:
 with super;
 
-let
-  plugins = callPackage ./plugins/default.nix { };
-  luv-dev = lua.pkgs.luv.override ({
-    propagatedBuildInputs = [ libuv ];
-    preBuild = ''
-      sed -i 's,\(option(WITH_SHARED_LIBUV.*\)OFF,\1ON,' CMakeLists.txt
-      sed -i 's,\(option(BUILD_MODULE.*\)ON,\1OFF,' CMakeLists.txt
-      sed -i 's,$'' + ''
-        {INSTALL_INC_DIR},${placeholder "out"}/include/luv,' CMakeLists.txt
-             rm -rf deps/libuv
-            '';
-    postInstall = ''
-      rm -rf $out/luv-*-rocks
-    '';
-  });
-  neovimLuaEnv = lua.withPackages
-    (ps: (with ps; [ compat53 lpeg luabitop luv luv-dev mpack ]));
-  libvterm = libvterm-neovim.overrideAttrs (old: {
-    pname = "libvterm-neovim";
-    version = "2018-09-17";
-    src = fetchFromGitHub {
-      owner = "neovim";
-      repo = "libvterm";
-      rev = "fcbccd3c79bfa811800fea24db3a77384941cb70";
-      sha256 = "1da17cmwwmfyz4jvj8lf3vqwjdv1583srp7gvf8rhypwvr6sb806";
-    };
-  });
+let plugins = callPackage ./plugins/default.nix { };
+
 in {
-  neovim-unwrapped =
-    (neovim-unwrapped.override { stdenv = gcc9Stdenv; }).overrideAttrs
-    (old: rec {
-      name = "neovim-unwrapped-${version}";
-      version = "0.4.0-dev";
-      src = fetchFromGitHub {
-        owner = "neovim";
-        repo = "neovim";
-        rev = "298da52";
-        sha256 = "0f492rhg5f1n90rbzrwy7idqkij11lzx19hcwm2infd0hanbk38y";
-      };
-      buildInputs = [
-        libtermkey
-        libuv
-        msgpack
-        ncurses
-        libvterm
-        unibilium
-        gperf
-        neovimLuaEnv
-      ];
-      cmakeFlags = [
-        "-DGPERF_PRG=${gperf}/bin/gperf"
-        "-DLUA_PRG=${neovimLuaEnv.interpreter}"
-        "-DLIBLUV_LIBRARY=${luv-dev}/lib/lua/${lua.luaversion}/libluv.a"
-        "-DLIBLUV_INCLUDE_DIR=${luv-dev}/include"
-      ] ++ stdenv.lib.optional (!lua.pkgs.isLuaJIT) "-DPREFER_LUA=ON";
-      NIX_CFLAGS_COMPILE = "-O3 -march=native";
-    });
 
   neovim = neovim.override {
     withNodeJs = true;
