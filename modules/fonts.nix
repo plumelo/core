@@ -1,10 +1,15 @@
 { config, options, lib, pkgs, ... }: {
   fonts = {
     enableDefaultFonts = true;
-    fonts = with pkgs; [ overpass nerdfonts ];
+    fonts = with pkgs; [
+      nerdfonts
+    ];
     fontconfig = {
       penultimate.enable = false;
-      defaultFonts = { monospace = [ "Hack Nerd Font Mono" ]; };
+      defaultFonts = {
+        monospace = [ "MesloLGS Nerd Font" ];
+        sansSerif = [ "Ubuntu" "DejaVu" ];
+      };
     };
   };
 }
