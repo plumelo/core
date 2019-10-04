@@ -22,7 +22,6 @@ window:
 scrolling:
   history: 100000
   multiplier: 2
-  faux_multiplier: 3
   auto_scroll: false
 
 tabspaces: 8
@@ -79,7 +78,7 @@ visual_bell:
   duration: 0
   color: '0xffffff'
 
-background_opacity: 0.95
+background_opacity: 0.98
 
 selection:
   semantic_escape_chars: ",│`|:\"' ()[]{}<>"
