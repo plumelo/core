@@ -44,16 +44,16 @@ let
   ];
 in buildRustPackage rec {
   pname = "alacritty";
-  version = "0.3.3";
+  version = "0.3.4";
 
   src = fetchFromGitHub {
     owner = "jwilm";
     repo = pname;
-    rev = "87cf14a4b79146240b74ab473faf542b72e5e939";
-    sha256 = "0l9ac708953hjm75jmqi2hnd63chmhc4jkx0sbz8a46w423g3cnk";
+    rev = "8a263414572d8ed4d771461de2fdbd9f7e549a75";
+    sha256 = "03ykp95l5xkwh9wdb6gy1fbnsnd9l2icysvnl4hw1xzn39dgjf4r";
   };
 
-  cargoSha256 = "1wcx8zwhhryhaq3i0yshqz5b73dyjprmz816n8nd0lk8rmf6az0z";
+  cargoSha256 = "0gzbfmdzq6gapd4v7ryc0bq053i7ji0dh0mvbjqsliai0mfnbk1k";
 
   nativeBuildInputs = [
     cmake
@@ -68,7 +68,7 @@ in buildRustPackage rec {
 
   outputs = [ "out" "terminfo" ];
   postPatch = ''
-    substituteInPlace alacritty_terminal/src/config/mouse.rs \
+    substituteInPlace alacritty/src/config/mouse.rs \
       --replace xdg-open ${xdg_utils}/bin/xdg-open
   '';
 
