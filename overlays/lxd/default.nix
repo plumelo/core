@@ -22,12 +22,6 @@ with super; rec {
     nativeBuildInputs = [ autoreconfHook pkgconfig ];
     buildInputs = [ lxc ];
   };
-  raft = callPackage ./raft.nix { };
-  libco = callPackage ./libco.nix { };
-  dqlite = callPackage ./dqlite.nix {
-    inherit raft;
-    inherit libco;
-  };
 
   lxc = super.lxc.overrideAttrs (old: rec {
     patches = old.patches ++ [
@@ -39,6 +33,4 @@ with super; rec {
       })
     ];
   });
-  lxd = callPackage ./lxd.nix { inherit dqlite; inherit lxc;};
-
 }
