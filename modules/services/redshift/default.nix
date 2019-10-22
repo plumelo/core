@@ -3,8 +3,8 @@ let
   redshift = pkgs.callPackage "${
       (builtins.fetchTarball {
         url =
-          "https://github.com/colemickens/nixpkgs-wayland/archive/95af0091603f2665893c871cef16714586517bfd.tar.gz";
-        sha256 = "0dgadcrmjg21n4zd6cssbqdf62yaz7zpgpbn5sgpf7d5wzsh9871";
+          "https://github.com/colemickens/nixpkgs-wayland/archive/afc347f.tar.gz";
+        sha256 = "0kpzh9qdd3xgvnqzyivm3wjxmnz6m4mx6ay0npwngg81inkw7s4j";
       })
     }/pkgs/redshift-wayland" {
       inherit (pkgs.python3Packages) python pygobject3 pyxdg wrapPython;
