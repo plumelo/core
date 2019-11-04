@@ -78,11 +78,13 @@
       HISTCONTROL="erasedups:ignoreboth"
       HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history:?:??"
 
+      # dircolors
       eval `${pkgs.coreutils}/bin/dircolors -b "${./dircolors}"`
-      source ${pkgs.fzf}/share/fzf/completion.bash
-      source ${pkgs.fzf}/share/fzf/key-bindings.bash
+
+      # hstr
       bind '"\C-r": "\C-a hh -- \C-j"';
       bind '"\C-xk": "\C-a hh -k \C-j"'
+
       stty -ixon
     '';
   };
