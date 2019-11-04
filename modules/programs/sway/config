@@ -183,9 +183,9 @@ client.urgent           $base08 $base08 $base00 $base08 $base08
 exec --no-startup-id $mako --default-timeout=10000 --font='sansSerif 10' --background-color=#282c34 --border-color=#0059a3 --max-icon-size=20
 
 #Window clases
-for_window [title="fzf-menu"] floating enable
-for_window [title="fzf-menu"] resize set 99999 200
-for_window [title="fzf-menu"] move position 0 0
+for_window [title="skim-menu"] floating enable
+for_window [title="skim-menu"] resize set 99999 200
+for_window [title="skim-menu"] move position 0 0
 for_window [title="nmtui"] floating enable
 
 no_focus [title="^mpv-preview$"]

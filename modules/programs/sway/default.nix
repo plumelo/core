@@ -17,7 +17,7 @@ in {
     menu = mkOption {
       type = types.str;
       default =
-        "$term --title 'fzf-menu' -e bash -c '${pkgs.dmenu}/bin/dmenu_path | sort -u | $fzf | xargs -I ? -r swaymsg exec ?'";
+        "$term --title 'skim-menu' -e bash -c '${pkgs.dmenu}/bin/dmenu_path | sort -u | $skim | xargs -I ? -r swaymsg exec ?'";
     };
 
     keybind = mkOption {
@@ -54,7 +54,7 @@ in {
     environment.etc."sway/config".text = with pkgs; ''
       set $swaylock ${swaylock}/bin/swaylock
       set $term ${cfg.terminal}
-      set $fzf ${fzf}/bin/fzf
+      set $skim ${skim}/bin/sk
       set $brightness ${brightnessctl}/bin/brightnessctl
       set $grim ${grim}/bin/grim
       set $mogrify ${imagemagick}/bin/mogrify
