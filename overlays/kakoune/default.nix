@@ -22,46 +22,56 @@ in {
     name = "kakoune-configured-${getVersion kakoune}";
     nativeBuildInputs = [ makeWrapper ];
     kakrc = writeText "kakrc" ''
-      	# grep
-      	set-option global grepcmd 'rg -L --hidden --with-filename --column'
+      # grep
+      set-option global grepcmd 'rg -L --column'
 
-        # editorconfig
-        hook global WinCreate ^[^*]+$ %{editorconfig-load}
+      # editorconfig
+      hook global WinCreate ^[^*]+$ %{editorconfig-load}
 
-        # fzf
-        map global normal <c-p> ': fzf-mode<ret>'
-        hook global ModuleLoaded fzf %{
-          set-option global fzf_implementation "sk"
-          set-option global fzf_file_command "fd --type file --follow --hidden --exclude .git"
-          set-option global fzf_highlight_command "bat --style=numbers --color=always {}"
-          set-option global fzf_preview_tmux_height '20%'
-        }
+      # highlighters
+      hook global WinCreate .* %{
+        addhl window/wrap wrap
+        addhl window/number-lines number-lines -hlcursor
+        addhl window/show-whitespaces show-whitespaces -tab '‣' -tabpad '―' -lf ' ' -spc ' ' -nbsp '⍽'
+        addhl window/show-matching show-matching
+        show-trailing-whitespace-enable; face window TrailingWhitespace default,magenta
+      }
 
-        # lsp
-        eval %sh{${kak-lsp}/bin/kak-lsp --kakoune -s $kak_session --config ${
-          writeText "kak-lsp.toml" ''
-            [language.tsx]
-            filetypes = ["typescript"]
-            roots = ["package.json", "tsconfig.json"]
-            command = "typescript-language-server"
-            args = ["--stdio"]
-          ''
-        }}
-        hook global WinSetOption filetype=(javascript|typescript) %{
-          lsp-enable-window
-        }
+      # fzf
+      map global normal <c-p> ': fzf-mode<ret>'
+      hook global ModuleLoaded fzf %{
+        set-option global fzf_implementation "sk"
+        set-option global fzf_file_command "fd --type file --follow --hidden --exclude .git"
+        set-option global fzf_highlight_command "bat --style=numbers --color=always {}"
+        set-option global fzf_preview_tmux_height '20%'
+        set-option global fzf_sk_grep_command "rg -L --no-heading"
+      }
 
-        hook global BufSetOption filetype=(javascript|typescript) %{
-          set-option buffer formatcmd "prettier --stdin-filepath='%val{buffile}'"
-          set-option buffer lintcmd "eslint --fix -c .eslintrc* -f ${eslint-formatter-kakoune}/index.js --stdin-filename '%val{buffile}' --stdin <"
-        }
+      # lsp
+      eval %sh{${kak-lsp}/bin/kak-lsp --kakoune -s $kak_session --config ${
+        writeText "kak-lsp.toml" ''
+          [language.tsx]
+          filetypes = ["typescript"]
+          roots = ["package.json", "tsconfig.json"]
+          command = "typescript-language-server"
+          args = ["--stdio"]
+        ''
+      }}
+      hook global WinSetOption filetype=(javascript|typescript) %{
+        lsp-enable-window
+      }
 
-        hook global BufSetOption filetype=nix %{
-          set-option buffer formatcmd "nixfmt"
-        }
+      hook global BufSetOption filetype=(javascript|typescript) %{
+        set-option buffer formatcmd "prettier --stdin-filepath='%val{buffile}'"
+        set-option buffer lintcmd "eslint --fix -c .eslintrc* -f ${eslint-formatter-kakoune}/index.js --stdin-filename '%val{buffile}' --stdin <"
+      }
 
-        try %{ source .kakrc.local }
-        try %{ source .kakrc.mine }
+      hook global BufSetOption filetype=nix %{
+        set-option buffer formatcmd "nixfmt"
+      }
+
+      try %{ source .kakrc.local }
+      try %{ source .kakrc.mine }
     '';
     buildCommand = ''
       mkdir -p $out/bin
