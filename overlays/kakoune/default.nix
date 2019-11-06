@@ -34,7 +34,6 @@ in {
         addhl window/number-lines number-lines -hlcursor
         addhl window/show-whitespaces show-whitespaces -tab '‣' -tabpad '―' -lf ' ' -spc ' ' -nbsp '⍽'
         addhl window/show-matching show-matching
-        show-trailing-whitespace-enable; face window TrailingWhitespace default,magenta
       }
 
       # fzf
