@@ -189,3 +189,9 @@ for_window [title="skim-menu"] move position 0 0
 for_window [title="nmtui"] floating enable
 
 no_focus [title="^mpv-preview$"]
+
+set $gnome-schema org.gnome.desktop.interface
+exec_always {
+  gsettings set $gnome-schema gtk-theme 'Nordic-blue'
+  gsettings set $gnome-schema icon-theme 'Paper'
+}

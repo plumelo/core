@@ -31,9 +31,9 @@ in {
 
     programs.sway = {
       extraPackages = (with pkgs; [
-        arc-theme
-        arc-icon-theme
+        glib
         paper-icon-theme
+        nordic
         xwayland
         android-udev-rules
         jmtpfs
@@ -42,6 +42,11 @@ in {
       ]);
       extraSessionCommands = ''
         export XKB_DEFAULT_LAYOUT=us
+        export XKB_DEFAULT_OPTIONS=grp:alt_shift_toggle,caps:escape
+        export XDG_DATA_DIRS=${
+          let schema = pkgs.gsettings-desktop-schemas;
+          in "${schema}/share/gsettings-schemas/${schema.name}"
+        }:$XDG_DATA_DIRS
       '';
     };
 
