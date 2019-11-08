@@ -49,7 +49,6 @@ in {
 
       # highlighters
       hook global WinCreate .* %{
-        addhl window/wrap wrap
         addhl window/number-lines number-lines -hlcursor
         addhl window/show-whitespaces show-whitespaces -tab '‣' -tabpad '―' -lf ' ' -spc ' ' -nbsp '⍽'
         addhl window/show-matching show-matching
@@ -80,15 +79,19 @@ in {
 
       try %{ source .kakrc.local }
       try %{ source .kakrc.mine }
+      # colorscheme
+      colorscheme nord
     '';
 
     buildCommand = ''
       mkdir -p $out/bin
       mkdir -p $out/share/kak/autoload/plugins
+      mkdir -p $out/share/kak/colors
 
       # symlink core
       ln -sfv ${kakoune}/share/kak/autoload/ $out/share/kak/autoload/core
       ln -sfv ${kakoune}/share/terminfo/ $out/share/terminfo
+      ln -sfv ${kakoune}/share/kak/colors/ $out/share/kak/colors
 
       # config
       ln -sfv $kakrc $out/share/kak/kakrc
@@ -96,6 +99,7 @@ in {
       # plugins
       ln -sfv ${kakounePlugins.kak-powerline}/share/kak/autoload/plugins/powerline $out/share/kak/autoload/plugins/powerline
       ln -sfv ${plugins.typescript}/share/kak/autoload/plugins/typescript $out/share/kak/autoload/plugins/typescript
+      ln -sfv ${plugins.nord}/share/kak/colors/nord-kakoune $out/share/kak/colors/nord-kakoune
 
       makeWrapper ${kakoune}/bin/kak $out/bin/kak \
         --prefix PATH : ${
