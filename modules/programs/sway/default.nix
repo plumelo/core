@@ -16,8 +16,7 @@ in {
 
     menu = mkOption {
       type = types.str;
-      default =
-        "$term --title 'skim-menu' -e bash -c '${pkgs.dmenu}/bin/dmenu_path | sort -u | $skim | xargs -I ? -r swaymsg exec ?'";
+      default = "${pkgs.wofi}/bin/wofi -i -m";
     };
 
     keybind = mkOption {
