@@ -106,7 +106,7 @@ in {
       }
 
       window#waybar {
-        background: #282c34;
+        background: #2E3440;
         color: #bcd1d6;
       }
 
@@ -118,8 +118,8 @@ in {
       #workspaces button:hover {
         box-shadow: inherit;
         text-shadow: inherit;
-        background: #282c34;
-        border: #282c34;
+        background: #2E3440;
+        border: #2E3440;
         padding: 0 8px;
       }
 
@@ -150,7 +150,7 @@ in {
 
       @keyframes blink {
         to {
-          color: #282c34;
+          color: #2E3440;
         }
       }
 

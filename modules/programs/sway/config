@@ -180,7 +180,7 @@ client.urgent           $base08 $base08 $base00 $base08 $base08
 #client.placeholder      $base00 $base00 $base05 $base00 $base00
 #client.background       $base07
 
-exec --no-startup-id $mako --default-timeout=10000 --font='sansSerif 10' --background-color=#282c34 --border-color=#0059a3 --max-icon-size=20
+exec --no-startup-id $mako --default-timeout=10000 --font='sansSerif 9' --background-color=#282c34 --border-size=0 border-radius=15 margin=20 padding=15 --border-color=#0059a3 --max-icon-size=20
 
 #Window clases
 for_window [title="skim-menu"] floating enable
