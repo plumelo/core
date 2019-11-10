@@ -7,9 +7,13 @@ let
     src = fetchFromGitHub {
       repo = "kakoune";
       owner = "mawww";
-      rev = "ec31d839724cfd0f8431c04509f1f1d2b5fa1290";
-      sha256 = "1nrsj74gfa0axaakvvfyhvcm7khi9fs2akfb4w5hng8azkgdr416";
+      rev = "7438f23b9beddc42b6561fe8be3f953aff2f73b1";
+      sha256 = "0sw89wqhbs641xqjwknxals8dbqj9mlp3l2za6xsw4alwx6hfnan";
     };
+    postInstall = ''
+      mkdir -p $out/share
+      tic -x -o "$out/share/terminfo" ../contrib/tmux-256color.terminfo
+    '';
   });
   eslint-formatter-kakoune = fetchFromGitHub {
     owner = "Delapouite";
@@ -25,6 +29,21 @@ in {
       # grep
       set-option global grepcmd 'rg -L --column'
 
+      # tab completion
+      hook global InsertCompletionShow .* %{ map window insert <tab> <c-n>; map window insert <s-tab> <c-p> }
+      hook global InsertCompletionHide .* %{ unmap window insert <tab> <c-n>; unmap window insert <s-tab> <c-p> }
+
+      # files
+      define-command find -params 1 -shell-script-candidates %{ ag -g ${
+        "''"
+      } --ignore "$kak_opt_ignored_files" } %{ edit %arg{1} }
+      map global user f ": find<space>" -docstring "Edit a file, searching from current directory"
+
+      define-command -hidden find-relative %{exec ": edit<space>%sh{echo  $(dirname $kak_buffile)}/"}
+      map global user e ": find-relative<ret>" -docstring "Edit a file, searching from current file's directory"
+
+      map global user b ": b<space>" -docstring "Switch buffers"
+
       # editorconfig
       hook global WinCreate ^[^*]+$ %{editorconfig-load}
 
@@ -34,16 +53,6 @@ in {
         addhl window/number-lines number-lines -hlcursor
         addhl window/show-whitespaces show-whitespaces -tab '‣' -tabpad '―' -lf ' ' -spc ' ' -nbsp '⍽'
         addhl window/show-matching show-matching
-      }
-
-      # fzf
-      map global normal <c-p> ': fzf-mode<ret>'
-      hook global ModuleLoaded fzf %{
-        set-option global fzf_implementation "sk"
-        set-option global fzf_file_command "fd --type file --follow --hidden --exclude .git"
-        set-option global fzf_highlight_command "bat --style=numbers --color=always {}"
-        set-option global fzf_preview_tmux_height '20%'
-        set-option global fzf_sk_grep_command "rg -L --no-heading"
       }
 
       # lsp
@@ -72,28 +81,27 @@ in {
       try %{ source .kakrc.local }
       try %{ source .kakrc.mine }
     '';
+
     buildCommand = ''
       mkdir -p $out/bin
       mkdir -p $out/share/kak/autoload/plugins
 
       # symlink core
       ln -sfv ${kakoune}/share/kak/autoload/ $out/share/kak/autoload/core
+      ln -sfv ${kakoune}/share/terminfo/ $out/share/terminfo
 
       # config
       ln -sfv $kakrc $out/share/kak/kakrc
 
-      #plugins
-      ln -sfv ${kakounePlugins.kak-fzf}/share/kak/autoload/plugins/fzf $out/share/kak/autoload/plugins/fzf
+      # plugins
       ln -sfv ${kakounePlugins.kak-powerline}/share/kak/autoload/plugins/powerline $out/share/kak/autoload/plugins/powerline
       ln -sfv ${plugins.typescript}/share/kak/autoload/plugins/typescript $out/share/kak/autoload/plugins/typescript
 
       makeWrapper ${kakoune}/bin/kak $out/bin/kak \
         --prefix PATH : ${
           makeBinPath [
-            skim
-            fd
+            ag
             ripgrep
-            bat
             editorconfig-core-c
             nixfmt
             universal-ctags
