@@ -12,15 +12,15 @@ with pkgs.tmuxPlugins; {
       set-window-option -g automatic-rename on
       set-option -g set-titles on
       set-option -g renumber-windows on
-
       set-window-option -g xterm-keys on
-      set -ga terminal-overrides ",xterm-256color:Tc"
-
       set -g focus-events on
-
       setw -g mouse on
       setw -g monitor-activity on
 
+      # colors
+      set -ga terminal-overrides ",*col*:Tc"
+
+      # prefix
       unbind C-b
       set -g prefix C-Space
       bind C-Space send-prefix
