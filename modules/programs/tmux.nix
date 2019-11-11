@@ -30,6 +30,8 @@ with pkgs.tmuxPlugins; {
 
       # Status
       set -g status-interval 1
+      set -g status-justify left
+      set -g status-left-length 40
 
       # Window titles
       set-window-option -g window-status-style fg=default,bg=default
@@ -37,12 +39,12 @@ with pkgs.tmuxPlugins; {
       set-window-option -g window-status-activity-style fg=default,noreverse,bg=default
 
       # Pane borders
-      set-option -g pane-border-style fg=colour240,bg=default
-      set-option -g pane-active-border-style fg=colour76,bg=default
+      # set-option -g pane-border-style fg=colour240,bg=default
+      # set-option -g pane-active-border-style fg=colour76,bg=default
 
       # Message text
-      set-option -g message-style fg=colour76,bg=default
-      set-option -g message-command-style fg=colour75,bg=default
+      # set-option -g message-style fg=colour76,bg=default
+      # set-option -g message-command-style fg=colour75,bg=default
 
       # Bars
       set -g status-left "#[fg=black,bg=blue,bold] #S #[fg=blue,bg=black,nobold,noitalics,nounderscore]"
@@ -54,10 +56,8 @@ with pkgs.tmuxPlugins; {
       set -g window-status-separator ""
 
       # Panes
-      set -g pane-border-style "bg=black fg=black"
-      set -g pane-active-border-style "bg=black fg=brightblack"
-      # set -g display-panes-colour black
-      # set -g display-panes-active-colour brightblack
+      set -g pane-border-style bg=default,fg=black
+      set -g pane-active-border-style bg=default,fg=blue
 
       # tmux-prefix-highlight
       set -g @prefix_highlight_output_prefix "#[fg=brightcyan]#[bg=black]#[nobold]#[noitalics]#[nounderscore]#[bg=brightcyan]#[fg=black]"
