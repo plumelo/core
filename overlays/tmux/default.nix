@@ -17,16 +17,5 @@ with super;
         sha256 = "0ffh0664bbpbv2v3nsdv7lxvy0k09ixkpgrw1vq2my6nb22nmj4m";
       };
     });
-
-    tmux-theme = mkDerivation {
-      pluginName = "tmux-theme";
-      rtpFilePath = "theme.tmux";
-      src = fetchgit {
-        url = "https://github.com/dweidner/tmux-theme";
-        rev = "4f2b81547f04d6ec44add2a1b5e05446b5c18fa8";
-        sha256 = "0bj5r70lq11hzqgdicmhnvqhdcwzj5vpg8wz1qjpq9i2r79r18f0";
-      };
-    };
-
   });
 }
