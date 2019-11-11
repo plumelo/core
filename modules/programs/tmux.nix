@@ -67,6 +67,7 @@ with pkgs.tmuxPlugins; {
       set -g @resurrect-processes '\
         "~nvim->nvim" \
         "~tig->tig" \
+        "~kak->kak" \
       '
 
       run-shell ${pain-control.rtp}
