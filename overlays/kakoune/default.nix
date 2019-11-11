@@ -99,7 +99,7 @@ in {
       # plugins
       ln -sfv ${kakounePlugins.kak-powerline}/share/kak/autoload/plugins/powerline $out/share/kak/autoload/plugins/powerline
       ln -sfv ${plugins.typescript}/share/kak/autoload/plugins/typescript $out/share/kak/autoload/plugins/typescript
-      ln -sfv ${plugins.nord}/share/kak/colors/nord-kakoune $out/share/kak/colors/nord-kakoune
+      ln -sfv ${./nord.kak} $out/share/kak/colors/nord.kak
 
       makeWrapper ${kakoune}/bin/kak $out/bin/kak \
         --prefix PATH : ${
