@@ -38,15 +38,8 @@ with pkgs.tmuxPlugins; {
       set-window-option -g window-status-current-style fg=white,bold,bg=default
       set-window-option -g window-status-activity-style fg=default,noreverse,bg=default
 
-      # Pane borders
-      # set-option -g pane-border-style fg=colour240,bg=default
-      # set-option -g pane-active-border-style fg=colour76,bg=default
-
-      # Message text
-      # set-option -g message-style fg=colour76,bg=default
-      # set-option -g message-command-style fg=colour75,bg=default
-
       # Bars
+      set -g window-status-separator ""
       set -g status-left "#[fg=black,bg=blue,bold] #S #[fg=blue,bg=black,nobold,noitalics,nounderscore]"
       set -g status-right "#{prefix_highlight}#[fg=brightblack,bg=black,nobold,noitalics,nounderscore]#[fg=cyan,bg=brightblack] #[fg=black,bg=cyan,bold] #H "
 
