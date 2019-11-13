@@ -70,7 +70,7 @@ in {
 
       hook global BufSetOption filetype=(javascript|typescript) %{
         set-option buffer formatcmd "prettier --stdin-filepath='%val{buffile}'"
-        set-option buffer lintcmd "eslint --fix -c .eslintrc* -f ${eslint-formatter-kakoune}/index.js --stdin-filename '%val{buffile}' --stdin <"
+        set-option buffer lintcmd "eslint --c .eslintrc* -f ${eslint-formatter-kakoune}/index.js --stdin-filename '%val{buffile}' --stdin <"
       }
 
       hook global BufSetOption filetype=nix %{
