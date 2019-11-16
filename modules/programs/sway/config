@@ -159,36 +159,17 @@ set $base0F #be5046
 bar {
   position bottom
   swaybar_command $status
-  colors {
-      background $base00
-      separator  $base01
-      statusline $base04
-
-      # State             Border  BG      Text
-      focused_workspace   $base05 $base0D $base00
-      active_workspace    $base05 $base03 $base00
-      inactive_workspace  $base03 $base01 $base05
-      urgent_workspace    $base08 $base08 $base00
-      binding_mode        $base0A $base0A $base00
-  }
 }
 
 client.focused          $base05 $base0D $base00 $base0D $base0D
 client.focused_inactive $base01 $base01 $base05 $base03 $base01
 client.unfocused        $base01 $base00 $base05 $base01 $base01
 client.urgent           $base08 $base08 $base00 $base08 $base08
-#client.placeholder      $base00 $base00 $base05 $base00 $base00
-#client.background       $base07
 
 exec --no-startup-id $mako --default-timeout=10000 --font='sansSerif 9' --background-color=#282c34 --border-size=0 border-radius=15 margin=20 padding=15 --border-color=#0059a3 --max-icon-size=20
 
 #Window clases
-for_window [title="skim-menu"] floating enable
-for_window [title="skim-menu"] resize set 99999 200
-for_window [title="skim-menu"] move position 0 0
 for_window [title="nmtui"] floating enable
-
-no_focus [title="^mpv-preview$"]
 
 set $gnome-schema org.gnome.desktop.interface
 exec_always {
