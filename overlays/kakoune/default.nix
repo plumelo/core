@@ -52,6 +52,7 @@ in {
         addhl window/number-lines number-lines -hlcursor
         addhl window/show-whitespaces show-whitespaces -tab '‣' -tabpad '―' -lf ' ' -spc ' ' -nbsp '⍽'
         addhl window/show-matching show-matching
+        add-highlighter global/ dynregex '%reg{/}' 0:+u
       }
 
       # lsp
