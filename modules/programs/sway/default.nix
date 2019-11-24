@@ -19,11 +19,10 @@ in {
       default = "${pkgs.wofi}/bin/wofi -i -m";
     };
 
-    keybind = mkOption {
-      type = types.lines;
-      default = "";
+    status = mkOption {
+      type = types.str;
+      default = "${waybar.override { pulseSupport = true; }}/bin/waybar";
     };
-
   };
 
   config = mkIf cfg.enable {
@@ -65,29 +64,11 @@ in {
       set $mako ${mako}/bin/mako
       set $idle ${swayidle}/bin/swayidle
       set $lock $grim /tmp/lock.png && $mogrify -scale 10% -scale 1000% /tmp/lock.png && $swaylock -f -i /tmp/lock.png
-
       set $menu ${cfg.menu}
-
-      set $status ${waybar.override { pulseSupport = true; }}/bin/waybar
-
-      output * bg ${./wallpaper.jpg} fill
-      output "Goldstar Company Ltd LG ULTRAWIDE 0x0000B7AA" bg ${
-        ./wallpaper_2560x1080.jpg
-      } fill
-      output "Goldstar Company Ltd LG ULTRAWIDE 0x0000C708" bg ${
-        ./wallpaper_2560x1080.jpg
-      } fill
-      output "Dell Inc. DELL U2515H 9X2VY74E0FFL" bg ${
-        ./wallpaper_2560x1080.jpg
-      } fill
-      output "Dell Inc. DELL U2518D 3C4YP773ARUL" bg ${
-        ./wallpaper_2560x1080.jpg
-      } fill
+      set $status ${cfg.menu}
 
       ${builtins.readFile ./config}
-      ${cfg.keybind}
 
-      exec ${tmux}/bin/tmux start-server \; run-shell ${tmuxPlugins.resurrect}/share/tmux-plugins/resurrect/scripts/restore.sh
       ${cfg.extraConfig}
     '';
   };
