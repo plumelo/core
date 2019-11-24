@@ -21,7 +21,7 @@ in {
 
     status = mkOption {
       type = types.str;
-      default = "${waybar.override { pulseSupport = true; }}/bin/waybar";
+      default = "${pkgs.waybar.override { pulseSupport = true; }}/bin/waybar";
     };
   };
 
@@ -65,7 +65,7 @@ in {
       set $idle ${swayidle}/bin/swayidle
       set $lock $grim /tmp/lock.png && $mogrify -scale 10% -scale 1000% /tmp/lock.png && $swaylock -f -i /tmp/lock.png
       set $menu ${cfg.menu}
-      set $status ${cfg.menu}
+      set $status ${cfg.status}
 
       ${builtins.readFile ./config}
 
