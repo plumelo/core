@@ -12,7 +12,6 @@ let
     };
 in {
   services.redshift = {
-    enable = true;
     package = redshift;
   };
   location = {

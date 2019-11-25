@@ -22,7 +22,7 @@ in {
     programs.git = {
       enable = mkOption {
         type = types.bool;
-        default = true;
+        default = false;
       };
 
       lfsEnable = mkOption {
