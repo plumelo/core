@@ -1,6 +1,5 @@
 { config, options, lib, pkgs, ... }: {
   imports = [
-    ./fonts.nix
     ./pkgs.nix
     ./users.nix
     ./programs/bash
@@ -12,8 +11,6 @@
     ./virtualisation/lxd.nix
     ./virtualisation/virtualbox.nix
     ./virtualisation/wine.nix
-    ./hardware/ssd.nix
-    ./hardware/zram.nix
     ./services/redshift
     ./services/networking/syncthing.nix
     ./programs/sway
