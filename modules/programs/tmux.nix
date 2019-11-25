@@ -1,7 +1,6 @@
 { config, options, lib, pkgs, ... }:
 with pkgs.tmuxPlugins; {
   programs.tmux = {
-    enable = true;
     baseIndex = 1;
     terminal = "tmux-256color";
     historyLimit = 10000;
