@@ -50,9 +50,15 @@ in {
       # highlighters
       hook global WinCreate .* %{
         addhl window/number-lines number-lines -hlcursor
-        addhl window/show-whitespaces show-whitespaces -tab '‣' -tabpad '―' -lf ' ' -spc ' ' -nbsp '⍽'
+        addhl window/show-whitespaces show-whitespaces -tab '‣' -tabpad ' ' -lf ' ' -spc ' ' -nbsp '⍽'
         addhl window/show-matching show-matching
         add-highlighter global/ dynregex '%reg{/}' 0:+u
+      }
+      hook global ModeChange .*:normal %{
+          set-face global PrimaryCursor      rgb:000000,rgb:ffffff+F
+      }
+      hook global ModeChange .*:insert %{
+          set-face global PrimaryCursor      rgb:ffffff,rgb:005577+F
       }
 
       # lsp

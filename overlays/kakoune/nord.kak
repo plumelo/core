@@ -55,7 +55,7 @@ evaluate-commands %sh{
     face global LineNumbers        ${nord3},${nord0}
     face global LineNumberCursor   ${nord10},${nord1}
     face global LineNumbersWrapped ${nord10},${nord1}
-    face global MenuForeground     ${nord5},${nord2}
+    face global MenuForeground     ${nord5},${nord3}
     face global MenuBackground     ${nord4},${nord1}
     face global MenuInfo           ${nord1}
     face global Information        ${nord4},${nord1}
@@ -64,9 +64,10 @@ evaluate-commands %sh{
     face global StatusLineMode     ${nord13}
     face global StatusLineInfo     ${nord8}
     face global StatusLineValue    ${nord12}
-    face global StatusCursor       ${nord4},${nord1}
+    face global StatusCursor       ${nord2},${nord5}+B
     face global Prompt             ${nord4}+b
     face global MatchingChar       ${nord4},${nord1}+b
     face global BufferPadding      ${nord11},${nord0}
+    face global Whitespace         ${nord3}
   "
 }
