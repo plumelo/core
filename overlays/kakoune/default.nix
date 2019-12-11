@@ -80,6 +80,10 @@ in {
         set-option buffer lintcmd "eslint --c .eslintrc* -f ${eslint-formatter-kakoune}/index.js --stdin-filename '%val{buffile}' --stdin <"
       }
 
+      hook global BufSetOption filetype=(scss) %{
+        set-option buffer formatcmd "stylelint --fix --stdin-filename='%val{buffile}'"
+      }
+
       hook global BufSetOption filetype=nix %{
         set-option buffer formatcmd "nixfmt"
       }
