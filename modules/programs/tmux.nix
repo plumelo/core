@@ -56,15 +56,8 @@ with pkgs.tmuxPlugins; {
       set -g @prefix_highlight_output_suffix ""
       set -g @prefix_highlight_copy_mode_attr "fg=brightcyan,bg=black,bold"
 
-      set -g @resurrect-processes '\
-        "~nvim->nvim" \
-        "~tig->tig" \
-        "~kak->kak" \
-      '
-
       run-shell ${pain-control.rtp}
       run-shell ${sensible.rtp}
-      run-shell ${resurrect.rtp}
       run-shell ${prefix-highlight.rtp}
     '';
   };
