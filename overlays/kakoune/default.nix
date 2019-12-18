@@ -4,12 +4,6 @@ with stdenv.lib;
 let
   plugins = callPackage ./plugins { };
   kakoune = kakoune-unwrapped.overrideAttrs (odl: rec {
-    src = fetchFromGitHub {
-      repo = "kakoune";
-      owner = "mawww";
-      rev = "7438f23b9beddc42b6561fe8be3f953aff2f73b1";
-      sha256 = "0sw89wqhbs641xqjwknxals8dbqj9mlp3l2za6xsw4alwx6hfnan";
-    };
     postInstall = ''
       mkdir -p $out/share
       tic -x -o "$out/share/terminfo" ../contrib/tmux-256color.terminfo
