@@ -86,9 +86,9 @@ in {
           },
           "pulseaudio": {
             "format": "{volume}% {icon}",
-            "format-muted": "🔇",
+            "format-muted": "",
             "format-icons": {
-              "default": ["🔈", "🔊"]
+            "default": ["", ""]
             },
             "scroll-step": 5,
             "on-click-right": "pactl set-sink-mute 0 toggle",
@@ -100,7 +100,7 @@ in {
       * {
         border: none;
         border-radius: 0;
-        font-family: "SauceCodePro Nerd Font";
+        font-family: monospace;
         font-size: 12px;
         min-height: 0;
       }
@@ -166,6 +166,7 @@ in {
       #tray {
         background: #00427a;
       }
+
     '';
   };
 }
