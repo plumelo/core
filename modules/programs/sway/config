@@ -89,6 +89,7 @@ bindsym $mod+f fullscreen
 bindsym $mod+space focus mode_toggle
 bindsym $mod+Shift+Space floating toggle
 bindsym $mod+a focus parent
+bindsym $mod+Tab workspace back_and_forth
 
 # Scratchpad:
 bindsym $mod+Shift+minus move scratchpad
@@ -135,7 +136,7 @@ hide_edge_borders smart
 default_border pixel 1
 default_floating_border pixel 1
 
-font pango: InconsolataGo Nerd Font
+font pango: monospace 9
 
 # Base16 colors
 set $base00 #282c34
