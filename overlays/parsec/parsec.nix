@@ -5,6 +5,7 @@ let
     desktopName = "Parsec";
     exec = "parsecd";
     name = "parsec";
+    icon = "parsecd";
     type = "Application";
   };
   parsecd = stdenv.mkDerivation {
@@ -53,8 +54,8 @@ buildFHSUserEnv {
     ];
   runScript = "/usr/bin/parsecd";
   extraInstallCommands = ''
-    mkdir -p $out/share/applications
-    ln -sfv ${parsecd}/share/icon $out/share/icons
+    mkdir -p $out/share/{applications,pixmaps}
+    ln -sfv ${parsecd}/share/icons/hicolor/256x256/apps/parsecd.png $out/share/pixmaps
     ln -sfv ${desktopItem} $out/share/applications
   '';
 }
