@@ -16,7 +16,7 @@ in {
 
     menu = mkOption {
       type = types.str;
-      default = "${pkgs.wofi}/bin/wofi -i -m";
+      default = "${pkgs.wofi}/bin/wofi -i -I --show drun";
     };
 
     status = mkOption {
