@@ -3,9 +3,6 @@ with pkgs.tmuxPlugins; {
   programs.tmux = {
     baseIndex = 1;
     terminal = "tmux-256color";
-    historyLimit = 10000;
-    escapeTime = 0;
-    keyMode = "vi";
     extraTmuxConf = ''
       # Automatically set window title
       set-window-option -g automatic-rename on
@@ -18,11 +15,6 @@ with pkgs.tmuxPlugins; {
 
       # colors
       set -ga terminal-overrides ",*col*:Tc"
-
-      # prefix
-      unbind C-b
-      set -g prefix C-Space
-      bind C-Space send-prefix
 
       # Default colors
       set-option -g status-style fg=white,bg=black
