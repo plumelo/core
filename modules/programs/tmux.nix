@@ -3,7 +3,7 @@ with pkgs.tmuxPlugins; {
   programs.tmux = {
     baseIndex = 1;
     terminal = "tmux-256color";
-    extraTmuxConf = ''
+    extraConfig = ''
       # Automatically set window title
       set-window-option -g automatic-rename on
       set-option -g set-titles on
