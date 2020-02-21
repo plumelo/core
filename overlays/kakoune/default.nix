@@ -15,6 +15,20 @@ let
     rev = "910ecf922d17a3f373e4f6cb441b4ec52c3ba035";
     sha256 = "02i67xcmw4z101r25sgwiyqjif25yd0i1bfmgz5vmd2vhfl4jdc3";
   };
+  kak-lsp = rustPlatform.buildRustPackage rec {
+    pname = "kak-lsp";
+    version = "7.0.0";
+
+    src = fetchFromGitHub {
+      owner = "ul";
+      repo = pname;
+      rev = "17fc6a6573251a77811ec7e75bf3807e24277cbb";
+      sha256 = "1ysidrb78y7i1d8db301mnjnxsc2s26wvqk6kgd0jzra744wvpnn";
+    };
+
+    cargoSha256 = "0045p58z9ai642wgf085d28ds5nchhv24p733018aaqds0qss2pr";
+  };
+
 in {
   kak = stdenv.mkDerivation {
     name = "kakoune-configured-${getVersion kakoune}";
