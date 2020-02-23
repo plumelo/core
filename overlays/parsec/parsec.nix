@@ -12,7 +12,7 @@ let
     name = "parsecd";
     src = fetchurl {
       url = "https://s3.amazonaws.com/parsec-build/package/parsec-linux.deb";
-      sha256 = "0xbq87sz88ldisl65cpcpza2hqjr5y9npn2lmkznzb5qcjd99i5f";
+      sha256 = "1hfdzjd8qiksv336m4s4ban004vhv00cv2j461gc6zrp37s0fwhc";
     };
     nativeBuildInputs = [ dpkg ];
     unpackCmd = "dpkg -x $curSrc .";
