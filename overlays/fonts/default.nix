@@ -1,12 +1,12 @@
 self: super:
 with super; {
-  nerdfont_dejavu = stdenv.mkDerivation rec {
-    name = "nerdfont-dejavu";
+  nerdfonts_dejavu = stdenv.mkDerivation rec {
+    name = "nerdfonts-dejavu";
 
     src = fetchurl {
       url =
-        "https://github.com/ryanoasis/nerd-fonts/releases/download/v2.0.0/DejaVuSansMono.zip";
-        sha256 = "06xk9qgw78xrbsq0kx9xxqff1fg4mxkyypi113mzvdjbx5khyfha";
+        "https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/DejaVuSansMono.zip";
+      sha256 = "03qfrkzmhnn8dwgx4qhiigbz4dxs3957hydlr0j8vxl89j8c9g1z";
     };
 
     unpackCmd = ''

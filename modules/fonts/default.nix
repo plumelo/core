@@ -5,6 +5,6 @@
         monospace = [ "DejaVuSansMono Nerd Font" ];
       };
     };
-    fonts = with pkgs; [ nerdfont_dejavu ];
+    fonts = with pkgs; [ nerdfonts_dejavu ];
   };
 }
