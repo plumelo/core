@@ -1,8 +1,8 @@
 { mkShell, nodejs-10_x, yarn, yarn-completion, chromedriver, sauce-connect
-, google-chrome }:
+, google-chrome, jre }:
 let yarn-10_x = yarn.override { nodejs = nodejs-10_x; };
 in mkShell {
-  inputsFrom = [ yarn-10_x ];
+  inputsFrom = [ yarn-10_x jre ];
   buildInputs = [ yarn-10_x ];
   shellHook = ''
     export XDG_DATA_DIRS=${yarn-completion}/share/:$XDG_DATA_DIRS
