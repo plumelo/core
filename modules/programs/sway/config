@@ -174,7 +174,7 @@ for_window [title="nmtui"] floating enable
 
 set $gnome-schema org.gnome.desktop.interface
 exec_always {
-  gsettings set $gnome-schema gtk-theme 'Nordic-blue'
+  gsettings set $gnome-schema gtk-theme 'Nordic-bluish-accent'
   gsettings set $gnome-schema icon-theme 'Paper'
   gsettings set org.gnome.desktop.wm.preferences theme "Nordic"
 }
