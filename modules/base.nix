@@ -1,6 +1,6 @@
 { config, options, lib, pkgs, ... }: {
   imports = [
-    ./pkgs.nix
+    ../pkgs/config.nix
     ./users.nix
     ./programs/bash
     ./programs/tmux.nix
@@ -17,7 +17,6 @@
     ./programs/waybar
   ];
 
-  system.stateVersion = "20.03";
 
   i18n = { defaultLocale = "en_US.UTF-8"; };
 

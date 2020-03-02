@@ -93,7 +93,7 @@ in {
       }
 
       hook global BufSetOption filetype=nix %{
-        set-option buffer formatcmd "nixfmt"
+        set-option buffer formatcmd "nixpkgs-fmt"
       }
 
       try %{ source .kakrc.local }
@@ -126,7 +126,7 @@ in {
             ag
             ripgrep
             editorconfig-core-c
-            nixfmt
+            nixpkgs-fmt
             universal-ctags
             nodePackages.typescript-language-server
           ]
