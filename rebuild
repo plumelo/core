@@ -2,9 +2,9 @@
 dir=$(dirname "$(readlink -f "$0")")
 
 # build nixpkgs
-nix-build -Q ./nixpkgs -o ./nixpkgs/.nixpkgs > /dev/null
+nix-build -Q ./core -o ./core/.nixpkgs > /dev/null
 
 # build nixos
 NIX_CFLAGS_COMPILE="-O3 -march=native -mtune=native" \
-NIX_PATH="nixpkgs=./nixpkgs/.nixpkgs:nixpkgs-overlays=./nixpkgs/overlays:nixos-config=./configuration.nix" \
+NIX_PATH="nixpkgs=./core/.nixpkgs:nixpkgs-overlays=./core/overlays:nixos-config=./configuration.nix" \
   nixos-rebuild "$@"
