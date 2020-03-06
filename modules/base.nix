@@ -1,6 +1,6 @@
 { config, options, lib, pkgs, ... }: {
   imports = [
-    ../pkgs/config.nix
+    ../nixpkgs/config.nix
     ./users.nix
     ./programs/bash
     ./programs/tmux.nix

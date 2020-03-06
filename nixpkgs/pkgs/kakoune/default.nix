@@ -46,109 +46,107 @@ let
   };
 
 in
-{
-  kak = stdenv.mkDerivation {
-    name = "kakoune-configured-${getVersion kakoune}";
-    nativeBuildInputs = [ makeWrapper ];
-    kakrc = writeText "kakrc" ''
-      # grep
-      set-option global grepcmd 'rg -L --column'
+stdenv.mkDerivation {
+  name = "kakoune-configured-${getVersion kakoune}";
+  nativeBuildInputs = [ makeWrapper ];
+  kakrc = writeText "kakrc" ''
+    # grep
+    set-option global grepcmd 'rg -L --column'
 
-      # tab completion
-      hook global InsertCompletionShow .* %{ map window insert <tab> <c-n>; map window insert <s-tab> <c-p> }
-      hook global InsertCompletionHide .* %{ unmap window insert <tab> <c-n>; unmap window insert <s-tab> <c-p> }
+    # tab completion
+    hook global InsertCompletionShow .* %{ map window insert <tab> <c-n>; map window insert <s-tab> <c-p> }
+    hook global InsertCompletionHide .* %{ unmap window insert <tab> <c-n>; unmap window insert <s-tab> <c-p> }
 
-      # files
-      define-command find -params 1 -shell-script-candidates %{ ag -g ${
-    "''"
-    } --ignore "$kak_opt_ignored_files" } %{ edit %arg{1} }
-      map global user f ": find<space>" -docstring "Edit a file, searching from current directory"
+    # files
+    define-command find -params 1 -shell-script-candidates %{ ag -g ${
+  "''"
+  } --ignore "$kak_opt_ignored_files" } %{ edit %arg{1} }
+    map global user f ": find<space>" -docstring "Edit a file, searching from current directory"
 
-      define-command -hidden find-relative %{exec ": edit<space>%sh{echo  $(dirname $kak_buffile)}/"}
-      map global user e ": find-relative<ret>" -docstring "Edit a file, searching from current file's directory"
+    define-command -hidden find-relative %{exec ": edit<space>%sh{echo  $(dirname $kak_buffile)}/"}
+    map global user e ": find-relative<ret>" -docstring "Edit a file, searching from current file's directory"
 
-      map global user b ": b<space>" -docstring "Switch buffers"
+    map global user b ": b<space>" -docstring "Switch buffers"
 
-      # editorconfig
-      hook global WinCreate ^[^*]+$ %{editorconfig-load}
+    # editorconfig
+    hook global WinCreate ^[^*]+$ %{editorconfig-load}
 
-      # highlighters
-      hook global WinCreate .* %{
-        addhl window/number-lines number-lines -hlcursor
-        addhl window/show-whitespaces show-whitespaces -tab '‣' -tabpad ' ' -lf ' ' -spc ' ' -nbsp '⍽'
-        addhl window/show-matching show-matching
-        add-highlighter global/ dynregex '%reg{/}' 0:+u
-      }
-      hook global ModeChange .*:normal %{
-          set-face global PrimaryCursor      rgb:000000,rgb:ffffff+F
-      }
-      hook global ModeChange .*:insert %{
-          set-face global PrimaryCursor      rgb:ffffff,rgb:005577+F
-      }
+    # highlighters
+    hook global WinCreate .* %{
+      addhl window/number-lines number-lines -hlcursor
+      addhl window/show-whitespaces show-whitespaces -tab '‣' -tabpad ' ' -lf ' ' -spc ' ' -nbsp '⍽'
+      addhl window/show-matching show-matching
+      add-highlighter global/ dynregex '%reg{/}' 0:+u
+    }
+    hook global ModeChange .*:normal %{
+        set-face global PrimaryCursor      rgb:000000,rgb:ffffff+F
+    }
+    hook global ModeChange .*:insert %{
+        set-face global PrimaryCursor      rgb:ffffff,rgb:005577+F
+    }
 
-      # lsp
-      eval %sh{${kak-lsp}/bin/kak-lsp --kakoune -s $kak_session --config ${
-    writeText "kak-lsp.toml" ''
-      [language.tsx]
-      filetypes = ["typescript"]
-      roots = ["package.json", "tsconfig.json"]
-      command = "typescript-language-server"
-      args = ["--stdio"]
-    ''
-    }}
-      hook global WinSetOption filetype=(javascript|typescript) %{
-        lsp-enable-window
-      }
+    # lsp
+    eval %sh{${kak-lsp}/bin/kak-lsp --kakoune -s $kak_session --config ${
+  writeText "kak-lsp.toml" ''
+    [language.tsx]
+    filetypes = ["typescript"]
+    roots = ["package.json", "tsconfig.json"]
+    command = "typescript-language-server"
+    args = ["--stdio"]
+  ''
+  }}
+    hook global WinSetOption filetype=(javascript|typescript) %{
+      lsp-enable-window
+    }
 
-      hook global BufSetOption filetype=(javascript|typescript) %{
-        set-option buffer formatcmd "prettier --stdin-filepath='%val{buffile}'"
-        set-option buffer lintcmd "eslint --c .eslintrc* -f ${eslint-formatter-kakoune}/index.js --stdin-filename '%val{buffile}' --stdin <"
-      }
+    hook global BufSetOption filetype=(javascript|typescript) %{
+      set-option buffer formatcmd "prettier --stdin-filepath='%val{buffile}'"
+      set-option buffer lintcmd "eslint --c .eslintrc* -f ${eslint-formatter-kakoune}/index.js --stdin-filename '%val{buffile}' --stdin <"
+    }
 
-      hook global BufSetOption filetype=(scss) %{
-        set-option buffer formatcmd "stylelint --fix --stdin-filename='%val{buffile}'"
-      }
+    hook global BufSetOption filetype=(scss) %{
+      set-option buffer formatcmd "stylelint --fix --stdin-filename='%val{buffile}'"
+    }
 
-      hook global BufSetOption filetype=nix %{
-        set-option buffer formatcmd "nixpkgs-fmt"
-      }
+    hook global BufSetOption filetype=nix %{
+      set-option buffer formatcmd "nixpkgs-fmt"
+    }
 
-      try %{ source .kakrc.local }
-      try %{ source .kakrc.mine }
-      # colorscheme
-      colorscheme nord
-    '';
+    try %{ source .kakrc.local }
+    try %{ source .kakrc.mine }
+    # colorscheme
+    colorscheme nord
+  '';
 
-    buildCommand = ''
-      mkdir -p $out/bin
-      mkdir -p $out/share/kak/autoload/plugins
-      mkdir -p $out/share/kak/colors
+  buildCommand = ''
+    mkdir -p $out/bin
+    mkdir -p $out/share/kak/autoload/plugins
+    mkdir -p $out/share/kak/colors
 
-      # symlink core
-      ln -sfv ${kakoune}/share/kak/autoload/ $out/share/kak/autoload/core
-      ln -sfv ${kakoune}/share/terminfo/ $out/share/terminfo
-      ln -sfv ${kakoune}/share/kak/colors/ $out/share/kak/colors
+    # symlink core
+    ln -sfv ${kakoune}/share/kak/autoload/ $out/share/kak/autoload/core
+    ln -sfv ${kakoune}/share/terminfo/ $out/share/terminfo
+    ln -sfv ${kakoune}/share/kak/colors/ $out/share/kak/colors
 
-      # config
-      ln -sfv $kakrc $out/share/kak/kakrc
+    # config
+    ln -sfv $kakrc $out/share/kak/kakrc
 
-      # plugins
-      ln -sfv ${kakounePlugins.kak-powerline}/share/kak/autoload/plugins/powerline $out/share/kak/autoload/plugins/powerline
-      ln -sfv ${plugins.typescript}/share/kak/autoload/plugins/typescript $out/share/kak/autoload/plugins/typescript
-      ln -sfv ${./nord.kak} $out/share/kak/colors/nord.kak
+    # plugins
+    ln -sfv ${kakounePlugins.kak-powerline}/share/kak/autoload/plugins/powerline $out/share/kak/autoload/plugins/powerline
+    ln -sfv ${plugins.typescript}/share/kak/autoload/plugins/typescript $out/share/kak/autoload/plugins/typescript
+    ln -sfv ${./nord.kak} $out/share/kak/colors/nord.kak
 
-      makeWrapper ${kakoune}/bin/kak $out/bin/kak \
-        --prefix PATH : ${
-    makeBinPath [
-      ag
-      ripgrep
-      editorconfig-core-c
-      nixpkgs-fmt
-      universal-ctags
-      nodePackages.typescript-language-server
-    ]
-    } \
-        --set XDG_CONFIG_HOME $out/share/
-    '';
-  };
+    makeWrapper ${kakoune}/bin/kak $out/bin/kak \
+      --prefix PATH : ${
+  makeBinPath [
+    ag
+    ripgrep
+    editorconfig-core-c
+    nixpkgs-fmt
+    universal-ctags
+    nodePackages.typescript-language-server
+  ]
+  } \
+      --set XDG_CONFIG_HOME $out/share/
+  '';
 }
