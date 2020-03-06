@@ -178,3 +178,8 @@ exec_always {
   gsettings set $gnome-schema icon-theme 'Paper'
   gsettings set org.gnome.desktop.wm.preferences theme "Nordic"
 }
+
+mode passthrough {
+  bindsym $mod+Pause mode default
+}
+bindsym $mod+Pause mode passthrough
