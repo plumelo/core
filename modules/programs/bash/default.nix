@@ -1,7 +1,6 @@
 { config, options, lib, pkgs, ... }: {
   programs.bash = {
     shellAliases = {
-      hh = "${pkgs.hstr}/bin/hstr";
       "~" = "cd ~";
       grep = "grep --color=auto";
       hid =
@@ -80,10 +79,6 @@
 
       # dircolors
       eval `${pkgs.coreutils}/bin/dircolors -b "${./dircolors}"`
-
-      # hstr
-      bind '"\C-r": "\C-a hh -- \C-j"';
-      bind '"\C-xk": "\C-a hh -k \C-j"'
 
       stty -ixon
     '';
