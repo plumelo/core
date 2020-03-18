@@ -14,7 +14,6 @@ rec {
   };
   nerdfonts_dejavu = callPackage ../../pkgs/nerdfonts/default.nix {};
   box2lxd = callPackage ../../pkgs/box2lxd/default.nix {};
-  ansible-completion = callPackage ../../pkgs/ansible-completion/default.nix {};
   ryzenadj = callPackage ../../pkgs/ryzenadj/default.nix {};
   parsec-client = callPackage ../../pkgs/parsec/default.nix {};
   shells = callPackage ../../pkgs/shells/default.nix {};
