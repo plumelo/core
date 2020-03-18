@@ -29,7 +29,7 @@ evaluate-commands %sh{
     face global keyword            ${nord9}
     face global operator           ${nord9}
     face global attribute          ${nord6}
-    face global comment            ${nord3}
+    face global comment            ${nord3}+i
     face global meta               ${nord7}
     face global builtin            default+b
 
@@ -66,7 +66,7 @@ evaluate-commands %sh{
     face global StatusLineValue    ${nord12}
     face global StatusCursor       ${nord2},${nord5}+B
     face global Prompt             ${nord4}+b
-    face global MatchingChar       ${nord4},${nord1}+b
+    face global MatchingChar       ${nord4},${nord11}+b
     face global BufferPadding      ${nord11},${nord0}
     face global Whitespace         ${nord3}
   "
