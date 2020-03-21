@@ -1,14 +1,9 @@
-{ wofi, runCommand, makeWrapper, wrapGAppsHook, writeText }:
+{ wofi, runCommand, makeWrapper, writeText }:
 
 runCommand "wofi" { nativeBuildInputs = [ makeWrapper ]; } ''
   mkdir -p $out/bin
 
-  makeWrapper ${wofi.overrideAttrs
-  (
-    old: {
-      nativeBuildInputs = old.nativeBuildInputs ++ [ wrapGAppsHook ];
-    }
-  )}/bin/wofi $out/bin/wofi --add-flags "-c ${writeText "config"
+  makeWrapper ${wofi.overrideAttrs (o: { patches = []; })}/bin/wofi $out/bin/wofi --add-flags "-c ${writeText "config"
   ''
     width=700
     height=400

@@ -8,10 +8,7 @@ rec {
   wofi = callPackage ../../pkgs/wofi/default.nix {};
   dmenu-wayland = callPackage ../../pkgs/dmenu-wayland/default.nix {};
   gnome-ssh-askpass3 = callPackage ../../pkgs/openssh/default.nix {};
-  lxc = callPackage ../../pkgs/lxc/default.nix {};
-  lxc-templates = callPackage ../../pkgs/lxc-templates/default.nix {
-    inherit lxc;
-  };
+  lxc-templates = callPackage ../../pkgs/lxc-templates/default.nix {};
   nerdfonts_dejavu = callPackage ../../pkgs/nerdfonts/default.nix {};
   box2lxd = callPackage ../../pkgs/box2lxd/default.nix {};
   ryzenadj = callPackage ../../pkgs/ryzenadj/default.nix {};
