@@ -9,6 +9,7 @@
 , fetchFromGitHub
 , ag
 , ripgrep
+, wl-clipboard
 , editorconfig-core-c
 , nixpkgs-fmt
 , universal-ctags
@@ -117,6 +118,16 @@ stdenv.mkDerivation {
     } catch %{
       expandtab
     }}}
+
+    # copy with system clipboard
+    hook global NormalKey y|d|c %{ nop %sh{
+      printf %s "$kak_main_reg_dquote" | ${wl-clipboard}/bin/wl-copy > /dev/null 2>&1 &
+    }}
+
+    # paste before
+    map global user P '!${wl-clipboard}/bin/wl-paste -n<ret>'
+    # paste after
+    map global user p '<a-!>${wl-clipboard}/bin/wl-paste -n<ret>'
 
     # lsp
     eval %sh{
