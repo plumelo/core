@@ -9,7 +9,7 @@
 , fetchFromGitHub
 , ag
 , ripgrep
-,wl-clipboard
+, wl-clipboard
 , editorconfig-core-c
 , nixpkgs-fmt
 , universal-ctags
