@@ -2,6 +2,5 @@
 {
   services.syncthing = {
     openDefaultPorts = true;
-    configDir="/var/lib/syncthing/.config";
   };
 }
