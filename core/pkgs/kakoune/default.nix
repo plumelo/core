@@ -122,7 +122,7 @@ stdenv.mkDerivation {
     # cliboard
     map global user y '<a-|>${wl-clipboard}/bin/wl-copy > /dev/null 2>&1 <ret>' -docstring "Yank (system clipboard)"
     map global user P '!${wl-clipboard}/bin/wl-paste -n<ret>' -docstring "Paste before (system clipboard)"
-    map global user p '<a-!>${wl-clipboard}/bin/wl-paste -n<ret>' -doctring "Paste after (system clipboard)"
+    map global user p '<a-!>${wl-clipboard}/bin/wl-paste -n<ret>' -docstring "Paste after (system clipboard)"
 
     # lsp
     eval %sh{
