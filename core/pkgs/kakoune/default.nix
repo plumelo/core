@@ -85,12 +85,12 @@ stdenv.mkDerivation {
     define-command find -params 1 -shell-script-candidates %{ ag --hidden --ignore .git -l -g "" } %{ edit %arg{1} }
     map global user f ": find<space>" -docstring "Edit a file, searching from current directory"
 
-    map global normal '#' ': comment-line<ret>'
-
     define-command -hidden find-relative %{exec ": edit<space>%sh{echo  $(dirname $kak_buffile)}/"}
     map global user e ": find-relative<ret>" -docstring "Edit a file, searching from current file's directory"
 
     map global user b ": b<space>" -docstring "Switch buffers"
+
+    map global normal '#' ': comment-line<ret>'
 
     # editorconfig
     hook global WinCreate ^[^*]+$ %{editorconfig-load}
@@ -119,15 +119,10 @@ stdenv.mkDerivation {
       expandtab
     }}}
 
-    # copy with system clipboard
-    hook global NormalKey y|d|c %{ nop %sh{
-      printf %s "$kak_main_reg_dquote" | ${wl-clipboard}/bin/wl-copy > /dev/null 2>&1 &
-    }}
-
-    # paste before
-    map global user P '!${wl-clipboard}/bin/wl-paste -n<ret>'
-    # paste after
-    map global user p '<a-!>${wl-clipboard}/bin/wl-paste -n<ret>'
+    # cliboard
+    map global user y '<a-|>${wl-clipboard}/bin/wl-copy > /dev/null 2>&1 <ret>' -docstring "Yank (system clipboard)"
+    map global user P '!${wl-clipboard}/bin/wl-paste -n<ret>' -docstring "Paste before (system clipboard)"
+    map global user p '<a-!>${wl-clipboard}/bin/wl-paste -n<ret>' -doctring "Paste after (system clipboard)"
 
     # lsp
     eval %sh{
