@@ -24,6 +24,7 @@
     font = "Lat2-Terminus16";
     keyMap = "us";
   };
+
   time.timeZone = "Europe/Bucharest";
 
   hardware = {
@@ -38,8 +39,5 @@
     kernel.sysctl."fs.inotify.max_user_watches" = lib.mkDefault 524288;
     kernelPackages = pkgs.linuxPackages_latest;
   };
-
-  services.ntp.enable = true;
-
   networking.networkmanager = { dns = "dnsmasq"; };
 }
