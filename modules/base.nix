@@ -39,5 +39,4 @@
     kernel.sysctl."fs.inotify.max_user_watches" = lib.mkDefault 524288;
     kernelPackages = pkgs.linuxPackages_latest;
   };
-  networking.networkmanager = { dns = "dnsmasq"; };
 }
