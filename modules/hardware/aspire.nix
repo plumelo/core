@@ -7,9 +7,6 @@
     kernelParams = [
       "acpi_backlight=vendor"
       "i8042.nopnp"
-      # "acpi_osi=!"
-      # "acpi_osi=Linux"
-      # "clocksource=hpet"
       "ivrs_ioapic[4]=00:14.0"
       "ivrs_ioapic[5]=00:00.2"
       "iommu=on"
