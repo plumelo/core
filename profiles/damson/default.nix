@@ -28,7 +28,7 @@
   programs = {
     sway = {
       enable = true;
-
+      menu = "${pkgs.bemenu}/bin/bemenu-run -w -i --prefix '⇒' --prompt 'Run: ' --hb '#404654' --ff '#c698e3' --tf '#c698e3' --hf '#fcfcfc'";
     };
     tmux = {
       enable = true;
