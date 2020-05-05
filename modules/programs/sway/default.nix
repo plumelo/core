@@ -1,7 +1,9 @@
 { config, lib, pkgs, ... }:
 with lib;
-let cfg = config.programs.sway;
-in {
+let
+  cfg = config.programs.sway;
+in
+{
 
   options.programs.sway = {
     extraConfig = mkOption {
@@ -16,12 +18,12 @@ in {
 
     menu = mkOption {
       type = types.str;
-      default = "${pkgs.wofi}/bin/wofi -i -I --show drun";
+      default = "${pkgs.bemenu}/bin/bemenu-run --prompt '▶' --tf '#3daee9' --hf '#3daee9' --sf '#3daee9' --scf '#3daee9'";
     };
 
     status = mkOption {
-      type = types.str;
-      default = "${pkgs.waybar.override { pulseSupport = true; }}/bin/waybar";
+      type = types.nullOr types.str;
+      default = null;
     };
   };
 
@@ -37,12 +39,13 @@ in {
         jmtpfs
         xdg_utils
         wl-clipboard
+        lm_sensors
       ]);
       extraSessionCommands = ''
         export XKB_DEFAULT_LAYOUT=us
         export XDG_DATA_DIRS=${
           let schema = pkgs.gsettings-desktop-schemas;
-          in "${schema}/share/gsettings-schemas/${schema.name}"
+            in "${schema}/share/gsettings-schemas/${schema.name}"
         }:$XDG_DATA_DIRS
       '';
     };
@@ -54,9 +57,9 @@ in {
     services.udev.packages = with pkgs; [ brightnessctl android-udev-rules ];
 
     environment.etc."sway/config".text = with pkgs; ''
+      include "${sway}/etc/sway/config"
+
       set $swaylock ${swaylock}/bin/swaylock
-      set $term ${cfg.terminal}
-      set $skim ${skim}/bin/sk
       set $brightness ${brightnessctl}/bin/brightnessctl
       set $grim ${grim}/bin/grim
       set $mogrify ${imagemagick}/bin/mogrify
@@ -65,10 +68,15 @@ in {
       set $idle ${swayidle}/bin/swayidle
       set $lock $grim /tmp/lock.png && $mogrify -scale 10% -scale 1000% /tmp/lock.png && $swaylock -f -i /tmp/lock.png
       set $menu ${cfg.menu}
-      set $status ${cfg.status}
+      set $term ${cfg.terminal}
 
       ${builtins.readFile ./config}
 
+      ${
+        if (cfg.status != null) then
+            "bar bar-0 status_command ${cfg.status}"
+        else ""
+      }
       ${cfg.extraConfig}
     '';
   };
