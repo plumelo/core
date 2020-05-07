@@ -15,80 +15,9 @@ set blame-options              = -C -C -C
 set show-notes                 = yes
 set show-changes               = yes
 set status-show-untracked-dirs = yes
-set refresh-mode = periodic
-set refresh-interval = 5
+set refresh-mode               = periodic
+set refresh-interval           = 3
 set line-graphics              = utf-8
-
-# unbind g
-bind generic g none
-
-# grep
-bind generic gg view-grep
-
-# branch
-bind refs gn  !@git checkout -b "%(prompt Enter branch name: )" %(branch)
-bind main gn  !@git checkout -b "%(prompt Enter branch name: )" %(commit)
-bind main gco ?git checkout %(commit)
-bind main gcb ?git checkout %(branch)
-bind refs gd  ?git branch -D %(branch)
-bind refs gD  !?git push %(remote) --delete %(branch)
-
-#Fetch
-bind generic gf ?git fetch --all --prune
-bind refs gf ?git fetch %(remote) %(branch):%(branch)
-
-# reset
-bind main grh ?git reset --hard %(commit)
-bind refs grh ?git reset --hard %(branch)
-bind main grs ?git reset --soft %(commit)
-
-# rebase interactive
-bind main grb ?git rebase %(branch)
-bind main gri ?git rebase -i %(commit)
-bind refs grb ?git rebase %(branch)
-bind refs gri ?git rebase -i %(branch)
-bind main gra ?git rebase --abort
-bind refs gra ?git rebase --abort
-bind main grc ?git rebase --continue
-bind main grk ?git rebase --skip
-
-# push
-bind main    gps ?git push
-bind status  gps ?git push
-bind main    gpf !?git push -f
-bind main    gps !?git push
-bind status  gpf !?git push -f
-bind generic gpr ?git push -u %(remote) %(repo:head)
-bind status  gpr ?git push -u %(remote) %(repo:head)
-
-# pull without merge
-bind main gad ?git pull --ff-only
-bind main gas ?git pull --rebase --autostash
-
-# commit
-bind main   gC ?git cherry-pick -n %(commit)
-bind status A ?git commit --amend
-bind status E ?git commit --amend --no-edit
-bind diff A ?git commit --amend
-bind diff E ?git commit --amend --no-edit
-
-# stash
-bind main  gst ?git stash
-bind stash gsa ?git stash apply %(stash)
-bind stash gsp ?git stash pop %(stash)
-bind stash gsd ?git stash drop %(stash)
-
-# tag the selected commit
-bind main T !?@git tag %(prompt) %(commit)
 
 # copy sha to clipboard
 bind generic Y !@sh -c "echo -n %(commit) | wl-copy"
-
-# COLORS
-
-color date      default default
-
-# general
-color   cursor                  default 241
-color   title-blur              234 blue
-color   title-focus             234 blue bold

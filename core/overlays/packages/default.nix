@@ -5,7 +5,6 @@ in
 rec {
   alacritty = callPackage ../../pkgs/alacritty/default.nix {};
   gitAndTools = super.gitAndTools // { tig = callPackage ../../pkgs/tig/default.nix {}; };
-  wofi = callPackage ../../pkgs/wofi/default.nix {};
   dmenu-wayland = callPackage ../../pkgs/dmenu-wayland/default.nix {};
   gnome-ssh-askpass3 = callPackage ../../pkgs/openssh/default.nix {};
   lxc-templates = callPackage ../../pkgs/lxc-templates/default.nix {};
