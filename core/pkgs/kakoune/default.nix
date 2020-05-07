@@ -14,18 +14,22 @@
 , nixpkgs-fmt
 , universal-ctags
 , nodePackages
+, writeShellScript
+, gnused
+, nix
 }:
 with stdenv.lib;
 let
-  plugins = callPackage ./plugins {};
-  kakoune = kakoune-unwrapped.overrideAttrs (
-    odl: rec {
-      postInstall = ''
-        mkdir -p $out/share
-        tic -x -o "$out/share/terminfo" ../contrib/tmux-256color.terminfo
-      '';
-    }
-  );
+  plugins = callPackage ./plugins { };
+  kakoune = kakoune-unwrapped.overrideAttrs
+    (
+      odl: rec {
+        postInstall = ''
+          mkdir -p $out/share
+          tic -x -o "$out/share/terminfo" ../contrib/tmux-256color.terminfo
+        '';
+      }
+    );
   eslint-formatter-kakoune = fetchFromGitHub {
     owner = "Delapouite";
     repo = "eslint-formatter-kakoune";
@@ -127,13 +131,13 @@ stdenv.mkDerivation {
     # lsp
     eval %sh{
       ${kak-lsp}/bin/kak-lsp --kakoune -s $kak_session --config ${writeText "kak-lsp.toml"
-    ''
-      [language.tsx]
-      filetypes = ["typescript"]
-      roots = ["package.json", "tsconfig.json"]
-      command = "typescript-language-server"
-      args = ["--stdio"]
-    ''}
+      ''
+        [language.tsx]
+        filetypes = ["typescript"]
+        roots = ["package.json", "tsconfig.json"]
+        command = "typescript-language-server"
+        args = ["--stdio"]
+      ''}
     }
     hook global WinSetOption filetype=(javascript|typescript) %{
       lsp-enable-window
@@ -151,7 +155,14 @@ stdenv.mkDerivation {
 
     hook global BufSetOption filetype=nix %{
       set-option buffer formatcmd "nixpkgs-fmt"
-      set-option buffer makecmd "nix-instantiate --parse '%val{buffile}'"
+      set-option buffer lintcmd "${
+      writeShellScript "kaknix" ''
+        if [ ''$# -ne 1 ] || [ ! -f "$1"  ]; then
+          exit 1
+        fi
+        ${nix}/bin/nix-instantiate --parse "$1" 2>&1 >&- | ${gnused}/bin/sed 's/^\(.\+\), at \(.\+\)$/\2: \1/'
+      ''
+    }"
     }
 
     try %{ source .kakrc.local }
@@ -177,8 +188,7 @@ stdenv.mkDerivation {
     ln -sfv ${./nord.kak} $out/share/kak/colors/nord.kak
 
     makeWrapper ${kakoune}/bin/kak $out/bin/kak \
-      --prefix PATH : ${makeBinPath
-    [
+      --prefix PATH : ${makeBinPath [
       ag
       ripgrep
       editorconfig-core-c
@@ -186,7 +196,7 @@ stdenv.mkDerivation {
       universal-ctags
       nodePackages.typescript-language-server
     ]
-  } \
+    } \
       --set XDG_CONFIG_HOME $out/share/
   '';
 }
