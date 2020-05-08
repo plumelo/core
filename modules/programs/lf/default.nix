@@ -7,7 +7,6 @@ let
       *.tar*) ${gnutar}/bin/tar tf "$1";;
       *.zip) ${unzip}/bin/unzip -l "$1";;
       *.rar) ${unrar}/bin/unrar l "$1";;
-      *.7z) ${p7zip}/bin/7z l "$1";;
       *.pdf) pdftotext "$1" -;;
       *) ${bat}/bin/bat --color always --terminal-width=$2 --theme OneHalfDark "$1";;
     esac
@@ -52,7 +51,6 @@ in {
         *.tar.xz|*.txz) ${gnutar}/bin/tar xJvf $f;;
         *.zip) ${unzip}/bin/unzip $f;;
         *.rar) ${unrar}/bin/unrar x $f;;
-        *.7z) ${p7zip}/bin/7z x $f;;
       esac
     }}
 
