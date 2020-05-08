@@ -5,7 +5,6 @@
 , callPackage
 , makeWrapper
 , writeText
-, rustPlatform
 , fetchFromGitHub
 , ag
 , ripgrep
@@ -17,6 +16,7 @@
 , writeShellScript
 , gnused
 , nix
+, kak-lsp
 }:
 with stdenv.lib;
 let
@@ -41,19 +41,6 @@ let
     repo = "smarttab.kak";
     rev = "1321c308edac6bd892e2bd2f683432402a04be98";
     sha256 = "048qq8aj405q3zm28jjh6ardxb8ixkq6gs1h3bwdv2qc4zi2nj4g";
-  };
-  kak-lsp = rustPlatform.buildRustPackage rec {
-    pname = "kak-lsp";
-    version = "7.0.0";
-
-    src = fetchFromGitHub {
-      owner = "ul";
-      repo = pname;
-      rev = "17fc6a6573251a77811ec7e75bf3807e24277cbb";
-      sha256 = "1ysidrb78y7i1d8db301mnjnxsc2s26wvqk6kgd0jzra744wvpnn";
-    };
-
-    cargoSha256 = "0045p58z9ai642wgf085d28ds5nchhv24p733018aaqds0qss2pr";
   };
 in
 stdenv.mkDerivation {
