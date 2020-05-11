@@ -58,4 +58,7 @@
     syncthing.enable = true;
     syncthing.openDefaultPorts = true;
   };
+
+  hardware.sane.enable = true;
+  hardware.bluetooth.enable = true;
 }
