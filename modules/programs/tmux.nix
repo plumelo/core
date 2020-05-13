@@ -41,16 +41,33 @@ with pkgs.tmuxPlugins; {
       # colors
       set -ga terminal-overrides ",*col*:Tc"
 
-      set-option -g status-style bg=black,fg=yellow #,attr=default
-      set-window-option -g window-status-style bg=default,fg=white #,attr=dim
-      set-window-option -g window-status-current-style bg=default,fg=brightblue #,attr=dim
-      set-window-option -g window-status-activity-style bg=black,fg=brightred
-      set-option -g message-style bg=black,fg=brightred
-      set-option -g display-panes-active-colour blue
-      set-option -g display-panes-colour brightred
-      flash='#{?client_prefix,#[fg=black]#[bg=brightblue],#[fg=brightblue]#[bg=black]}'
-      set -g status-left ""
-      set -g status-right "$flash #h"
+      # Default colors
+      set-option -g status-style fg=white,bg=black
+
+      # Status
+      set -g status-interval 1
+      set -g status-justify left
+      set -g status-left-length 40
+
+      # Window titles
+      set-window-option -g window-status-style fg=default,bg=default
+      set-window-option -g window-status-current-style fg=white,bold,bg=default
+      set-window-option -g window-status-activity-style fg=default,noreverse,bg=default
+
+      # Bars
+      set -g window-status-separator ""
+      set -g status-left "#[fg=black,bg=blue,bold] #S #[fg=blue,bg=black,nobold,noitalics,nounderscore]"
+      flash='#{?client_prefix,#[fg=magenta]#[fg=black]#[bg=magenta]#H,#[fg=cyan]#[bg=black]#[fg=black]#[bg=cyan]#H}'
+      set -g status-right "$flash"
+
+      # Windows
+      set -g window-status-format "#[fg=black,bg=brightblack,nobold,noitalics,nounderscore] #[fg=white,bg=brightblack]#I #[fg=white,bg=brightblack,nobold,noitalics,nounderscore] #[fg=white,bg=brightblack]#W #F #[fg=brightblack,bg=black,nobold,noitalics,nounderscore]"
+      set -g window-status-current-format "#[fg=black,bg=cyan,nobold,noitalics,nounderscore] #[fg=black,bg=cyan]#I #[fg=black,bg=cyan,nobold,noitalics,nounderscore] #[fg=black,bg=cyan]#W #F #[fg=cyan,bg=black,nobold,noitalics,nounderscore]"
+      set -g window-status-separator ""
+
+      # Panes
+      set -g pane-border-style bg=default,fg=black
+      set -g pane-active-border-style bg=default,fg=blue
     '';
   };
 }
