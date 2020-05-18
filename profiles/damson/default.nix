@@ -46,6 +46,9 @@
       difftool = "kdiff3";
       mergetool = "kdiff3";
     };
+    gnupg.agent = {
+      enable = true;
+    };
   };
 
   environment.variables = rec {
@@ -61,4 +64,5 @@
 
   hardware.sane.enable = true;
   hardware.bluetooth.enable = true;
+
 }
