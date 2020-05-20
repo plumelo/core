@@ -119,8 +119,8 @@ stdenv.mkDerivation {
     eval %sh{
       ${kak-lsp}/bin/kak-lsp --kakoune -s $kak_session --config ${writeText "kak-lsp.toml"
       ''
-        [language.tsx]
-        filetypes = ["typescript"]
+        [language.typescript]
+        filetypes = ["typescript","javascript"]
         roots = ["package.json", "tsconfig.json"]
         command = "typescript-language-server"
         args = ["--stdio"]
@@ -133,7 +133,7 @@ stdenv.mkDerivation {
     hook global BufSetOption filetype=(javascript|typescript) %{
       set-option buffer formatcmd "prettier --stdin-filepath='%val{buffile}'"
       set-option buffer lintcmd "eslint --c .eslintrc* -f ${eslint-formatter-kakoune}/index.js --stdin-filename '%val{buffile}' --stdin <"
-      define-command eslint-fix %{ nop %sh{ eslint --fix $kak_buffile }}
+      define-command -override eslint-fix %{ nop %sh{ eslint --fix $kak_buffile }}
     }
 
     hook global BufSetOption filetype=(scss) %{
