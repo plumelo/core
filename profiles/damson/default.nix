@@ -13,11 +13,24 @@
       libnotify
       chromium
       firefox
-      slack
       keepassxc
       kak
       nomachine-client
       parsec-client
+
+      (weechat.override {
+        configure = { availablePlugins, ... }: {
+          plugins = with availablePlugins; [
+            (python.withPackages (_: with weechatScripts; [ weechat-matrix ]))
+          ];
+
+          scripts = with weechatScripts; [
+            weechat-matrix
+            wee-slack
+          ];
+        };
+      })
+
     ];
   };
 
