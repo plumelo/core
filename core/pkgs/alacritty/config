@@ -12,6 +12,7 @@ window:
     x: 0
     y: 0
   dynamic_padding: true
+  dynamic_title: true
   decorations: none
   startup_mode: Windowed
   class:
@@ -60,7 +61,7 @@ colors:
     cyan: '0x8FBCBB'
     white: '0xECEFF4'
 
-visual_bell:
+bell:
   animation: EaseOutExpo
   duration: 0
   color: '0xffffff'
@@ -70,8 +71,6 @@ background_opacity: 0.98
 selection:
   semantic_escape_chars: ",│`|:\"' ()[]{}<>"
   save_to_clipboard: true
-
-dynamic_title: true
 
 cursor:
   style: Block
