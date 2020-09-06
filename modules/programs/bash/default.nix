@@ -3,14 +3,14 @@
     shellAliases = {
       "~" = "cd ~";
       grep = "grep --color=auto";
-      hid =
-        "${pkgs.gawk}/bin/gawk -i inplace '!a[$0]++' $HISTFILE; ${pkgs.gnused}/bin/sed -i 's/[[:space:]]*$//' $HISTFILE";
     };
     promptInit = ''
       GIT_PS1_SHOWUNTRACKEDFILES=1
       GIT_PS1_SHOWUPSTREAM="auto"
       GIT_PS1_SHOWCOLORHINTS=1
       GIT_PS1_SHOWDIRTYSTATE=1
+      GIT_PS1_SHOWSTASHSTATE=1
+      GIT_PS1_SHOWUNTRACKEDFILES=1
       bold=$(tput bold)
       red=$(tput setaf 1)
       yellow=$(tput setaf 3)
@@ -72,13 +72,14 @@
       bind '"\e[M": kill-word'
       bind '"\C-h": backward-kill-word'
 
+      HISTSIZE=-1
       HISTFILESIZE=-1
-      HISTSIZE=''${HISTFILESIZE}
-      HISTCONTROL="erasedups:ignoreboth"
-      HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history:?:??"
+      HISTIGNORE="&:[ ]*:exit:l:ls:ll:bg:fg:?:??"
 
-      # dircolors
-      eval `${pkgs.coreutils}/bin/dircolors -b "${./dircolors}"`
+      historymerge () {
+        ${pkgs.coreutils}/bin/tac $HISTFILE | ${pkgs.gawk}/bin/awk '!x[$0]++' | ${pkgs.coreutils}/bin/tac | ${pkgs.moreutils}/bin/sponge $HISTFILE
+      }
+      trap historymerge EXIT
 
       stty -ixon
     '';
