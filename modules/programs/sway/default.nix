@@ -71,14 +71,7 @@ in
       set $term ${cfg.terminal}
 
       # input
-      input "2:14:ETPS/2_Elantech_Touchpad" {
-        dwt enabled
-        tap enabled
-        natural_scroll enabled
-        middle_emulation enabled
-      }
-      input "1267:12433:ELAN0504:01_04F3:3091_Touchpad" {
-        dwt enabled
+      input type:touchpad {
         tap enabled
         natural_scroll enabled
         middle_emulation enabled
