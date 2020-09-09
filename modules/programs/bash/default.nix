@@ -74,10 +74,14 @@
 
       HISTSIZE=-1
       HISTFILESIZE=-1
-      HISTIGNORE="&:[ ]*:exit:l:ls:ll:bg:fg:?:??"
+      HISTIGNORE="&:[ ]*:exit:l:ls:ll:bg:fg:history*:clear:kill*:?:??"
 
       historymerge () {
-        ${pkgs.coreutils}/bin/tac $HISTFILE | ${pkgs.gawk}/bin/awk '!x[$0]++' | ${pkgs.coreutils}/bin/tac | ${pkgs.moreutils}/bin/sponge $HISTFILE
+        ${pkgs.gnused}/bin/sed 's/[[:space:]]*$//' $HISTFILE \
+        | ${pkgs.coreutils}/bin/tac \
+        | ${pkgs.gawk}/bin/awk '!x[$0]++' \
+        | ${pkgs.coreutils}/bin/tac \
+        | ${pkgs.moreutils}/bin/sponge $HISTFILE
       }
       trap historymerge EXIT
 
