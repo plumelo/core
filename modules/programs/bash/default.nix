@@ -76,14 +76,9 @@
       HISTFILESIZE=-1
       HISTIGNORE="&:[ ]*:exit:l:ls:ll:bg:fg:history*:clear:kill*:?:??"
 
-      historymerge () {
-        ${pkgs.gnused}/bin/sed 's/[[:space:]]*$//' $HISTFILE \
-        | ${pkgs.coreutils}/bin/tac \
-        | ${pkgs.gawk}/bin/awk '!x[$0]++' \
-        | ${pkgs.coreutils}/bin/tac \
-        | ${pkgs.moreutils}/bin/sponge $HISTFILE
+      hm() {
+        sed 's/[[:space:]]*$//' $HISTFILE | tac | awk '!x[$0]++' | tac | ${pkgs.moreutils}/bin/sponge $HISTFILE
       }
-      trap historymerge EXIT
 
       stty -ixon
     '';
