@@ -1,7 +1,7 @@
 { pkgs, ... }: {
   hardware = {
     pulseaudio.enable = true;
-    opengl.extraPackages = with pkgs; [ vaapiIntel libvdpau-va-gl vaapiVdpau ];
+    opengl.extraPackages = with pkgs; [ libvdpau-va-gl vaapiVdpau ];
   };
 
   boot = {

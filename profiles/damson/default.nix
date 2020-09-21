@@ -9,7 +9,6 @@
   users.defaultUser = {
     name = "iulian";
     packages = with pkgs; [
-      killall
       libnotify
       chromium
       firefox
