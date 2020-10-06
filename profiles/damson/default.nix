@@ -14,7 +14,13 @@
       firefox
       keepassxc
       kak
-      nomachine-client
+      (nomachine-client.overrideAttrs (old: rec {
+        src = pkgs.fetchurl {
+          url= "https://download.nomachine.com/download/6.12/Linux/nomachine_6.12.3_7_x86_64.tar.gz";
+          sha256 = "1dqsqwxbd77g6gc0hvjmmg4flm3vwwv5y98m8d9wxyybp37vkmgd";
+        };
+      }))
+
       parsec-client
 
       (weechat.override {
