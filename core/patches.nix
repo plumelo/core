@@ -1,4 +1,4 @@
-{ writeText, fetchpatch }:
+{ writeText }:
 [
   (
     writeText "nixos-overlays-fix.patch" ''
@@ -19,12 +19,5 @@
 
        in
     ''
-  )
-  (
-    (fetchpatch {
-      name = "99395.patch";
-      url = "https://patch-diff.githubusercontent.com/raw/NixOS/nixpkgs/pull/99395.diff";
-      sha256 = "1vx1d4a8hp94jb6isgmyiyhhkzadyshri3h86ka1imz08xilislf";
-    })
   )
 ]
