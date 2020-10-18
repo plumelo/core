@@ -34,6 +34,12 @@
   };
 
   networking.networkmanager = { dns = "dnsmasq"; };
+  environment.etc."NetworkManager/dnsmasq.d/20-adblock.conf".text = builtins.readFile
+    ((fetchTarball {
+      url = "https://github.com/notracking/hosts-blocklists/archive/dc2e9d5.tar.gz";
+      sha256 = "0zpmxmjkljrwvx75d197r2f7inqbnggbcj4gsrjiz4k3q172ysvb";
+    }) + "/dnsmasq/dnsmasq.blacklist.txt");
+
 
   virtualisation.lxd.enable = true;
 
@@ -55,8 +61,8 @@
     git = rec {
       enable = true;
       editor = "${pkgs.kak}/bin/kak";
-      difftool = "kdiff3";
-      mergetool = "kdiff3";
+      difftool = "vim";
+      mergetool = "vim";
     };
     gnupg.agent = {
       enable = true;
