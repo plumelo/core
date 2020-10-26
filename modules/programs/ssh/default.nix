@@ -8,12 +8,13 @@ let
     export DISPLAY=:0
     exec ${askPassword} 2>/tmp/ask.log
   '';
-in {
+in
+{
   options = {
     programs.ssh = {
       persistentHosts = mkOption {
         type = types.listOf types.str;
-        default = [ "github.com" "bitbucket.org" ];
+        default = [ "github.com" "bitbucket.org" "*.plum" ];
       };
     };
   };
