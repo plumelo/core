@@ -36,8 +36,8 @@
   networking.networkmanager = { dns = "dnsmasq"; };
   environment.etc."NetworkManager/dnsmasq.d/20-adblock.conf".text = builtins.readFile
     ((fetchTarball {
-      url = "https://github.com/notracking/hosts-blocklists/archive/dc2e9d5.tar.gz";
-      sha256 = "0zpmxmjkljrwvx75d197r2f7inqbnggbcj4gsrjiz4k3q172ysvb";
+      url = "https://github.com/notracking/hosts-blocklists/archive/d1ce01e.tar.gz";
+      sha256 = "1vp3phraci4lga7bqmlggz0v9yylqy96d9hr3ffzfxd5cgdyb2j2";
     }) + "/dnsmasq/dnsmasq.blacklist.txt");
 
 
