@@ -1,5 +1,5 @@
 # https://howoldis.herokuapp.com
 builtins.fetchTarball {
-  url = "https://github.com/NixOS/nixpkgs/archive/34ad166a830d.tar.gz";
-  sha256 = "1jvi1562x3kq65w642vfimpszv65zbc7c2nv8gakhzcx4n3f47xq";
+  url = "https://github.com/NixOS/nixpkgs/archive/a52e974cff8f.tar.gz";
+  sha256 = "0yhcnn435j9wfi1idxr57c990aihg0n8605566f2l8vfdrz7hl7d";
 }
