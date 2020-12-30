@@ -8,6 +8,7 @@ in {
       type = types.str;
       default = null;
     };
+
     packages = mkOption {
       type = types.listOf types.package;
       default = [ ];
@@ -36,7 +37,7 @@ in {
           "systemd-journal"
         ] ++ cfg.extraGroups;
         initialPassword = "${cfg.name}";
-        packages = mkDefault cfg.packages;
+        packages = cfg.packages;
       };
     };
   };
