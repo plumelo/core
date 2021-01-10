@@ -14,8 +14,7 @@
         value = toString path + "/" + name;
       })
       (filter (n: match ".*\\.nix" n != null) (attrNames (readDir path)))
-    );
-    in
+    ); in
     {
       overlay = import ./pkgs;
 
@@ -36,10 +35,5 @@
       nixosModule = self.nixosModules.core;
 
       homeModules = pathToAttrs ./homes;
-
-      # defaultTemplate = {
-      #   path = ./.;
-      #   description = "template";
-      # };
     };
 }
