@@ -1,6 +1,10 @@
-# nixos
-Nixos configuration
+# About
+A NixOS & home-manager configuration template using the new flakes mechanism.
+It provides an overlay and some packages, some NixOs and home-manager modules.
+
+# Template
+A template is provided to get started with a basic config
+
 ```
-sudo nix-channel --add https://nixos.org/channels/nixos-unstable unstable
-sudo nix-channel --update
+nix flake new -t "github:plumelo/nixos" nixos
 ```
