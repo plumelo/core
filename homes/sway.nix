@@ -135,7 +135,7 @@
       {
         block = "memory";
         display_type = "memory";
-        format_mem = "{Mug}%";
+        format_mem = "{Mupi}%";
         format_swap = "{SUp}%";
       }
       {
