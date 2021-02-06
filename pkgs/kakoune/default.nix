@@ -17,8 +17,9 @@
 , gnused
 , nix
 , kak-lsp
+, lib
 }:
-with stdenv.lib;
+with lib;
 let
   plugins = callPackage ./plugins { };
   kakoune = kakoune-unwrapped.overrideAttrs
