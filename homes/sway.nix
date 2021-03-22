@@ -127,12 +127,6 @@
     icons = "awesome";
     blocks = [
       {
-        block = "battery";
-        driver = "upower";
-        device = "BAT1";
-        format = "{percentage}% {time}";
-      }
-      {
         block = "memory";
         display_type = "memory";
         format_mem = "{Mupi}%";
