@@ -26,6 +26,9 @@
       XF86MonBrightnessDown = "exec brightnessctl set 10%-";
       XF86MonBrightnessUp = "exec brightnessctl set +10%";
       Print = "exec slurp | grim -g - - | wl-copy";
+      "Ctrl+Print" = "exec wf-recorder -f ~/record.mp4";
+      "Ctrl+Shift+Print" = "exec wf-recorder -g \"$$(slurp)\" -f ~/record.mp4";
+      "Ctrl+Shift+BackSpace" = "exec killall -s SIGINT wf-recorder";
       "Mod4+Control+l" = "exec loginctl lock-session";
     };
     fonts = [ "monospace 9" ];
@@ -111,6 +114,8 @@
     grim
     lm_sensors
     pavucontrol
+    wf-recorder
+    killall
   ];
 
   programs.i3status-rust.enable = true;
@@ -172,7 +177,7 @@
     maxIconSize = 24;
   };
 
-  services.wlsunset  = {
+  services.wlsunset = {
     enable = true;
     latitude = "47.15";
     longitude = "27.59";
