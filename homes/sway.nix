@@ -1,7 +1,8 @@
 { pkgs, config, lib, ... }: {
+
   wayland.windowManager.sway = {
     enable = true;
-    wrapperFeatures.gtk = true;
+    package = null;
   };
   wayland.windowManager.sway.config = {
     menu = "bemenu-run -w -i --prefix '⇒' --prompt 'Run: ' --hb '#404654' --ff '#c698e3' --tf '#c698e3' --hf '#fcfcfc'";
