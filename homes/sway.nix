@@ -135,18 +135,18 @@
       {
         block = "memory";
         display_type = "memory";
-        format_mem = "{Mupi}%";
-        format_swap = "{SUp}%";
+        format_mem = "{mem_used_percents}";
+        format_swap = "{swap_used_percents}";
       }
       {
         block = "cpu";
-        format = "{utilization}% {frequency}";
+        format = "{utilization} {frequency}";
       }
       {
         block = "temperature";
         collapsed = false;
         interval = 1;
-        format = "{max}°";
+        format = "{max}";
         chip = "k10temp-*";
         idle = 70;
         info = 75;
