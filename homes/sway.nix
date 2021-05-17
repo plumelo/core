@@ -1,4 +1,7 @@
-{ pkgs, config, lib, ... }: {
+{ pkgs, config, lib, ... }:
+let fonts = { names = [ "monospace" ]; size = 9.00; };
+in
+{
 
   wayland.windowManager.sway = {
     enable = true;
@@ -32,12 +35,12 @@
       "Ctrl+Shift+BackSpace" = "exec killall -s SIGINT wf-recorder";
       "Mod4+Control+l" = "exec loginctl lock-session";
     };
-    fonts = [ "monospace 9" ];
+    inherit fonts;
     bars = [{
       mode = "dock";
       hiddenState = "hide";
       position = "bottom";
-      fonts = [ "monospace 9" ];
+      inherit fonts;
       workspaceButtons = true;
       workspaceNumbers = true;
       statusCommand = "i3status-rs ~/.config/i3status-rust/config-bottom.toml";
@@ -159,7 +162,7 @@
       {
         block = "networkmanager";
         on_click = "alacritty -e nmtui";
-        interface_name_exclude = [ "br\\-[0-9a-f]{12}" "lxdbr\\d+" ];
+        interface_name_exclude = [ "br\\-[0-9a-f]{12}" "lxdbr\\d+" "lxcbr\\d+" ];
       }
       {
         block = "time";
