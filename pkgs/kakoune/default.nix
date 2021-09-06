@@ -22,15 +22,7 @@
 with lib;
 let
   plugins = callPackage ./plugins { };
-  kakoune = kakoune-unwrapped.overrideAttrs
-    (
-      odl: rec {
-        postInstall = ''
-          mkdir -p $out/share
-          tic -x -o "$out/share/terminfo" ../contrib/tmux-256color.terminfo
-        '';
-      }
-    );
+  kakoune = kakoune-unwrapped;
   eslint-formatter-kakoune = fetchFromGitHub {
     owner = "Delapouite";
     repo = "eslint-formatter-kakoune";
