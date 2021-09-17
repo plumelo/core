@@ -18,11 +18,21 @@
 , nix
 , kak-lsp
 , lib
+, ncurses
 }:
 with lib;
 let
   plugins = callPackage ./plugins { };
-  kakoune = kakoune-unwrapped;
+  kakoune = kakoune-unwrapped.overrideAttrs
+    (
+      old: rec {
+        postInstall = ''
+          mkdir -p $out/share
+          tic -x -o "$out/share/terminfo" ../contrib/tmux-256color.terminfo
+        '' + old.postInstall;
+        buildInputs = [ ncurses ];
+      }
+    );
   eslint-formatter-kakoune = fetchFromGitHub {
     owner = "Delapouite";
     repo = "eslint-formatter-kakoune";
