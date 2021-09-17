@@ -28,7 +28,7 @@ let
       old: rec {
         postInstall = ''
           mkdir -p $out/share
-          tic -x -o "$out/share/terminfo" ../contrib/tmux-256color.terminfo
+          tic -x -o "$out/share/terminfo" ./contrib/tmux-256color.terminfo
         '' + old.postInstall;
         buildInputs = [ ncurses ];
       }
