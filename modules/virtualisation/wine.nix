@@ -11,7 +11,7 @@ in
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       winePackage
-      (winetricks.override { wine = winePackage; })
+      winetricks
     ];
     hardware.opengl.driSupport32Bit = true;
     hardware.pulseaudio.support32Bit = true;
