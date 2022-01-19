@@ -8,7 +8,7 @@ in
       enable = true;
       drivers = with pkgs; [ gutenprint ];
     };
-
+    services.saned.enable = true;
     environment.systemPackages = with pkgs; [ gnome3.simple-scan ];
   };
 }
