@@ -32,7 +32,7 @@
       };
     };
     font = { size = 10; };
-    background_opacity = 0.98;
+    window = {opacity = 0.95; };
     env = {
       TERM = "xterm-256color";
     };
