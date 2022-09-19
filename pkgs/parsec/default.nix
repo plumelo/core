@@ -11,7 +11,7 @@ let
     name = "parsecd";
     src = fetchurl {
       url = "https://builds.parsecgaming.com/package/parsec-linux.deb";
-      sha256 = "1hfdzjd8qiksv336m4s4ban004vhv00cv2j461gc6zrp37s0fwhc";
+      hash = "sha256-DHIH9Bk3f8NeMESKzQDYcBMArFpEk2rG2HpGjJr8zcE=";
     };
     nativeBuildInputs = [ dpkg ];
     unpackCmd = "dpkg -x $curSrc .";
@@ -51,6 +51,7 @@ buildFHSUserEnv {
       xorg.libXxf86vm
       xorg.libxcb
       openssl
+      ffmpeg
     ];
   runScript = "/usr/bin/parsecd";
   profile = ''
