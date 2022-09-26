@@ -26,7 +26,7 @@ buildFHSUserEnv {
   targetPkgs = pkgs:
     with pkgs; [
       parsecd
-      alsaLib
+      alsa-lib
       cups
       dbus
       fontconfig
