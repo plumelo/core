@@ -9,6 +9,6 @@ in
       drivers = with pkgs; [ gutenprint ];
     };
     services.saned.enable = true;
-    environment.systemPackages = with pkgs; [ gnome3.simple-scan ];
+    environment.systemPackages = with pkgs; [ gnome.simple-scan ];
   };
 }
