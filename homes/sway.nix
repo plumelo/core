@@ -1,8 +1,24 @@
 { pkgs, config, lib, ... }:
-let fonts = { names = [ "monospace" ]; size = 9.00; };
+let
+  fonts = { names = [ "monospace" ]; size = 9.00; };
+  record = pkgs.writeShellScript "record" ''
+    pid=`pgrep wf-recorder`
+    status=$?
+    if [ $status != 0 ]
+    then
+      area=$(slurp)
+      wf-recorder -g $area -f ~/Screenshots/$(date +'recording_%Y-%m-%d-%H%M%S.mp4') >/dev/null 2>&1 &
+      notify-send "Recording started"
+      pkill -RTMIN+8 i3status-rs
+    else
+      killall -s SIGINT wf-recorder
+      notify-send "Recording stopped"
+      wait $(pgrep wf-recorder)
+      pkill -RTMIN+8 i3status-rs
+    fi;
+  '';
 in
 {
-
   wayland.windowManager.sway = {
     enable = true;
     package = null;
@@ -30,9 +46,7 @@ in
       XF86MonBrightnessDown = "exec brightnessctl set 10%-";
       XF86MonBrightnessUp = "exec brightnessctl set +10%";
       Print = "exec slurp | grim -g - - | wl-copy";
-      "Ctrl+Print" = "exec wf-recorder -f ~/record.mp4";
-      "Ctrl+Shift+Print" = "exec wf-recorder -g \"$$(slurp)\" -f ~/record.mp4";
-      "Ctrl+Shift+BackSpace" = "exec killall -s SIGINT wf-recorder";
+      "Mod4+Print" = "exec ${record}";
       "Mod4+Control+l" = "exec loginctl lock-session";
     };
     inherit fonts;
@@ -135,6 +149,13 @@ in
     };
     icons = "awesome";
     blocks = [
+      {
+        block = "custom";
+        command = "pgrep wf-recorder > /dev/null && echo ''";
+        interval = "once";
+        signal = 8;
+        hide_when_empty = true;
+      }
       {
         block = "memory";
         display_type = "memory";
