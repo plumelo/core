@@ -25,7 +25,7 @@
         };
         ssh = ./modules/programs/ssh;
         lxc = ./modules/virtualisation/lxc.nix;
-        lxd = ./modules/virtualisation/lxd.nix;
+        lxd = ./modules/virtualisation/lxd/default.nix;
         sane = ./modules/hardware/sane.nix;
         bluetooth = ./modules/hardware/bluetooth.nix;
         wine = ./modules/virtualisation/wine.nix;
