@@ -1,7 +1,16 @@
 { config, options, lib, pkgs, ... }:
 with lib;
-let cfg = config.virtualisation.lxd;
-in {
+let
+  cfg = config.virtualisation.lxd;
+  ovmf = (import
+    (builtins.fetchTarball {
+      url = "https://github.com/nixos/nixpkgs/archive/665bb90fc3f6c39cfb290ecc100b3433082e5d64.tar.gz";
+      sha256 = "sha256:1kbypzr5mwmc42s61zgyk0xiiyf9kikmml1d4p4qdijkyr1j6n3y";
+    })
+    { system = pkgs.system; }
+  ).OVMFFull.fd;
+in
+{
   options = {
     virtualisation.lxd.useQemu = mkOption {
       type = types.bool;
@@ -25,8 +34,8 @@ in {
         qemu-utils
         e2fsprogs
         util-linux
-        (pkgs.callPackage ./lxd-agent.nix { })
         gptfdisk
+        (pkgs.callPackage ./lxd-agent.nix { })
         (stdenv.mkDerivation rec {
           name = "virtiofsd";
           buildCommand = ''
@@ -40,9 +49,10 @@ in {
         name = "ovmf-meta";
         buildCommand = ''
           mkdir -p $out
-          cp ${OVMFFull.fd}/FV/OVMF.fd $out/
-          cp ${OVMFFull.fd}/FV/OVMF_CODE.fd $out/
-          cp ${OVMFFull.fd}/FV/OVMF_VARS.fd $out/OVMF_VARS.ms.fd
+          cp ${ovmf}/FV/OVMF.fd $out/
+          cp ${ovmf}/FV/OVMF_CODE.fd $out/
+          cp ${ovmf}/FV/OVMF_VARS.fd $out/OVMF_VARS.fd
+          cp ${ovmf}/FV/OVMF_VARS.fd $out/OVMF_VARS.ms.fd
         '';
       });
     })
