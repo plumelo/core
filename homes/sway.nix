@@ -7,7 +7,7 @@ let
     if [ $status != 0 ]
     then
       area=$(slurp)
-      wf-recorder -g $area -f ~/Screenshots/$(date +'recording_%Y-%m-%d-%H%M%S.mp4') >/dev/null 2>&1 &
+      wf-recorder -g "$area" -f ~/Screenshots/$(date +'recording_%Y-%m-%d-%H%M%S.mp4') -c h264_vaapi -d /dev/dri/renderD128 >/dev/null 2>&1 &
       notify-send "Recording started"
       pkill -RTMIN+8 i3status-rs
     else
