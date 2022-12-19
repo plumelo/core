@@ -17,6 +17,28 @@ let
       pkill -RTMIN+8 i3status-rs
     fi;
   '';
+  bookmarks = pkgs.writeShellScript "bookmarks" ''
+    exec cat ~/.sync/Docs/bookmarks | tofi --horizontal false --height 200 | xargs -0 -I {} echo "{}" | sed "s/#.*//"  | wtype - --
+  '';
+  bookmark = pkgs.writeShellScript "bookmark" ''
+    tree=$(swaymsg -t 'get_tree')
+    shell=$(echo $tree | ${pkgs.jq}/bin/jq -r 'recurse(.nodes[])|select(.focused == true)|.shell')
+    if [ $shell == "xwayland" ]; then
+      xdotool key ctrl+c
+    else
+      wtype -M ctrl c -m ctrl
+    fi
+    bookmark=$(wl-paste)
+    title=$(echo $tree | ${pkgs.jq}/bin/jq -r 'recurse(.nodes[])|select(.focused == true)|.name' | sed 's/\s\-\s.*//')
+    file=~/.sync/Docs/bookmarks
+    if grep -q "^$bookmark #" "$file"; then
+      notify-send "Bookmark already exists! $title"
+    else
+      notify-send "Bookmark added! $title # $bookmark"
+      echo "$bookmark # $title" >> "$file"
+    fi
+    wl-copy -c
+  '';
 in
 {
   wayland.windowManager.sway = {
@@ -24,7 +46,7 @@ in
     package = null;
   };
   wayland.windowManager.sway.config = {
-    menu = "bemenu-run -w -i --prefix '⇒' --prompt 'Run: ' --hb '#404654' --ff '#c698e3' --tf '#c698e3' --hf '#fcfcfc'";
+    menu = "tofi-run | xargs swaymsg exec --";
     modifier = "Mod4";
     terminal = "alacritty";
     input."type:touchpad" = {
@@ -45,6 +67,8 @@ in
       XF86AudioMute = "exec pactl set-sink-mute @DEFAULT_SINK@ toggle";
       XF86MonBrightnessDown = "exec brightnessctl set 10%-";
       XF86MonBrightnessUp = "exec brightnessctl set +10%";
+      "Mod4+i" = "exec ${bookmarks}";
+      "Mod4+Shift+i" = "exec ${bookmark}";
       Print = "exec slurp | grim -g - - | wl-copy";
       "Mod4+Print" = "exec ${record}";
       "Mod4+Control+l" = "exec loginctl lock-session";
@@ -134,6 +158,8 @@ in
     pavucontrol
     wf-recorder
     killall
+    wtype
+    xdotool
   ];
 
   programs.i3status-rust.enable = true;
@@ -144,7 +170,6 @@ in
         idle_bg = "#2e3440";
         idle_fg = "#839496";
         separator = "";
-
       };
     };
     icons = "awesome";
