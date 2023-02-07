@@ -36,23 +36,24 @@ let
     "extensions.pocket.showHome" = false;
     "extensions.pocket.site" = "";
   };
+  extensions = [
+    pkgs.nur.repos.rycee.firefox-addons.ublock-origin
+    pkgs.nur.repos.rycee.firefox-addons.libredirect
+  ];
+
 in
 {
   programs.firefox = {
     enable = true;
-    extensions = [
-      pkgs.nur.repos.rycee.firefox-addons.ublock-origin
-      pkgs.nur.repos.rycee.firefox-addons.libredirect
-    ];
     profiles.default = {
       id = 0;
       name = "Default";
-      inherit settings;
+      inherit extensions settings;
     };
     profiles.oather = {
       id = 1;
       name = "Oather";
-      inherit settings;
+      inherit extensions settings;
     };
   };
 
