@@ -35,6 +35,7 @@ in
         e2fsprogs
         util-linux
         gptfdisk
+        swtpm
         (pkgs.callPackage ./lxd-agent.nix { })
         (stdenv.mkDerivation rec {
           name = "virtiofsd";
