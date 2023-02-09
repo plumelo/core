@@ -30,6 +30,7 @@ in
         util-linux
         gptfdisk
         swtpm
+        kmod
         (pkgs.callPackage ./lxd-agent.nix { })
         (stdenv.mkDerivation rec {
           name = "virtiofsd";
