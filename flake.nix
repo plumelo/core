@@ -25,6 +25,9 @@
         core = { ... }: {
           nixpkgs.config.allowUnfree = true;
           nixpkgs.overlays = [ self.overlay nur.overlay ];
+          nix.extraOptions = ''
+            experimental-features = nix-command flakes
+          '';
           nix.registry.nixpkgs.flake = nixpkgs;
         };
         ssh = ./modules/programs/ssh;
