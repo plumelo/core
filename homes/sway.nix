@@ -183,8 +183,8 @@ in
       }
       {
         block = "memory";
-        format_mem = "{mem_used_percents}";
-        format_swap = "{swap_used_percents}";
+        format = " $icon $mem_used_percents.eng(w:1) ";
+        format_alt = " $icon_swap $swap_free.eng(w:3,u:B,p:M)/$swap_total.eng(w:3,u:B,p:M)($swap_used_percents.eng(w:2)) ";
       }
       {
         block = "cpu";
