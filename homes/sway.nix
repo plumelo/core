@@ -219,7 +219,7 @@ in
         block = "time";
         interval = 60;
         format = {
-          full = " $icon $timestamp.datetime(f:'%a %Y-%m-%d %R %Z', l:ro_RO) ";
+          full = " $icon $timestamp.datetime(f:'%a %Y-%m-%d %R', l:ro_RO) ";
           short = " $icon $timestamp.datetime(f:%R) ";
         };
       }
