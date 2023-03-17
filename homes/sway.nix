@@ -165,14 +165,14 @@ in
   programs.i3status-rust.enable = true;
   programs.i3status-rust.bars.bottom = {
     settings = {
-      theme = "slick";
+      theme.theme = "slick";
       overrides = {
         idle_bg = "#2e3440";
         idle_fg = "#839496";
         separator = "";
       };
     };
-    icons = "awesome";
+    icons = "awesome5";
     blocks = [
       {
         block = "custom";
@@ -183,18 +183,18 @@ in
       }
       {
         block = "memory";
-        format = " $icon $mem_used_percents.eng(w:1) ";
+        format = " $icon $mem_used.eng(prefix:M) ($mem_used_percents.eng(w:2)) ";
         format_alt = " $icon_swap $swap_free.eng(w:3,u:B,p:M)/$swap_total.eng(w:3,u:B,p:M)($swap_used_percents.eng(w:2)) ";
       }
       {
         block = "cpu";
-        format = "{utilization} {frequency}";
+        format = " $icon $barchart $utilization ";
+        format_alt = " $icon $frequency{ $boost|} ";
       }
       {
         block = "temperature";
-        collapsed = false;
-        interval = 1;
-        format = "{max}";
+        interval = 10;
+        format = " $icon $max";
         chip = "k10temp-*";
         idle = 70;
         info = 75;
@@ -202,17 +202,26 @@ in
       }
       {
         block = "sound";
-        on_click = "pavucontrol";
+        click = [{
+          button = "left";
+          cmd = "pavucontrol";
+        }];
       }
       {
-        block = "networkmanager";
-        on_click = "alacritty -e nmtui";
-        interface_name_exclude = [ "br\\-[0-9a-f]{12}" "lxdbr\\d+" "lxcbr\\d+" ];
+        block = "net";
+        format = " $icon $graph_down $graph_up {$signal_strength $ssid|$ip} via $device ";
+        click = [{
+          button = "left";
+          cmd = "alacritty -e nmtui";
+        }];
       }
       {
         block = "time";
         interval = 60;
-        format = "%a %d/%m %R";
+        format = {
+          full = " $icon $timestamp.datetime(f:'%a %Y-%m-%d %R %Z', l:ro_RO) ";
+          short = " $icon $timestamp.datetime(f:%R) ";
+        };
       }
     ];
   };
