@@ -144,6 +144,11 @@ in
       --separator-color 3b4252ff \
       --grace 2 \
       --fade-in 0.2
+
+    mode passthrough {
+      bindsym Mod4+Y mode default
+    }
+    bindsym Mod4+Y mode passthrough
   '';
 
   home.packages = with pkgs; [
