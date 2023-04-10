@@ -193,8 +193,8 @@ in
       }
       {
         block = "cpu";
-        format = " $icon $barchart $utilization ";
-        format_alt = " $icon $frequency{ $boost|} ";
+        format = "$icon $utilization";
+        format_alt = " $icon $barchart $frequency ";
       }
       {
         block = "temperature";
@@ -214,12 +214,21 @@ in
       }
       {
         block = "net";
-        format = " $icon $graph_down $graph_up {$signal_strength $ssid|$ip} via $device ";
+        format = "$icon {$signal_strength $ssid|$ip}";
+        format_alt = "$icon $graph_down $graph_up {$signal_strength $ssid|$ip} via $device";
         click = [{
-          button = "left";
+          button = "right";
           cmd = "alacritty -e nmtui";
         }];
       }
+      {
+        block = "net";
+        device = "^wg[0-9]$";
+        format = "$icon $ip";
+        format_alt = "$icon $graph_down $graph_up $ip $device";
+        missing_format = "";
+      }
+
       {
         block = "time";
         interval = 60;
