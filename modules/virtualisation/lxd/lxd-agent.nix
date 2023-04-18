@@ -2,10 +2,10 @@
 
 buildGo118Package rec {
   pname = "lxd-agent";
-  version = "5.10";
+  version = "5.13";
   src = fetchurl {
     url = "https://linuxcontainers.org/downloads/lxd/lxd-${version}.tar.gz";
-    sha256 = "sha256-sYJkPr/tE22xJEjKX7fMjOLQ9zBDm52UjqbVLrm39zU=";
+    sha256 = "sha256-kys8zfqhkpJqq4ICg6dOsoJEoxJ209GwdjGRrfrZ7j0=";
   };
   goPackagePath = "github.com/lxc/lxd";
 
