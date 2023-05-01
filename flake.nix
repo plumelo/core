@@ -36,8 +36,10 @@
         sane = ./modules/hardware/sane.nix;
         bluetooth = ./modules/hardware/bluetooth.nix;
         wine = ./modules/virtualisation/wine.nix;
-        home = home-manager.nixosModules.home-manager;
-        home-config.home-manager = { useGlobalPkgs = true; useUserPackages = true; };
+        home = {
+          imports = [ home-manager.nixosModules.home-manager ];
+          home-manager = { useGlobalPkgs = true; useUserPackages = true; };
+        };
       };
       nixosModule = self.nixosModules.core;
       homeModules = pathToAttrs ./homes;
