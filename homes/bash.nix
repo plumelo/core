@@ -35,10 +35,18 @@
       bind '"\e[B": history-search-forward'
       bind '"\e[M": kill-word'
       bind '"\C-h": backward-kill-word'
+
+      stty -ixon
+
       hm() {
         sed 's/[[:space:]]*$//' $HISTFILE | tac | awk '!x[$0]++' | tac | ${pkgs.moreutils}/bin/sponge $HISTFILE
       }
-      stty -ixon
+      mend() {
+        nix run nixpkgs#patchelf -- \
+          --set-interpreter $(nix eval --raw 'nixpkgs#glibc')/lib64/ld-linux-x86-64.so.2 \
+          --set-rpath $(nix eval --raw 'nixpkgs#gcc.cc.lib')/lib \
+          $@
+      }
     '';
   };
 
