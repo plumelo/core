@@ -1,8 +1,8 @@
 { pkgs, ... }:
 let
   settings = {
-    "browser.startup.homepage" = "https://duckduckgo.com/";
-    "browser.search.defaultenginename" = "DuckDuckGo";
+    #"browser.startup.homepage" = "https://duckduckgo.com/";
+    "browser.search.defaultenginename" = "@libredirect";
     # Enable HTTPS-Only Mode
     "dom.security.https_only_mode" = true;
     "dom.security.https_only_mode_ever_enabled" = true;
