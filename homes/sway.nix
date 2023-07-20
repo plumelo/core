@@ -61,6 +61,7 @@ in
       smartGaps = true;
     };
     window.hideEdgeBorders = "smart";
+    window.titlebar = false;
     keybindings = lib.mkOptionDefault {
       XF86AudioRaiseVolume = "exec pactl set-sink-volume @DEFAULT_SINK@ +5%";
       XF86AudioLowerVolume = "exec pactl set-sink-volume @DEFAULT_SINK@ -5%";
