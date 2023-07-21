@@ -224,7 +224,7 @@ in
       }
       {
         block = "net";
-        device = "^wg[0-9]$";
+        device = "^wg\-[a-z0-9]+$";
         format = "$icon $ip";
         format_alt = "$icon $graph_down $graph_up $ip $device";
         missing_format = "";
