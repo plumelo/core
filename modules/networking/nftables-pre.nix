@@ -11,12 +11,8 @@ in
         type = types.bool;
         default = false;
       };
-      deps = mkOption {
+      after = mkOption {
         default = [ ];
-        type = types.listOf types.str;
-      };
-      trustedInterfaces = mkOption {
-        default = config.networking.firewall.trustedInterfaces;
         type = types.listOf types.str;
       };
     };
@@ -28,14 +24,13 @@ in
     };
     systemd.services.nftables = {
       before = lib.mkForce [ ];
-      after = lib.mkForce ([ "network-online.target" ] ++ cfg.deps);
-      wants = lib.mkForce cfg.deps;
+      after = [ "network-pre.target" ] ++ cfg.after;
     };
 
     systemd.services.nftables-pre =
       let
         ifs = concatStringsSep ", " (
-          map (x: ''"${x}"'') cfg.trustedInterfaces
+          map (x: ''"${x}"'') config.networking.firewall.trustedInterfaces
         );
       in
       {
@@ -47,13 +42,10 @@ in
           ExecStart = pkgs.writeScript "nftables-rules" ''
             #! ${pkgs.nftables}/bin/nft -f
             flush ruleset
-            table inet filter {
+            table inet nixos-fw {
               chain input {
                 type filter hook input priority filter; policy drop;
                 ${optionalString (ifs != "") ''iifname { ${ifs} } accept comment "trusted interfaces"''}
-              }
-              chain forward {
-                type filter hook forward priority filter; policy drop;
               }
             }
           '';
