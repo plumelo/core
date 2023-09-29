@@ -24,7 +24,7 @@ in
     };
     systemd.services.nftables = {
       before = lib.mkForce [ ];
-      after = [ "network-pre.target" ] ++ cfg.after;
+      after = [ "network-online.target" ] ++ cfg.after;
     };
 
     systemd.services.nftables-pre =
