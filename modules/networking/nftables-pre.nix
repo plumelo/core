@@ -9,7 +9,7 @@ in
     networking.nftables-pre = {
       enable = mkOption {
         type = types.bool;
-        default = true;
+        default = false;
       };
       deps = mkOption {
         default = [ ];
