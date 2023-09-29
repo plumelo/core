@@ -40,6 +40,7 @@
           imports = [ home-manager.nixosModules.home-manager ];
           home-manager = { useGlobalPkgs = true; useUserPackages = true; };
         };
+        nftables-pre = ./modules/networking/nftables-pre.nix;
       };
       nixosModule = self.nixosModules.core;
       homeModules = pathToAttrs ./homes;
