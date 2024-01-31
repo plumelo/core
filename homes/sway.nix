@@ -150,6 +150,8 @@ in
       bindsym Mod4+Y mode default
     }
     bindsym Mod4+Y mode passthrough
+
+    for_window [shell=".*"] inhibit_idle fullscreen
   '';
 
   home.packages = with pkgs; [
