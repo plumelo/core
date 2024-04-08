@@ -2,12 +2,13 @@
 let
   fonts = { names = [ "monospace" ]; size = 9.00; };
   record = pkgs.writeShellScript "record" ''
+    args="$@"
     pid=`pgrep wf-recorder`
     status=$?
     if [ $status != 0 ]
     then
       area=$(slurp)
-      wf-recorder -g "$area" -f ~/Screenshots/$(date +'recording_%Y-%m-%d-%H%M%S.mp4') -c h264_vaapi -d /dev/dri/renderD128 >/dev/null 2>&1 &
+      wf-recorder -g "$area" $args -f ~/Screenshots/$(date +'recording_%Y-%m-%d-%H%M%S.mp4') -c h264_vaapi -d /dev/dri/renderD128 >/dev/null 2>&1 &
       notify-send "Recording started"
       pkill -RTMIN+8 i3status-rs
     else
@@ -72,6 +73,7 @@ in
       "Mod4+Shift+i" = "exec ${bookmark}";
       Print = "exec slurp | grim -g - - | wl-copy";
       "Mod4+Print" = "exec ${record}";
+      "Mod4+Shift+Print" = "exec ${record} -a";
       "Mod4+Control+l" = "exec loginctl lock-session";
     };
     inherit fonts;
