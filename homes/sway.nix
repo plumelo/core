@@ -203,7 +203,7 @@ in
       }
       {
         block = "temperature";
-        interval = 10;
+        interval = 2;
         format = "$icon $max";
         chip = "k10temp-*";
         idle = 70;
