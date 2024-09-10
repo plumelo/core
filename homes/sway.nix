@@ -65,7 +65,7 @@ in
     window.titlebar = false;
     keybindings = lib.mkOptionDefault {
       XF86AudioRaiseVolume = "exec wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 0.05+";
-      XF86AudioLowerVolume = "exec pwctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ +5%";
+      XF86AudioLowerVolume = "exec pwctl set-volume @DEFAULT_AUDIO_SINK@ 0.05-";
       XF86AudioMute = "exec pwctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
       XF86MonBrightnessDown = "exec brightnessctl set 10%-";
       XF86MonBrightnessUp = "exec brightnessctl set +10%";
