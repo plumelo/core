@@ -30,7 +30,7 @@
           '';
           nix.registry.nixpkgs.flake = nixpkgs;
         };
-        ssh = ./modules/programs/ssh;
+        #ssh = ./modules/programs/ssh;
         lxc = ./modules/virtualisation/lxc.nix;
         sane = ./modules/hardware/sane.nix;
         bluetooth = ./modules/hardware/bluetooth.nix;
