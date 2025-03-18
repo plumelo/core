@@ -5,10 +5,9 @@
       url = github:nix-community/home-manager;
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nur.url = github:nix-community/NUR;
   };
 
-  outputs = { self, nixpkgs, home-manager, nur }:
+  outputs = { self, nixpkgs, home-manager  }:
     let
       pathToAttrs = with builtins; path: listToAttrs (map
         (name: {
@@ -24,7 +23,7 @@
       nixosModules = {
         core = { ... }: {
           nixpkgs.config.allowUnfree = true;
-          nixpkgs.overlays = [ self.overlay nur.overlay ];
+          nixpkgs.overlays = [ self.overlay ];
           nix.extraOptions = ''
             experimental-features = nix-command flakes
           '';
@@ -44,7 +43,6 @@
       nixosModule = self.nixosModules.core;
       homeModules = pathToAttrs ./homes;
 
-      nur = nur;
       home-manager = home-manager;
     };
 }
