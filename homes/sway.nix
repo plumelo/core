@@ -247,11 +247,13 @@ in
 
   services.mako = {
     enable = true;
-    defaultTimeout = 10000;
-    font = "sansSerif 9";
-    backgroundColor = "#282c34";
-    borderSize = 1;
-    maxIconSize = 24;
+    settings = {
+      defaultTimeout = "10000";
+      font = "sansSerif 9";
+      backgroundColor = "#282c34";
+      borderSize = "1";
+      maxIconSize = "24";
+    };
   };
 
   services.wlsunset = {
