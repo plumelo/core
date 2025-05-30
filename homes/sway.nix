@@ -269,16 +269,16 @@ in
 
   services.swaync = {
     enable = true;
-    style = with pkgs; concatText "swaync-style.css" [
-      (fetchurl {
-        url = "https://github.com/catppuccin/swaync/releases/download/v0.2.3/mocha.css";
-        hash = "sha256-Hie/vDt15nGCy4XWERGy1tUIecROw17GOoasT97kIfc=";
-      })
-      (writeText "tweaks.css" ''
-        * {
-          font-family: "monospace";
-        }
-      '')
-    ];
+    style = with pkgs; runCommandLocal "swaync-style.css"
+      {
+        style = (fetchurl {
+          url = "https://github.com/catppuccin/swaync/releases/download/v0.2.3/mocha.css";
+          hash = "sha256-Hie/vDt15nGCy4XWERGy1tUIecROw17GOoasT97kIfc=";
+        });
+      } ''
+      cat $style > $out
+      sed -i 's/font-size: 14px;/font-size: 12px;/g' $out
+    '';
+
   };
 }
