@@ -267,5 +267,18 @@ in
     longitude = "27.59";
   };
 
-  services.swaync.enable = true;
+  services.swaync = {
+    enable = true;
+    style = with pkgs; concatText "swaync-style.css" [
+      (fetchurl {
+        url = "https://github.com/catppuccin/swaync/releases/download/v0.2.3/mocha.css";
+        hash = "sha256-LMm6nWn1JPPgj5YpppwFG3lXTtXem5atlIvqrDxd0bM=";
+      })
+      (writeText "tweaks.css" ''
+        * {
+          font-family: "monospace";
+        }
+      '')
+    ];
+  };
 }
