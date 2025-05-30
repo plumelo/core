@@ -118,7 +118,6 @@ in
       };
     }];
     startup = [
-      { command = "mako"; }
       {
         command = ''
           swayidle -w \
@@ -235,6 +234,23 @@ in
       }
 
       {
+        block = "notify";
+        driver = "swaync";
+        click = [
+          {
+            button = "left";
+            action = "show";
+
+          }
+          {
+            button = "right";
+            action = "toggle_paused";
+          }
+        ];
+      }
+
+
+      {
         block = "time";
         interval = 60;
         format = {
@@ -245,20 +261,11 @@ in
     ];
   };
 
-  services.mako = {
-    enable = true;
-    settings = {
-      defaultTimeout = "10000";
-      font = "sansSerif 9";
-      backgroundColor = "#282c34";
-      borderSize = "1";
-      maxIconSize = "24";
-    };
-  };
-
   services.wlsunset = {
     enable = true;
     latitude = "47.15";
     longitude = "27.59";
   };
+
+  services.swaync.enable = true;
 }
