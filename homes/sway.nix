@@ -272,7 +272,7 @@ in
     style = with pkgs; concatText "swaync-style.css" [
       (fetchurl {
         url = "https://github.com/catppuccin/swaync/releases/download/v0.2.3/mocha.css";
-        hash = "sha256-LMm6nWn1JPPgj5YpppwFG3lXTtXem5atlIvqrDxd0bM=";
+        hash = "sha256-Hie/vDt15nGCy4XWERGy1tUIecROw17GOoasT97kIfc=";
       })
       (writeText "tweaks.css" ''
         * {
