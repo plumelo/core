@@ -1,6 +1,14 @@
-{ pkgs, config, lib, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 let
-  fonts = { names = [ "monospace" ]; size = 9.00; };
+  fonts = {
+    names = [ "monospace" ];
+    size = 9.00;
+  };
   record = pkgs.writeShellScript "record" ''
     args="$@"
     pid=`pgrep wf-recorder`
@@ -77,46 +85,48 @@ in
       "Mod4+Control+l" = "exec loginctl lock-session";
     };
     inherit fonts;
-    bars = [{
-      mode = "dock";
-      hiddenState = "hide";
-      position = "bottom";
-      inherit fonts;
-      workspaceButtons = true;
-      workspaceNumbers = true;
-      statusCommand = "i3status-rs ~/.config/i3status-rust/config-bottom.toml";
-      trayOutput = "primary";
-      colors = {
-        background = "#2E3440";
-        statusline = "#839496";
-        separator = "#777777";
-        focusedWorkspace = {
-          border = "#4C7899";
-          background = "#285577";
-          text = "#D8DEE9";
-        };
-        activeWorkspace = {
-          border = "#333333";
-          background = "#4C7899";
-          text = "#D8DEE9";
-        };
-        inactiveWorkspace = {
-          border = "#3B4252";
+    bars = [
+      {
+        mode = "dock";
+        hiddenState = "hide";
+        position = "bottom";
+        inherit fonts;
+        workspaceButtons = true;
+        workspaceNumbers = true;
+        statusCommand = "i3status-rs ~/.config/i3status-rust/config-bottom.toml";
+        trayOutput = "primary";
+        colors = {
           background = "#2E3440";
-          text = "#888888";
+          statusline = "#839496";
+          separator = "#777777";
+          focusedWorkspace = {
+            border = "#4C7899";
+            background = "#285577";
+            text = "#D8DEE9";
+          };
+          activeWorkspace = {
+            border = "#333333";
+            background = "#4C7899";
+            text = "#D8DEE9";
+          };
+          inactiveWorkspace = {
+            border = "#3B4252";
+            background = "#2E3440";
+            text = "#888888";
+          };
+          urgentWorkspace = {
+            border = "#2F343A";
+            background = "#900000";
+            text = "#D8DEE9";
+          };
+          bindingMode = {
+            border = "#2F343A";
+            background = "#900000";
+            text = "#D8DEE9";
+          };
         };
-        urgentWorkspace = {
-          border = "#2F343A";
-          background = "#900000";
-          text = "#D8DEE9";
-        };
-        bindingMode = {
-          border = "#2F343A";
-          background = "#900000";
-          text = "#D8DEE9";
-        };
-      };
-    }];
+      }
+    ];
     startup = [
       {
         command = ''
@@ -173,15 +183,8 @@ in
 
   programs.i3status-rust.enable = true;
   programs.i3status-rust.bars.bottom = {
-    settings = {
-      theme.theme = "slick";
-      theme.overrides = {
-        idle_bg = "#2e3440";
-        idle_fg = "#839496";
-        separator = "";
-      };
-    };
-    icons = "awesome5";
+    theme = "modern";
+    icons = "awesome6";
     blocks = [
       {
         block = "custom";
@@ -211,19 +214,23 @@ in
       }
       {
         block = "sound";
-        click = [{
-          button = "left";
-          cmd = "pavucontrol";
-        }];
+        click = [
+          {
+            button = "left";
+            cmd = "pavucontrol";
+          }
+        ];
       }
       {
         block = "net";
         format = "$icon {$signal_strength $ssid|$ip}";
         format_alt = "$icon $graph_down $graph_up {$signal_strength $ssid|$ip} via $device";
-        click = [{
-          button = "right";
-          cmd = "alacritty -e nmtui";
-        }];
+        click = [
+          {
+            button = "right";
+            cmd = "alacritty -e nmtui";
+          }
+        ];
       }
       {
         block = "net";
@@ -249,7 +256,6 @@ in
         ];
       }
 
-
       {
         block = "time";
         interval = 60;
@@ -269,16 +275,21 @@ in
 
   services.swaync = {
     enable = true;
-    style = with pkgs; runCommandLocal "swaync-style.css"
-      {
-        style = (fetchurl {
-          url = "https://github.com/catppuccin/swaync/releases/download/v0.2.3/mocha.css";
-          hash = "sha256-Hie/vDt15nGCy4XWERGy1tUIecROw17GOoasT97kIfc=";
-        });
-      } ''
-      cat $style > $out
-      sed -i 's/font-size: 14px;/font-size: 12px;/g' $out
-    '';
+    style =
+      with pkgs;
+      runCommandLocal "swaync-style.css"
+        {
+          style = (
+            fetchurl {
+              url = "https://github.com/catppuccin/swaync/releases/download/v0.2.3/mocha.css";
+              hash = "sha256-Hie/vDt15nGCy4XWERGy1tUIecROw17GOoasT97kIfc=";
+            }
+          );
+        }
+        ''
+          cat $style > $out
+          sed -i 's/font-size: 14px;/font-size: 12px;/g' $out
+        '';
 
   };
 }
