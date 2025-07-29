@@ -175,7 +175,7 @@ in
   programs.i3status-rust.bars.bottom = {
     settings = {
       theme.theme = "slick";
-      overrides = {
+      theme.overrides = {
         idle_bg = "#2e3440";
         idle_fg = "#839496";
         separator = "";
