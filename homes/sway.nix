@@ -71,19 +71,28 @@ in
     };
     window.hideEdgeBorders = "smart";
     window.titlebar = false;
-    keybindings = lib.mkOptionDefault {
-      XF86AudioRaiseVolume = "exec wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 0.05+";
-      XF86AudioLowerVolume = "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05-";
-      XF86AudioMute = "exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
-      XF86MonBrightnessDown = "exec brightnessctl set 10%-";
-      XF86MonBrightnessUp = "exec brightnessctl set +10%";
-      "Mod4+i" = "exec ${bookmarks}";
-      "Mod4+Shift+i" = "exec ${bookmark}";
-      Print = "exec slurp | grim -g - - | wl-copy";
-      "Mod4+Print" = "exec ${record}";
-      "Mod4+Shift+Print" = "exec ${record} -a";
-      "Mod4+Control+l" = "exec loginctl lock-session";
-    };
+    keybindings =
+      let
+        modifier = config.wayland.windowManager.sway.config.modifier;
+      in
+      lib.mkOptionDefault {
+        XF86AudioRaiseVolume = "exec wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 0.05+";
+        XF86AudioLowerVolume = "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05-";
+        XF86AudioMute = "exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
+        XF86MonBrightnessDown = "exec brightnessctl set 10%-";
+        XF86MonBrightnessUp = "exec brightnessctl set +10%";
+        XF86AudioPlay = "exec playerctl play-pause";
+        XF86AudioPause = "exec playerctl play-pause";
+        XF86AudioNext = "exec playerctl next";
+        XF86AudioPrev = "exec playerctl previous";
+        XF86AudioStop = "exec playerctl stop";
+        "${modifier}+i" = "exec ${bookmarks}";
+        "${modifier}+Shift+i" = "exec ${bookmark}";
+        Print = "exec slurp | grim -g - - | wl-copy";
+        "Mod4+Print" = "exec ${record}";
+        "Mod4+Shift+Print" = "exec ${record} -a";
+        "Mod4+Control+l" = "exec loginctl lock-session";
+      };
     inherit fonts;
     bars = [
       {
