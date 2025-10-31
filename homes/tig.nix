@@ -1,4 +1,4 @@
 { pkgs, ... }: {
-  home.packages = [ pkgs.gitAndTools.tig ];
+  home.packages = [ pkgs.tig ];
   xdg.configFile."tig/config".source = ./xdg/tig/config;
 }
