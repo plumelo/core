@@ -17,13 +17,13 @@ let
     then
       area=$(slurp)
       wf-recorder -g "$area" $args -f ~/Screenshots/$(date +'recording_%Y-%m-%d-%H%M%S.mp4') -c h264_vaapi -d /dev/dri/renderD128 >/dev/null 2>&1 &
-      notify-send "Recording started"
-      pkill -RTMIN+8 i3status-rs
+      pkill -SIGUSR1 waybar
     else
       killall -s SIGINT wf-recorder
       notify-send "Recording stopped"
       wait $(pgrep wf-recorder)
-      pkill -RTMIN+8 i3status-rs
+      swaymsg bar bar-0 mode dock
+      pkill -SIGUSR1 waybar
     fi;
   '';
   bookmarks = pkgs.writeShellScript "bookmarks" ''
@@ -94,48 +94,7 @@ in
         "Mod4+Control+l" = "exec loginctl lock-session";
       };
     inherit fonts;
-    bars = [
-      {
-        mode = "dock";
-        hiddenState = "hide";
-        position = "bottom";
-        inherit fonts;
-        workspaceButtons = true;
-        workspaceNumbers = true;
-        statusCommand = "i3status-rs ~/.config/i3status-rust/config-bottom.toml";
-        trayOutput = "primary";
-        colors = {
-          background = "#2E3440";
-          statusline = "#839496";
-          separator = "#777777";
-          focusedWorkspace = {
-            border = "#4C7899";
-            background = "#285577";
-            text = "#D8DEE9";
-          };
-          activeWorkspace = {
-            border = "#333333";
-            background = "#4C7899";
-            text = "#D8DEE9";
-          };
-          inactiveWorkspace = {
-            border = "#3B4252";
-            background = "#2E3440";
-            text = "#888888";
-          };
-          urgentWorkspace = {
-            border = "#2F343A";
-            background = "#900000";
-            text = "#D8DEE9";
-          };
-          bindingMode = {
-            border = "#2F343A";
-            background = "#900000";
-            text = "#D8DEE9";
-          };
-        };
-      }
-    ];
+    bars = [ ];
     startup = [
       {
         command = ''
