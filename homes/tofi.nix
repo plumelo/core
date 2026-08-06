@@ -10,7 +10,10 @@
     font = monospace
     outline-width = 0
     border-width = 0
-    background-color = #000000
+    background-color = #282A36
+    text-color = #F8F8F2
+    prompt-color = #BD93F9
+    selection-color = #BD93F9
     min-input-width = 120
     result-spacing = 15
     padding-top = 0

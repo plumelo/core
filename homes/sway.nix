@@ -18,12 +18,10 @@ let
       area=$(slurp)
       wf-recorder -g "$area" $args -f ~/Screenshots/$(date +'recording_%Y-%m-%d-%H%M%S.mp4') -c h264_vaapi -d /dev/dri/renderD128 >/dev/null 2>&1 &
       notify-send "Recording started"
-      pkill -RTMIN+8 i3status-rs
     else
       killall -s SIGINT wf-recorder
       notify-send "Recording stopped"
       wait $(pgrep wf-recorder)
-      pkill -RTMIN+8 i3status-rs
     fi;
   '';
   bookmarks = pkgs.writeShellScript "bookmarks" ''
@@ -94,48 +92,7 @@ in
         "Mod4+Control+l" = "exec loginctl lock-session";
       };
     inherit fonts;
-    bars = [
-      {
-        mode = "dock";
-        hiddenState = "hide";
-        position = "bottom";
-        inherit fonts;
-        workspaceButtons = true;
-        workspaceNumbers = true;
-        statusCommand = "i3status-rs ~/.config/i3status-rust/config-bottom.toml";
-        trayOutput = "primary";
-        colors = {
-          background = "#2E3440";
-          statusline = "#839496";
-          separator = "#777777";
-          focusedWorkspace = {
-            border = "#4C7899";
-            background = "#285577";
-            text = "#D8DEE9";
-          };
-          activeWorkspace = {
-            border = "#333333";
-            background = "#4C7899";
-            text = "#D8DEE9";
-          };
-          inactiveWorkspace = {
-            border = "#3B4252";
-            background = "#2E3440";
-            text = "#888888";
-          };
-          urgentWorkspace = {
-            border = "#2F343A";
-            background = "#900000";
-            text = "#D8DEE9";
-          };
-          bindingMode = {
-            border = "#2F343A";
-            background = "#900000";
-            text = "#D8DEE9";
-          };
-        };
-      }
-    ];
+    bars = [ ];
     startup = [
       {
         command = ''
@@ -159,10 +116,10 @@ in
       --indicator-thickness 7 \
       --effect-blur 7x5 \
       --effect-vignette 0.5:0.5 \
-      --ring-color 3b4252ff \
-      --key-hl-color ebcb8bff \
-      --inside-color 2e3440ff \
-      --separator-color 3b4252ff \
+      --ring-color 44475aff \
+      --key-hl-color bd93f9ff \
+      --inside-color 282a36ff \
+      --separator-color 44475aff \
       --grace 2 \
       --fade-in 0.2
 
@@ -190,92 +147,6 @@ in
     xdotool
   ];
 
-  programs.i3status-rust.enable = true;
-  programs.i3status-rust.bars.bottom = {
-    theme = "modern";
-    icons = "awesome6";
-    blocks = [
-      {
-        block = "custom";
-        command = "pgrep wf-recorder > /dev/null && echo ''";
-        interval = "once";
-        signal = 8;
-        hide_when_empty = true;
-      }
-      {
-        block = "memory";
-        format = "$icon $mem_used.eng(prefix:M) ($mem_used_percents.eng(w:2))";
-        format_alt = "$icon_swap $swap_free.eng(w:3,u:B,p:M)/$swap_total.eng(w:3,u:B,p:M)($swap_used_percents.eng(w:2))";
-      }
-      {
-        block = "cpu";
-        format = "$icon $utilization";
-        format_alt = "$icon $barchart $frequency";
-      }
-      {
-        block = "temperature";
-        interval = 2;
-        format = "$icon $max";
-        chip = "k10temp-*";
-        idle = 70;
-        info = 75;
-        warning = 80;
-      }
-      {
-        block = "sound";
-        click = [
-          {
-            button = "left";
-            cmd = "pavucontrol";
-          }
-        ];
-      }
-      {
-        block = "net";
-        format = "$icon {$signal_strength $ssid|$ip}";
-        format_alt = "$icon $graph_down $graph_up {$signal_strength $ssid|$ip} via $device";
-        click = [
-          {
-            button = "right";
-            cmd = "alacritty -e nmtui";
-          }
-        ];
-      }
-      {
-        block = "net";
-        device = "^wg\-[a-z0-9]+$";
-        format = "$icon $ip";
-        format_alt = "$icon $graph_down $graph_up $ip $device";
-        missing_format = "";
-      }
-
-      {
-        block = "notify";
-        driver = "swaync";
-        click = [
-          {
-            button = "left";
-            action = "show";
-
-          }
-          {
-            button = "right";
-            action = "toggle_paused";
-          }
-        ];
-      }
-
-      {
-        block = "time";
-        interval = 60;
-        format = {
-          full = " $icon $timestamp.datetime(f:'%a %Y-%m-%d %R', l:ro_RO) ";
-          short = " $icon $timestamp.datetime(f:%R) ";
-        };
-      }
-    ];
-  };
-
   services.wlsunset = {
     enable = true;
     latitude = "47.15";
@@ -288,16 +159,21 @@ in
       with pkgs;
       runCommandLocal "swaync-style.css"
         {
-          style = (
-            fetchurl {
-              url = "https://github.com/catppuccin/swaync/releases/download/v0.2.3/mocha.css";
-              hash = "sha256-Hie/vDt15nGCy4XWERGy1tUIecROw17GOoasT97kIfc=";
-            }
-          );
+          style = fetchurl {
+            url = "https://raw.githubusercontent.com/dracula/swaync/main/style.css";
+            hash = "sha256-hwZuIR8NOvcE4u03WcALCdlzHNyVY42OGE81JOVM0Ww=";
+          };
         }
         ''
           cat $style > $out
-          sed -i 's/font-size: 14px;/font-size: 12px;/g' $out
+          sed -i 's|/\* font-family: "JetBrainsMono Nerd Font", sans-serif; \*/|font-family: "DejaVuSansMono Nerd Font", sans-serif;|' $out
+          cat >> $out <<'OVERRIDES'
+* { font-size: 12px; }
+.widget-title > label { font-size: 13px; }
+.widget-title button { padding: 3px 8px; }
+.widget-dnd, .widget-inhibitors { font-size: 12px; }
+.widget-buttons-grid > flowbox > flowboxchild > button { padding: 4px 0; }
+OVERRIDES
         '';
 
   };

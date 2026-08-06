@@ -32,15 +32,15 @@
       setw -g mouse on
       setw -g monitor-activity on
 
-      set-option -g status-style bg=black,fg=yellow #,attr=default
-      set-window-option -g window-status-style bg=default,fg=white #,attr=dim
-      set-window-option -g window-status-current-style bg=default,fg=cyan #,attr=dim
-      set-window-option -g window-status-activity-style bg=black,fg=brightred
-      set-option -g message-style bg=black,fg=brightred
-      set-option -g display-panes-active-colour cyan
-      set-option -g display-panes-colour brightred
+      set-option -g status-style bg=#282A36,fg=#F8F8F2
+      set-window-option -g window-status-style bg=default,fg=#6272A4
+      set-window-option -g window-status-current-style bg=default,fg=#BD93F9
+      set-window-option -g window-status-activity-style bg=#282A36,fg=#FF5555
+      set-option -g message-style bg=#282A36,fg=#FF5555
+      set-option -g display-panes-active-colour #8BE9FD
+      set-option -g display-panes-colour #FF5555
       set -g status-left ""
-      set -g status-right "#{?client_prefix,#[fg=black]#[bg=cyan],#[fg=cyan]#[bg=black]} #h"
+      set -g status-right "#{?client_prefix,#[fg=#282A36]#[bg=#BD93F9],#[fg=#BD93F9]#[bg=#282A36]} #h"
     '';
     shortcut = "Space";
   };
