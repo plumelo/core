@@ -15,6 +15,8 @@
     ];
 
     initExtra = ''
+      export LS_COLORS="$(${pkgs.vivid}/bin/vivid generate dracula)"
+
       HISTIGNORE="&:[ ]*:exit:l:ls:ll:bg:fg:history*:clear:kill*:?:??"
 
       set -o notify
@@ -51,10 +53,10 @@
   };
 
   programs.fzf.enable = true;
-  home.packages = with pkgs; [ fd ];
+  home.packages = with pkgs; [ fd vivid ];
 
   programs.bat = {
     enable = true;
-    config.theme = "OneHalfDark";
+    config.theme = "Dracula";
   };
 }
