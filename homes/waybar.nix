@@ -24,8 +24,8 @@
           "memory"
           "temperature"
           "battery"
-          "clock"
           "tray"
+          "clock"
         ];
         tray = {
           spacing = 8;
